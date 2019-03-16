@@ -1,0 +1,32 @@
+Q1.1 : 
+    - J'ai déclaré une méthode privée qui effectue le "clamping" à la position. La méthode est privée car le clamping est un détail d'implémentation inutile au développeur utilisateur de la classe CircularCollider. En fait j'ai utilisé deux méthodes privées afin de ne pas dupliquer le code pour la coordonnée x et y sur lesquelles le même algorithme est effectué.
+
+Q1.2 : 
+    - L'avantage d'expliciter est que si un autre développeur reprend notre code, il est sûr que le constructeur de copie et l'operateur = font ce qui a été prévu par le concepteur de la classe. 
+
+Q1.3 : 
+    - Afin de tester les 9 possibilité, j'ai testé toutes les combinaisons de "to + i * {0, height} + j * {weight, 0}" i, j étant prenant les valeurs -1, 0, 1. Donc en faisant deux boucles for imbriquée, il est facilement possible de réalier toutes ces combinaisons.
+
+Q1.4 :
+    - J'ai passé tous les arguments de types Vec2d et CircularCollider en références constantes pour les méthodes : directionTo, distanceTo, move et operator+=
+
+Q1.5 :
+    - Les méthodes getPosition, getRadius, directionTo, distance sont toutes des prédicats donc doivent être déclarées comme const.
+
+Q1.6 :
+    - Les 3 opérateurs demander sont simplement des appels aux fonctions isCircularColliderInside, isPointInside et isColliding de l'objet sur lequel l'opérateur est appliqué.
+
+Q1.7 :
+    - operator=  : interne pour éviter une copie inutile
+    - operator+= : interne pour éviter une copie inutile
+    - operator>  : (body1 > body2) externe car peut l'être sans rajouter de copie ni utiliser friend
+    - operator|  : externe car peut l'être sans rajouter de copie ni utiliser friend
+    - operator>  : (body > point) externe car peut l'être sans rajouter de copie ni utiliser friend
+    - operator<< : externe par obligation 
+
+Q1.8 : 
+    - J'ai passé tous les arguments de types Vec2d, CircularCollider et std::ostream en références constantes pour les méthodes : isCircularColliderInside, isColliding, isPointInside, operator> (les deux surcharges), operator|, operator<<
+
+Q1.9 :
+    - les méthodes isCircularColliderInside, isColliding, isPointInside sont toutes des prédicats donc doivent être déclarées comme const.
+
