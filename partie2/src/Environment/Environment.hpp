@@ -3,8 +3,8 @@
  * Author  : Bastien Beuchat
  */
 
-#ifndef ENVIRONMENT_H
-#define ENVIRONMENT_H
+#ifndef ENVIRONMENT_HPP
+#define ENVIRONMENT_HPP
 
 #include <Animal/Animal.hpp>
 #include <Utility/Vec2d.hpp>
@@ -60,4 +60,4 @@ private:
     std::list<Vec2d> targets_;
 };
 
-#endif
+#endif //ENVIRONMENT_HPP

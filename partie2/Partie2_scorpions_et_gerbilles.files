@@ -2,6 +2,8 @@ SConstruct
 extlib/Catch/include/catch.hpp
 src/Animal/Animal.cpp
 src/Animal/Animal.hpp
+src/Animal/ChasingAutomaton.cpp
+src/Animal/ChasingAutomaton.hpp
 src/Application.cpp
 src/Application.hpp
 src/Config.cpp

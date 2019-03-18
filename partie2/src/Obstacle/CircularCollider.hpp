@@ -3,8 +3,8 @@
  * Author  : Bastien Beuchat
  */
 
-#ifndef CIRCULAR_COLLIDER_H
-#define CIRCULAR_COLLIDER_H
+#ifndef CIRCULAR_COLLIDER_HPP
+#define CIRCULAR_COLLIDER_HPP
 
 #include <Utility/Vec2d.hpp>
 #include <iostream>
@@ -159,4 +159,4 @@ bool operator>(CircularCollider const& body1, Vec2d const& point);
  */
 std::ostream& operator<<(std::ostream& out , CircularCollider const& body);
 
-#endif
+#endif //CIRCULAR_COLLIDER_HPP
