@@ -30,3 +30,14 @@ Q1.8 :
 Q1.9 :
     - les méthodes isCircularColliderInside, isColliding, isPointInside sont toutes des prédicats donc doivent être déclarées comme const.
 
+Q2.1 :
+    - J'ai déclaré draw et const en tant que prédicats. Update va sûrement modifier les animaux (leur position par exemple) mais pas l'environnement en tant que tel. Les 3 autres méthodes modifient directement les 2 attributs.
+
+Q2.2 :
+    - Pour interdire l'accès au constructeur de copie il faut utiliser l'instruction delete dans le fichier de header de la manière suivante : Environment(Environment const& other) = delete;
+
+Q2.3 :
+    - Les animaux étant référencé par des pointeurs dans un environnement, il faut donc les désallouer avant de détruire l'objet. Je désalloue les Animaux dans la méthode clean avant de vider la liste. Je fais simplement appel à cette méthode depuis le destructeur.
+
+Q2.4 :
+    - Le comportement des touches R et T est défini dans le fichier Application.cpp dans la méthode Application::handleEvent(sf::Event event, sf::RenderWindow& window). Cette méthode est appelé par la méthode run lorsque qu'un événement est détecté dans la boucle.

@@ -6,8 +6,8 @@
 #ifndef CIRCULAR_COLLIDER_H
 #define CIRCULAR_COLLIDER_H
 
-#include <iostream>
 #include <Utility/Vec2d.hpp>
+#include <iostream>
 
 /*!
  * @brief The CircularCollider class represents a circular body in a toric world

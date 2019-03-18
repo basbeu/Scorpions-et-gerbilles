@@ -1,9 +1,13 @@
 SConstruct
 extlib/Catch/include/catch.hpp
+src/Animal/Animal.cpp
+src/Animal/Animal.hpp
 src/Application.cpp
 src/Application.hpp
 src/Config.cpp
 src/Config.hpp
+src/Environment/Environment.cpp
+src/Environment/Environment.hpp
 src/JSON/JSON.cpp
 src/JSON/JSON.hpp
 src/JSON/JSONImpl.cpp

@@ -3,7 +3,7 @@
  * Author  : Bastien Beuchat
  */
 
-#include "CircularCollider.hpp"
+#include <Obstacle/CircularCollider.hpp>
 #include <Utility/Vec2d.hpp>
 
 #include <Application.hpp>
