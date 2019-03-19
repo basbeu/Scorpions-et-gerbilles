@@ -69,7 +69,7 @@ void Animal::draw(sf::RenderTarget& targetWindow) const
 {
     //targetWindow.draw(buildCircle(targetPosition_, 5, sf::Color(255,0,0)));
     sf::Texture& texture = getAppTexture(ANIMAL_TEXTURE);
-    auto image_to_draw(buildSprite(getPosition(), 2*getRadius(),texture, direction_.angle()/DEG_TO_RAD));
+    auto image_to_draw(buildSprite(getPosition(), 2*getRadius(),texture, getRotation()/DEG_TO_RAD));
     targetWindow.draw(image_to_draw);
     drawVision(targetWindow);
     if(targetPosition_ == Vec2d(0,0)){
@@ -157,7 +157,7 @@ void Animal::drawVision(sf::RenderTarget& targetWindow) const
 {
     sf::Color color = sf::Color::Black;
     color.a = 16; // light, transparent grey
-    Arc arc(buildArc(-getViewRange()/(DEG_TO_RAD*2), getViewRange()/(DEG_TO_RAD * 2), getViewDistance(), getPosition(), color, direction_.angle()/DEG_TO_RAD));
+    Arc arc(buildArc(-getViewRange()/(DEG_TO_RAD*2), getViewRange()/(DEG_TO_RAD * 2), getViewDistance(), getPosition(), color, getRotation()/DEG_TO_RAD));
     targetWindow.draw(arc);
 }
 
@@ -173,7 +173,7 @@ Vec2d Animal::convertToGlobalCoord(Vec2d local) const
 {
     sf::Transform matTransform;
     matTransform.translate(getPosition());
-    matTransform.rotate(direction_.angle()/DEG_TO_RAD);
+    matTransform.rotate(getRotation()/DEG_TO_RAD);
     return matTransform.transformPoint(local);
 }
 

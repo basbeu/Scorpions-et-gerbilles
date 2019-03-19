@@ -29,13 +29,11 @@ public:
     CircularCollider(CircularCollider const& other);
 
     /*!
-     * @brief Get the position of the center of the CircularCollider body
      * @return Vec2d vector representing the position of the center
      */
     Vec2d const& getPosition() const;
 
     /*!
-     * @brief Get the radius of the CircularCollider Body
      * @return CircularCollider's radius
      */
     double getRadius() const;
@@ -110,7 +108,14 @@ public:
     CircularCollider& operator+=(Vec2d const& dx);
 
 private:
+    /*!
+     * @brief position of the CircularCollider
+     */
     Vec2d position_;
+
+    /*!
+     * @brief radius of the circle of the CircularCollider
+     */
     double radius_;
 
     /*!

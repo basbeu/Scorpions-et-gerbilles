@@ -55,4 +55,13 @@ Q2.7 :
     - setRotation modifie la direction de l'animal, si on suppose que l'animal est autonome, il ne faudrait pas que l'extérieur puisse changer la direction. Par contre les spécialisations (les animaux en tant que tel) doivent être capable de se diriger, donc le lien protected offre cette fonctionnalité.
 
 Q2.8 :
-    - il faut rajouter l'affichage de l'animal dans la méthode d'affichage de l'environnement (méthode draw)
+    - il faut rajouter l'affichage de l'animal dans la méthode d'affichage de l'environnement (méthode draw).
+
+Q2.9 :
+    - Comme justifié à la réponse 2.7, la méthode setRotation de Animal a un accès protected. Donc pour que l'animal change de direction, il faut que ce soit l'animal lui même qui décide de changer de direction. Comme les méthodes protected sont accessibles depuis les sous-classes, la classe DummyAnimal peut changer sa direction par un appel à setRotation. Dans ce cas la classe DummyAnimal casse l'encapsulation en offrant le changement de rotation via une méthode publique (void setHeading(Vec2d const& heading)) qui fait appel à la méthode protected setRotation. Ceci permet à un utilisateur de DummyAnimal de changer la direction.
+
+Q2.10 :
+    - getTargetsInSightForAnimal doit retourner un ensemble donc il faut retourner une liste de cible. Nos cibles étant dans Vec2d. Le type de retour logique est std::list<Vec2d>.
+
+Q2.11 :
+    - il faut compléter la méthode update de la class Environment. Dans cette méthode, j'itère sur tous les animaux et appelle leur méthode update.
