@@ -32,6 +32,10 @@ public:
     double getViewDistance() const;
     double getRotation() const;
     bool isTargetInSight(Vec2d const& target);
+    double getRandomWalkRadius() const;
+    double getRandomWalkDistance() const;
+    double getRandomWalkJitter() const;
+
 
 protected:
     void setRotation(double angle);
@@ -40,11 +44,15 @@ private:
     Vec2d direction_;
     double speed_;
     Vec2d targetPosition_;
+    Vec2d currentTarget_;
     double deceleration_;
 
     Vec2d computeForce() const;
     void update(Vec2d force, sf::Time dt);
     void drawVision(sf::RenderTarget& targetWindow) const;
+    Vec2d randomWalk();
+    Vec2d convertToGlobalCoord(Vec2d local) const;
+    void drawRandomWalkTarget(sf::RenderTarget& targetWindow) const;
 };
 
 #endif

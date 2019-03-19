@@ -6,11 +6,12 @@
 #ifndef ENVIRONMENT_HPP
 #define ENVIRONMENT_HPP
 
-#include <Animal/Animal.hpp>
 #include <Utility/Vec2d.hpp>
 
 #include <list>
 #include <SFML/Graphics.hpp>
+
+class Animal;
 
 class Environment
 {
@@ -55,6 +56,7 @@ public:
      */
     void clean();
 
+    std::list<Vec2d> getTargetsInSightForAnimal(Animal* animal);
 private:
     std::list<Animal*> animals_;
     std::list<Vec2d> targets_;
