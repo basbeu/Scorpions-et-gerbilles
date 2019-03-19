@@ -50,3 +50,9 @@ Cette combinaison permet une potentielle redéfinition de la méthode de calcul 
 
 Q2.6 :
     - J'ai mis un type énuméré dans l'interface publique de la classe ChasingAutomaton. Je l'ai mis dans la classe car ce type n'a de sens que dans le cadre d'un chasingAutomaton. Mais il nous faut l'accès à l'extérieur donc je l'ai mis en public. Ensuite, j'ai rajouté un attribut privé qui stocke la décélération dans un double et une méthode publique : setDeceleration(Deceleration deceleration) qui affecte la bonne valeur de décélération à l'attribut privé selon le type énuméré passé en paramêtre. Par défaut, la décélération est initialisée à la décélération moyenne (0.6)
+
+Q2.7 :
+    - setRotation modifie la direction de l'animal, si on suppose que l'animal est autonome, il ne faudrait pas que l'extérieur puisse changer la direction. Par contre les spécialisations (les animaux en tant que tel) doivent être capable de se diriger, donc le lien protected offre cette fonctionnalité.
+
+Q2.8 :
+    - il faut rajouter l'affichage de l'animal dans la méthode d'affichage de l'environnement (méthode draw)

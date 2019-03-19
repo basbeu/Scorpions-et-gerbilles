@@ -80,6 +80,7 @@ double CircularCollider::distanceTo(CircularCollider const& to) const
 void CircularCollider::move(Vec2d const& dx)
 {
     position_ += dx;
+    clampPosition();
 }
 
 bool CircularCollider::isCircularColliderInside(CircularCollider const& other) const

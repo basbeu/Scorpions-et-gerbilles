@@ -28,11 +28,14 @@ void Environment::addTarget(const Vec2d& target)
 
 void Environment::update(sf::Time dt) const
 {
-    //faire évoluer les animaux de la faune ici:
+    for(auto animal : animals_)
+        animal->update(dt);
 }
 
 void Environment::draw(sf::RenderTarget& targetWindow) const
 {
+    for(auto animal: animals_)
+        animal->draw(targetWindow);
     for(auto& target:targets_)
         targetWindow.draw(buildCircle(target, 5, sf::Color(255,0,0)));
 }
