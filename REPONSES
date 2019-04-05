@@ -31,7 +31,7 @@ Q1.9 :
     - les méthodes isCircularColliderInside, isColliding, isPointInside sont toutes des prédicats donc doivent être déclarées comme const.
 
 Q2.1 :
-    - J'ai déclaré draw et const en tant que prédicats. Update va sûrement modifier les animaux (leur position par exemple) mais pas l'environnement en tant que tel. Les 3 autres méthodes modifient directement les 2 attributs.
+    - J'ai déclaré draw et update en tant que prédicats. Update va sûrement modifier les animaux (leur position par exemple) mais pas l'environnement en tant que tel. Les 3 autres méthodes modifient directement les 2 attributs.
 
 Q2.2 :
     - Pour interdire l'accès au constructeur de copie il faut utiliser l'instruction delete dans le fichier de header de la manière suivante : Environment(Environment const& other) = delete;
@@ -65,3 +65,5 @@ Q2.10 :
 
 Q2.11 :
     - il faut compléter la méthode update de la class Environment. Dans cette méthode, j'itère sur tous les animaux et appelle leur méthode update.
+
+

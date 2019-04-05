@@ -88,7 +88,7 @@ private:
     double speed_;
 
     /*!
-     * @brief targetPosition_ vector of the ChasingAutomaton
+     * @brief targetPosition_ target position vector of the ChasingAutomaton
      */
     Vec2d targetPosition_;
 
