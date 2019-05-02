@@ -7,7 +7,7 @@
 #include "PPSTest.hpp"
 #include <Animal/Gerbil.hpp>
 #include <Animal/Scorpion.hpp>
-// #include <Environment/Food.hpp> // UNCOMMENT WHEN Food IS CREATED
+#include <Environment/Food.hpp> // UNCOMMENT WHEN Food IS CREATED
 //#include <Environment/FoodGenerator.hpp> // UNCOMMENT WHEN FoodGenerator IS CREATED
 
 IMPLEMENT_MAIN(PPSTest)
@@ -48,7 +48,7 @@ void PPSTest::onEventPPS(sf::Event event, sf::RenderWindow&)
 
         case sf::Keyboard::F:
             // IMPORTANT: UNCOMMENT WHEN CLASS FOOD IS CODED:
-            //getAppEnv().addEntity(new Food(getCursorPositionInView()));
+            getAppEnv().addEntity(new Food(getCursorPositionInView()));
             break;
 
         default:
