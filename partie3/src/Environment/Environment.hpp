@@ -10,6 +10,7 @@
 
 #include <list>
 #include <SFML/Graphics.hpp>
+#include <Environment/OrganicEntity.hpp>
 
 class Animal;
 
@@ -35,16 +36,10 @@ public:
     ~Environment();
 
     /*!
-     * @brief Add an animal in the environment
-     * @param Pointer to the Animal that is added to the environment
+     * @brief Add an organic entity in the environment
+     * @param Pointer to the organic entity that is added to the environment
      */
-    void addAnimal(Animal* animal);
-
-    /*!
-     * @brief Add a target to the environment
-     * @param target is represented by its position (Vec2d)
-     */
-    void addTarget(const Vec2d& target);
+    void addEntity(OrganicEntity* entity);
 
     /*!
      * @brief Update the environment for the tic of time dt
@@ -64,21 +59,17 @@ public:
     void clean();
 
     /*!
-     * @brief Get all target that is in sight for a given animal
+     * @brief Get all organic entities that is in sight for a given animal
      * @param animal Pointer to the animal for which the potential targets are requested
-     * @return a list (std::list) of Vec2d representing the targets seens by the given animal
+     * @return a list (std::list) of OrganicEntity representing the different entitys seen by the given animal
      */
-    std::list<Vec2d> getTargetsInSightForAnimal(Animal* animal);
+    std::list<OrganicEntity*> getEntitiesInSightForAnimal(Animal* animal);
 private:
-    /*!
-     * @brief animals_ list of all animals living in the environment
-     */
-    std::list<Animal*> animals_;
 
     /*!
-     * @brief targets_ list of all targets living in the environment
+     * @brief entities_ list of all the organic entities living in the environment
      */
-    std::list<Vec2d> targets_;
+    std::list<OrganicEntity*> entities_;
 };
 
 #endif //ENVIRONMENT_HPP

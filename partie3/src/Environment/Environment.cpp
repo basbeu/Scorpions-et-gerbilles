@@ -10,51 +10,44 @@
 
 #include <list>
 #include <SFML/Graphics.hpp>
+#include <Environment/OrganicEntity.hpp>
 
 Environment::~Environment()
 {
     clean();
 }
 
-void Environment::addAnimal(Animal* animal)
+void Environment::addEntity(OrganicEntity* entity)
 {
-    animals_.push_back(animal);
-}
-
-void Environment::addTarget(const Vec2d& target)
-{
-    targets_.push_back(target);
+    entities_.push_back(entity);
 }
 
 void Environment::update(sf::Time dt) const
 {
-    for(auto animal : animals_)
-        animal->update(dt);
+    for(auto entity : entities_)
+        entity->update(dt);
 }
 
 void Environment::draw(sf::RenderTarget& targetWindow) const
 {
-    for(auto animal: animals_)
-        animal->draw(targetWindow);
-    for(auto& target:targets_)
-        targetWindow.draw(buildCircle(target, 5, sf::Color(255,0,0)));
+    for(auto entity: entities_)
+        entity->draw(targetWindow);
 }
 
 void Environment::clean()
 {
-    for(auto& animal:animals_)
-        delete animal;
-    animals_.clear();
-    targets_.clear();
+    for(auto& entity:entities_)
+        delete entity;
+    entities_.clear();
 }
 
-std::list<Vec2d> Environment::getTargetsInSightForAnimal(Animal* animal)
+std::list<OrganicEntity *> Environment::getEntitiesInSightForAnimal(Animal* animal)
 {
-    std::list<Vec2d> targetInSight;
-    for(auto& target:targets_){
-        if(animal->isTargetInSight(target))
-            targetInSight.push_back(target);
+    std::list<OrganicEntity*> entitiesInSight;
+    for(auto& entity:entities_) {
+        if(animal->isTargetInSight(entity->getPosition()))
+            entitiesInSight.push_back(entity);
     }
 
-    return targetInSight;
+    return entitiesInSight;
 }

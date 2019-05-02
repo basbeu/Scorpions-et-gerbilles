@@ -15,12 +15,13 @@
 
 #include <SFML/Graphics.hpp>
 
-Animal::Animal(Vec2d position)
-:CircularCollider (position, ANIMAL_RADIUS)
-,direction_(1,0)
-,speed_(0)
-,targetPosition_(0,0)
-,currentTarget_(1,0)
+Animal::Animal(Vec2d position, double size, double energyLevel, bool female)
+    :OrganicEntity (position, size, energyLevel)
+    ,direction_(1,0)
+    ,speed_(0)
+    ,targetPosition_(0,0)
+    ,currentTarget_(1,0)
+    ,female_(female)
 {
     setDeceleration(DECELERATION_MEDIUM);
 }
@@ -28,16 +29,6 @@ Animal::Animal(Vec2d position)
 Animal::~Animal()
 {
 
-}
-
-double Animal::getStandardMaxSpeed() const
-{
-    return ANIMAL_MAX_SPEED;
-}
-
-double Animal::getMass() const
-{
-    return ANIMAL_MASS;
 }
 
 void Animal::setTargetPosition(Vec2d targetPosition)
@@ -52,53 +43,47 @@ Vec2d Animal::getSpeedVector() const
 
 void Animal::update(sf::Time dt)
 {
-    std::list<Vec2d> targetsInsight(getAppEnv().getTargetsInSightForAnimal(this));
+    /*std::list<Vec2d> targetsInsight(getAppEnv().getTargetsInSightForAnimal(this));
     Vec2d force(0,0);
-    if(!targetsInsight.empty()){
+    if(!targetsInsight.empty()) {
         targetPosition_ = targetsInsight.front();
         force = computeForce();
-    }else{
+    } else {
         targetPosition_ = Vec2d(0,0);
         force = randomWalk();
     }
 
-    update(force, dt);
+    update(force, dt);*/
 }
 
 void Animal::draw(sf::RenderTarget& targetWindow) const
 {
     //targetWindow.draw(buildCircle(targetPosition_, 5, sf::Color(255,0,0)));
-    sf::Texture& texture = getAppTexture(ANIMAL_TEXTURE);
+    sf::Texture& texture = getAppTexture(getTexture());
     auto image_to_draw(buildSprite(getPosition(), 2*getRadius(),texture, getRotation()/DEG_TO_RAD));
     targetWindow.draw(image_to_draw);
-    drawVision(targetWindow);
-    if(targetPosition_ == Vec2d(0,0)){
-        drawRandomWalkTarget(targetWindow);
+
+    if(isDebugOn()) {
+        drawVision(targetWindow);
+        if(targetPosition_ == Vec2d(0,0)) {
+            drawRandomWalkTarget(targetWindow);
+        }
     }
 }
 
-void Animal::setDeceleration(Deceleration deceleration){
+void Animal::setDeceleration(Deceleration deceleration)
+{
     switch (deceleration) {
-        case DECELERATION_STRONG:
-            deceleration_ = 0.9;
-            break;
-        case DECELERATION_MEDIUM:
-            deceleration_ = 0.6;
-            break;
-        case DECELERATION_WEAK:
-            deceleration_ = 0.3;
-            break;
+    case DECELERATION_STRONG:
+        deceleration_ = 0.9;
+        break;
+    case DECELERATION_MEDIUM:
+        deceleration_ = 0.6;
+        break;
+    case DECELERATION_WEAK:
+        deceleration_ = 0.3;
+        break;
     }
-}
-
-double Animal::getViewRange() const
-{
-    return ANIMAL_VIEW_RANGE;
-}
-
-double Animal::getViewDistance() const
-{
-    return ANIMAL_VIEW_DISTANCE;
 }
 
 double Animal::getRotation() const
@@ -114,26 +99,15 @@ bool Animal::isTargetInSight(Vec2d const& target)
            (d.lengthSquared() <= getViewDistance()*getViewDistance() && direction_.dot(d.normalised()) >= cos((getViewRange() + 0.001)/2));
 }
 
-double Animal::getRandomWalkRadius() const
+bool Animal::isFemale() const
 {
-    return ANIMAL_RANDOM_WALK_RADIUS;
+    return female_;
 }
-
-double Animal::getRandomWalkDistance() const
-{
-    return ANIMAL_RANDOM_WALK_DISTANCE;
-}
-
-double Animal::getRandomWalkJitter() const
-{
-    return ANIMAL_RANDOM_WALK_JITTER;
-}
-
 
 void Animal::setRotation(double angle)
 {
-   direction_.x = cos(angle);
-   direction_.y = sin(angle);
+    direction_.x = cos(angle);
+    direction_.y = sin(angle);
 }
 
 Vec2d Animal::computeForce() const

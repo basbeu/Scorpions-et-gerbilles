@@ -12,17 +12,17 @@
 #include <limits>
 
 CircularCollider::CircularCollider(Vec2d position, double radius)
-:position_(position)
-,radius_(radius)
+    :position_(position)
+    ,radius_(radius)
 {
-    if(radius < 0.0){
+    if(radius < 0.0) {
         throw std::string("Radius cannot be less than 0");
     }
     clampPosition();
 }
 
 CircularCollider::CircularCollider(CircularCollider const& other)
-:CircularCollider(other.position_, other.radius_)
+    :CircularCollider(other.position_, other.radius_)
 {
 
 }
@@ -48,12 +48,12 @@ Vec2d CircularCollider::directionTo(Vec2d const& to) const
     Vec2d min(0 , 0);
     double dMin(std::numeric_limits<double>::max());
 
-    for(int i = -1; i <= 1; ++i){
-        for(int j = -1; j <= 1; ++j){
+    for(int i = -1; i <= 1; ++i) {
+        for(int j = -1; j <= 1; ++j) {
             Vec2d temp(to + i * h + j * w);
             double dTemp = distance(temp, position_);
 
-            if(dTemp < dMin){
+            if(dTemp < dMin) {
                 min = temp;
                 dMin = dTemp;
             }
@@ -98,7 +98,8 @@ bool CircularCollider::isPointInside(Vec2d const& point) const
     return distanceTo(point) <= radius_;
 }
 
-CircularCollider& CircularCollider::operator=(CircularCollider source){
+CircularCollider& CircularCollider::operator=(CircularCollider source)
+{
     //swap(*this, source);
     position_ = source.position_;
     radius_ = source.radius_;
@@ -123,11 +124,11 @@ void CircularCollider::clampPosition()
 
 void CircularCollider::clamp(double& value, double maxValue, double minValue)
 {
-    while(value < minValue){
+    while(value < minValue) {
         value += maxValue;
     }
 
-    while(value > maxValue){
+    while(value > maxValue) {
         value -= maxValue;
     }
 }

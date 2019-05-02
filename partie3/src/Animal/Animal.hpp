@@ -5,7 +5,7 @@
 
 #ifndef ANIMAL_H
 #define ANIMAL_H
-#include <Obstacle/CircularCollider.hpp>
+#include <Environment/OrganicEntity.hpp>
 #include <Utility/Vec2d.hpp>
 
 #include <SFML/Graphics.hpp>
@@ -13,13 +13,13 @@
 /*!
  * @brief The Animal class
  */
-class Animal:public CircularCollider
+class Animal:public OrganicEntity
 {
 public:
     /*!
     * @brief The Deceleration enum represent the differents magnitude that a Animal can be set
     */
-    enum Deceleration{
+    enum Deceleration {
         DECELERATION_STRONG,
         DECELERATION_MEDIUM,
         DECELERATION_WEAK
@@ -28,23 +28,53 @@ public:
     /*!
      * @brief Animal build a a ChasinAutomaton
      * @param position Vec2d representing the initial position
+     * @param size double representing the diameter of the animal
+     * @param energyLevel initial level of the animal
+     * @param female gender of the animal instance : true => female, false => male
      */
-    Animal(Vec2d position);
+    Animal(Vec2d position, double size, double energyLevel, bool female);
 
     /*!
      * @brief Destroy a Animal
      */
-    ~Animal();
+    virtual ~Animal();
 
     /*!
      * @return the max speed of the Animal
      */
-    double getStandardMaxSpeed() const;
+    virtual double getStandardMaxSpeed() const = 0;
 
     /*!
      * @return the mass of the Animal
      */
-    double getMass() const;
+    virtual double getMass() const = 0;
+
+    /*!
+     * @return radius of the circle on which random targets are generated
+     */
+    virtual double getRandomWalkRadius() const = 0;
+
+    /*!
+     * @return the distance at which the random targets are generated
+     */
+    virtual double getRandomWalkDistance() const = 0;
+
+    /*!
+     * @return jitter coeficient for random targets generation
+     */
+    virtual double getRandomWalkJitter() const = 0;
+
+    /*!
+     * @return the view range of the Animal
+     */
+    virtual double getViewRange() const = 0;
+
+    /*!
+     * @return the max distance that the animal can see
+     */
+    virtual double getViewDistance() const = 0;
+
+    virtual std::string getTexture() const = 0;
 
     /*!
       * @brief set the position of the Animal's target
@@ -76,16 +106,6 @@ public:
     void setDeceleration(Deceleration deceleration);
 
     /*!
-     * @return the view range of the Animal
-     */
-    double getViewRange() const;
-
-    /*!
-     * @return the max distance that the animal can see
-     */
-    double getViewDistance() const;
-
-    /*!
      * @return the angle (in radians) of the polar coordinate of the direction vector of the animal
      */
     double getRotation() const;
@@ -97,20 +117,7 @@ public:
      */
     bool isTargetInSight(Vec2d const& target);
 
-    /*!
-     * @return radius of the circle on which random targets are generated
-     */
-    double getRandomWalkRadius() const;
-
-    /*!
-     * @return the distance at which the random targets are generated
-     */
-    double getRandomWalkDistance() const;
-
-    /*!
-     * @return jitter coeficient for random targets generation
-     */
-    double getRandomWalkJitter() const;
+    bool isFemale() const;
 
 protected:
     /*!
@@ -145,6 +152,11 @@ private:
      * @brief deceleration_ value of the Animal
      */
     double deceleration_;
+
+    /*!
+     * @brief female : true => the animal is a female, false => the animal is a male
+     */
+    bool female_;
 
     /*!
      * @brief Compute the attraction force between Animal and its target
