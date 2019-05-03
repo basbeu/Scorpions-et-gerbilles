@@ -83,6 +83,7 @@ void Animal::draw(sf::RenderTarget& targetWindow) const
         if(targetPosition_ == Vec2d(0,0)) {
             drawRandomWalkTarget(targetWindow);
         }
+        drawState(targetWindow);
     }
 }
 
@@ -205,4 +206,40 @@ void Animal::updateState(sf::Time dt)
         state_ = WANDERING;
         targetPosition_ = Vec2d(0,0);
     }
+}
+
+void Animal::drawState(sf::RenderTarget& targetWindow) const
+{
+    std::string debugText("");
+    switch (state_) {
+    case FOOD_IN_SIGHT:
+        debugText = "FOOD_IN_SIGHT";
+        break;
+    case FEEDING:
+        debugText = "FEEDING";
+        break;
+    case RUNNING_AWAY:
+        debugText = "RUNNING_AWAY";
+        break;
+    case MATE_IN_SIGHT:
+        debugText = "MATE_IN_SIGHT";
+        break;
+    case MATING:
+        debugText = "MATING";
+        break;
+    case GIVING_BIRTH:
+        debugText = "GIVING_BIRTH";
+        break;
+    case WANDERING:
+        debugText = "WANDERING";
+        break;
+    }
+
+    targetWindow.draw(buildText(debugText,
+                                convertToGlobalCoord(Vec2d(getRandomWalkDistance(), 0)),
+                                getAppFont(),
+                                getAppConfig().default_debug_text_size,
+                                getAppConfig().debug_text_color,
+                                getRotation() / DEG_TO_RAD + 90
+                               ));
 }

@@ -210,6 +210,8 @@ private:
     void drawRandomWalkTarget(sf::RenderTarget& targetWindow) const;
 
     void updateState(sf::Time dt);
+
+    void drawState(sf::RenderTarget& targetWindow) const;
 };
 
 #endif

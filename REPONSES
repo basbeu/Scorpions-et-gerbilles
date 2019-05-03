@@ -92,3 +92,7 @@ Q3.3 :
 Q3.4 :
     - Tester le type des objets à l'exécution est une très mauvaise pratique. Car cela nous empêche de bénéficier de la force du polymorphisme et rend nos programmes beaucoup plus compliqué à maintenir. Si on rajoute un type dans une hierarchie, il faudra aller rajouter les cas partout ou on a fait des tests. Alors que si la conception est bonne il suffira de coder la nouvelle classe et tout le reste du code manipulera cette nouvelle classe sans devoir y changer une ligne. On perd donc en flexibilité et maintenabilité.
 
+Q3.5 :
+    - Selon moi, les affichages de debug que l'on a pour le moment sont très spécifiques aux animaux, donc toutes les méthodes d'affichage de debugging sont placées dans la classe Animal. Ce qui donc ne change rien à l'héritage de Drawable discuté à la question 3.3.
+
+
