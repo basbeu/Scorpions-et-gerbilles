@@ -91,13 +91,13 @@ public:
      * @brief update the state of the Animal at the given time
      * @param dt elapsed time since the last update
      */
-    void update(sf::Time dt);
+    virtual void update(sf::Time dt) override;
 
     /*!
      * @brief draw the automaton on given render target
      * @param targetWindow The window on which the Animal has to be rendered
      */
-    void draw(sf::RenderTarget& targetWindow) const;
+    virtual void draw(sf::RenderTarget& targetWindow) const override;
 
     /*!
     * @brief Set the deceleration level for the Animal

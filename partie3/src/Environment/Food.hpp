@@ -14,10 +14,15 @@ class Food:public OrganicEntity
 public:
     Food(Vec2d position);
 
-    virtual ~Food();
+    virtual ~Food() override;
 
-    void update(sf::Time dt);
-    void draw(sf::RenderTarget& targetWindow) const;
+    virtual void update(sf::Time dt) override;
+    virtual void draw(sf::RenderTarget& targetWindow) const override;
+
+    virtual bool eatable(OrganicEntity const* entity) override;
+    virtual bool eatableBy(Scorpion  const* scorpion) const override;
+    virtual bool eatableBy(Gerbil const* gerbil) const override;
+    virtual bool eatableBy(Food const* food) const override;
 };
 
 #endif // FOOD_HPP

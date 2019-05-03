@@ -14,6 +14,7 @@ public:
     Gerbil(Vec2d position, double energyLevel, bool female);
     Gerbil(Vec2d position);
 
+    virtual ~Gerbil() override;
     virtual double getStandardMaxSpeed() const override;
     virtual double getMass() const override;
     virtual double getRandomWalkRadius() const override;
@@ -23,6 +24,10 @@ public:
     virtual double getViewDistance() const override;
     virtual std::string getTexture() const override;
 
+    virtual bool eatable(OrganicEntity const* entity) override;
+    virtual bool eatableBy(Scorpion  const* scorpion) const override;
+    virtual bool eatableBy(Gerbil const* gerbil) const override;
+    virtual bool eatableBy(Food const* food) const override;
 };
 
 #endif // GERBIL_HPP

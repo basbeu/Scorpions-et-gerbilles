@@ -3,7 +3,7 @@
 * Author  : Bastien Beuchat
 */
 
-#include "Gerbil.hpp"
+#include <Animal/Gerbil.hpp>
 #include <Utility/Vec2d.hpp>
 #include <Application.hpp>
 #include <Random/Uniform.hpp>
@@ -16,6 +16,11 @@ Gerbil::Gerbil(Vec2d position, double energyLevel, bool female)
 
 Gerbil::Gerbil(Vec2d position)
     :Animal(position, getAppConfig().gerbil_size, getAppConfig().gerbil_energy_initial, uniform(0,1) == 0)
+{
+
+}
+
+Gerbil::~Gerbil()
 {
 
 }
@@ -58,4 +63,24 @@ double Gerbil::getViewDistance() const
 std::string Gerbil::getTexture() const
 {
     return isFemale() ? getAppConfig().gerbil_texture_female : getAppConfig().gerbil_texture_male;
+}
+
+bool Gerbil::eatable(OrganicEntity const* entity)
+{
+    return entity->eatableBy(this);
+}
+
+bool Gerbil::eatableBy(Scorpion  const* scorpion) const
+{
+    return true;
+}
+
+bool Gerbil::eatableBy(Gerbil const* gerbil) const
+{
+    return false;
+}
+
+bool Gerbil::eatableBy(Food const* food) const
+{
+    return false;
 }

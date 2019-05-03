@@ -20,6 +20,11 @@ Scorpion::Scorpion(Vec2d position)
 
 }
 
+Scorpion::~Scorpion()
+{
+
+}
+
 double Scorpion::getStandardMaxSpeed() const
 {
     return getAppConfig().scorpion_max_speed;
@@ -58,4 +63,24 @@ double Scorpion::getViewDistance() const
 std::string Scorpion::getTexture() const
 {
     return getAppConfig().scorpion_texture;
+}
+
+bool Scorpion::eatable(OrganicEntity const* entity)
+{
+    return entity->eatableBy(this);
+}
+
+bool Scorpion::eatableBy(Scorpion  const* scorpion) const
+{
+    return false;
+}
+
+bool Scorpion::eatableBy(Gerbil const* gerbil) const
+{
+    return false;
+}
+
+bool Scorpion::eatableBy(Food const* food) const
+{
+    return false;
 }

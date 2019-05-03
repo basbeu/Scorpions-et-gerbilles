@@ -31,3 +31,23 @@ void Food::draw(sf::RenderTarget& targetWindow) const
     auto image_to_draw(buildSprite(getPosition(), 2*getRadius(),texture));
     targetWindow.draw(image_to_draw);
 }
+
+bool Food::eatable(OrganicEntity const* entity)
+{
+    return entity->eatableBy(this);
+}
+
+bool Food::eatableBy(Scorpion  const* scorpion) const
+{
+    return false;
+}
+
+bool Food::eatableBy(Gerbil const* gerbil) const
+{
+    return true;
+}
+
+bool Food::eatableBy(Food const* food) const
+{
+    return false;
+}
