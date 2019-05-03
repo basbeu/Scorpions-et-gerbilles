@@ -11,6 +11,7 @@
 #include <list>
 #include <SFML/Graphics.hpp>
 #include <Environment/OrganicEntity.hpp>
+#include <Environment/FoodGenerator.hpp>
 
 class Animal;
 
@@ -64,12 +65,16 @@ public:
      * @return a list (std::list) of OrganicEntity representing the different entitys seen by the given animal
      */
     std::list<OrganicEntity*> getEntitiesInSightForAnimal(Animal* animal);
+
+    void addGenerator(FoodGenerator* gen);
 private:
 
     /*!
      * @brief entities_ list of all the organic entities living in the environment
      */
     std::list<OrganicEntity*> entities_;
+
+    std::list<FoodGenerator*> generators_;
 };
 
 #endif //ENVIRONMENT_HPP

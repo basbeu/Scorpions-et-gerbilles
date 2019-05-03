@@ -26,6 +26,9 @@ void Environment::update(sf::Time dt) const
 {
     for(auto entity : entities_)
         entity->update(dt);
+
+    for(auto generator : generators_)
+        generator->update(dt);
 }
 
 void Environment::draw(sf::RenderTarget& targetWindow) const
@@ -50,4 +53,9 @@ std::list<OrganicEntity *> Environment::getEntitiesInSightForAnimal(Animal* anim
     }
 
     return entitiesInSight;
+}
+
+void Environment::addGenerator(FoodGenerator* gen)
+{
+    generators_.push_back(gen);
 }

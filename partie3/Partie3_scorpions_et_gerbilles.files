@@ -16,6 +16,8 @@ src/Environment/Environment.cpp
 src/Environment/Environment.hpp
 src/Environment/Food.cpp
 src/Environment/Food.hpp
+src/Environment/FoodGenerator.cpp
+src/Environment/FoodGenerator.hpp
 src/Environment/OrganicEntity.cpp
 src/Environment/OrganicEntity.hpp
 src/Interface/Drawable.hpp

@@ -8,7 +8,7 @@
 #include <Animal/Gerbil.hpp>
 #include <Animal/Scorpion.hpp>
 #include <Environment/Food.hpp> // UNCOMMENT WHEN Food IS CREATED
-//#include <Environment/FoodGenerator.hpp> // UNCOMMENT WHEN FoodGenerator IS CREATED
+#include <Environment/FoodGenerator.hpp> // UNCOMMENT WHEN FoodGenerator IS CREATED
 
 IMPLEMENT_MAIN(PPSTest)
 
@@ -30,8 +30,7 @@ void PPSTest::onUpdate(sf::Time dt)
 void PPSTest::onSimulationStart()
 {
     setSimulationMode(SimulationMode::PPS);
-    // IMPORTANT: UNCOMMENT WHEN CLASS FOODGENERATOR IS CODED:
-    //getAppEnv().addGenerator(new FoodGenerator());
+    getAppEnv().addGenerator(new FoodGenerator());
 }
 
 void PPSTest::onEventPPS(sf::Event event, sf::RenderWindow&)
