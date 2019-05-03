@@ -22,6 +22,7 @@ Animal::Animal(Vec2d position, double size, double energyLevel, bool female)
     ,targetPosition_(0,0)
     ,currentTarget_(1,0)
     ,female_(female)
+    ,state_(WANDERING)
 {
     setDeceleration(DECELERATION_MEDIUM);
 }
@@ -43,6 +44,20 @@ Vec2d Animal::getSpeedVector() const
 
 void Animal::update(sf::Time dt)
 {
+    updateState(dt);
+
+    Vec2d force(0,0);
+    switch (state_) {
+    case FOOD_IN_SIGHT:
+        force = computeForce();
+        break;
+    case WANDERING:
+        force = randomWalk();
+        break;
+    default:
+        break;
+    }
+    update(force, dt);
     /*std::list<Vec2d> targetsInsight(getAppEnv().getTargetsInSightForAnimal(this));
     Vec2d force(0,0);
     if(!targetsInsight.empty()) {
@@ -96,12 +111,27 @@ bool Animal::isTargetInSight(Vec2d const& target)
     Vec2d d = target - getPosition();
 
     return isEqual(d.lengthSquared(), 0.0) ||
-           (d.lengthSquared() <= getViewDistance()*getViewDistance() && direction_.dot(d.normalised()) >= cos((getViewRange() + 0.001)/2));
+            (d.lengthSquared() <= getViewDistance()*getViewDistance() && direction_.dot(d.normalised()) >= cos((getViewRange() + 0.001)/2));
 }
 
 bool Animal::isFemale() const
 {
     return female_;
+}
+
+double Animal::getMaxSpeed() const
+{
+    double standardMaxSpeed = getStandardMaxSpeed();
+    switch (state_) {
+    case FOOD_IN_SIGHT:
+        return 3 * standardMaxSpeed;
+    case MATE_IN_SIGHT:
+        return 2 * standardMaxSpeed;
+    case RUNNING_AWAY:
+        return 4 * standardMaxSpeed;
+    default:
+        return standardMaxSpeed;
+    }
 }
 
 void Animal::setRotation(double angle)
@@ -113,7 +143,7 @@ void Animal::setRotation(double angle)
 Vec2d Animal::computeForce() const
 {
     Vec2d toTarget(targetPosition_ - getPosition());
-    double speed(std::min(toTarget.length() / deceleration_, getStandardMaxSpeed()));
+    double speed(std::min(toTarget.length() / deceleration_, getMaxSpeed()));
 
     return toTarget.normalised() * speed - getSpeedVector();
 }
@@ -123,7 +153,7 @@ void Animal::update(Vec2d force, sf::Time dt)
     Vec2d acceleration = force / getMass();
     Vec2d newSpeed = getSpeedVector() + acceleration * dt.asSeconds();
     direction_ = newSpeed.normalised();
-    speed_ = std::min(newSpeed.length(), getStandardMaxSpeed());
+    speed_ = std::min(newSpeed.length(), getMaxSpeed());
     move(newSpeed * dt.asSeconds());
 }
 
@@ -155,4 +185,24 @@ void Animal::drawRandomWalkTarget(sf::RenderTarget& targetWindow) const
 {
     targetWindow.draw(buildAnnulus(getPosition()+getRandomWalkDistance()*direction_, getRandomWalkRadius(),sf::Color(255, 150, 0),2));
     targetWindow.draw(buildCircle(convertToGlobalCoord(currentTarget_ + Vec2d(getRandomWalkDistance(), 0)), 5, sf::Color(0,0,255)));
+}
+
+void Animal::updateState(sf::Time dt)
+{
+    std::list<OrganicEntity*> entitiesInSight(getAppEnv().getEntitiesInSightForAnimal(this));
+    Vec2d maxVector(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
+    Vec2d target(maxVector);
+    for(auto& entity:entitiesInSight) {
+        if(eatable(entity) && entity->distanceTo(getPosition()) < distanceTo(target)){
+            target = entity->getPosition();
+        }
+    }
+
+    if(target != maxVector){
+        state_ = FOOD_IN_SIGHT;
+        targetPosition_ = target;
+    }else{
+        state_ = WANDERING;
+        targetPosition_ = Vec2d(0,0);
+    }
 }

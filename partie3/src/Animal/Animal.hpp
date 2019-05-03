@@ -119,6 +119,8 @@ public:
 
     bool isFemale() const;
 
+    double getMaxSpeed() const;
+
 protected:
     /*!
      * @brief Rotate the direction of the animal
@@ -127,6 +129,15 @@ protected:
     void setRotation(double angle);
 
 private:
+    enum State {
+        FOOD_IN_SIGHT, // nourriture en vue
+        FEEDING,       // en train de manger (là en principe il arrête de se déplacer)
+        RUNNING_AWAY,  // en fuite
+        MATE_IN_SIGHT, // partenaire en vue
+        MATING,        // vie privée (rencontre avec un partenaire!)
+        GIVING_BIRTH,  // donne naissance
+        WANDERING      // déambule
+    };
 
     /*!
      * @brief direction_ vector of the Animal
@@ -157,6 +168,8 @@ private:
      * @brief female : true => the animal is a female, false => the animal is a male
      */
     bool female_;
+
+    State state_;
 
     /*!
      * @brief Compute the attraction force between Animal and its target
@@ -195,6 +208,8 @@ private:
      * @param targetWindow window on which the target is rendered
      */
     void drawRandomWalkTarget(sf::RenderTarget& targetWindow) const;
+
+    void updateState(sf::Time dt);
 };
 
 #endif
