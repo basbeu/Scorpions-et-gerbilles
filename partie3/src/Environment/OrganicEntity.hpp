@@ -36,6 +36,9 @@ public:
     virtual sf::Time getLongevity() const;
     bool isAlive() const;
 
+protected:
+    void decreaseEnergyLevel(double loss);
+    double getEnergyLevel() const;
 private:
     double energyLevel_;
     sf::Time age_;

@@ -101,3 +101,6 @@ Q3.6 :
 Q3.7 :
     - Je teste si l'animal doit être enlevé dans la boucle de la méthode update de l'environnement. Je fais bien entendu ce test après avoir mis à jour l'animal. Il faut faire attention de bien delete l'entité pour éviter les fuites de mémoires. 
 
+Q3.8:
+    - J'ai tout d'abord ajouté trois parametres dans les fichiers JSON pour le seuil de fatigue (parametre des animaux) et pour la vitesse en étant fatigué (pour la gerbille et le scorpion). Ensuite, dans la méthode getMaxSpeed je teste si le niveau d'énergie est au dessous du seuil et dans ce cas j'utilise la vitesse fatigué au lieu de la standard maximale.
+

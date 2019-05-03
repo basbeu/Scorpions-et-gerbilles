@@ -45,9 +45,6 @@ Vec2d Animal::getSpeedVector() const
 void Animal::update(sf::Time dt)
 {
     OrganicEntity::update(dt);
-
-    updateState(dt);
-
     Vec2d force(0,0);
     switch (state_) {
     case FOOD_IN_SIGHT:
@@ -60,6 +57,7 @@ void Animal::update(sf::Time dt)
         break;
     }
     update(force, dt);
+    decreaseEnergyLevel(dt);
 }
 
 void Animal::draw(sf::RenderTarget& targetWindow) const
@@ -113,16 +111,19 @@ bool Animal::isFemale() const
 
 double Animal::getMaxSpeed() const
 {
-    double standardMaxSpeed = getStandardMaxSpeed();
+    double maxSpeed = getStandardMaxSpeed();
+    if(OrganicEntity::getEnergyLevel() < getAppConfig().animal_tired_threshold)
+        maxSpeed = getTiredMaxSpeed();
+
     switch (state_) {
     case FOOD_IN_SIGHT:
-        return 3 * standardMaxSpeed;
+        return 3 * maxSpeed;
     case MATE_IN_SIGHT:
-        return 2 * standardMaxSpeed;
+        return 2 * maxSpeed;
     case RUNNING_AWAY:
-        return 4 * standardMaxSpeed;
+        return 4 * maxSpeed;
     default:
-        return standardMaxSpeed;
+        return maxSpeed;
     }
 }
 
@@ -233,4 +234,10 @@ void Animal::drawState(sf::RenderTarget& targetWindow) const
                                 getAppConfig().debug_text_color,
                                 getRotation() / DEG_TO_RAD + 90
                                ));
+}
+
+void Animal::decreaseEnergyLevel(sf::Time dt)
+{
+    double loss = getAppConfig().animal_base_energy_consumption + speed_ * getEnergyLossFactor() * dt.asSeconds();
+    OrganicEntity::decreaseEnergyLevel(loss);
 }

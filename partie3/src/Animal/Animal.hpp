@@ -212,6 +212,9 @@ private:
     void updateState(sf::Time dt);
 
     void drawState(sf::RenderTarget& targetWindow) const;
+    virtual double getEnergyLossFactor() const = 0;
+    void decreaseEnergyLevel(sf::Time dt);
+    virtual double getTiredMaxSpeed() const = 0;
 };
 
 #endif

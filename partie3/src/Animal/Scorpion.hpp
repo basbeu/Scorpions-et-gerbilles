@@ -32,6 +32,8 @@ public:
     virtual bool eatableBy(Food const* food) const override;
 
     virtual sf::Time getLongevity() const override;
+    virtual double getEnergyLossFactor() const override;
+    virtual double getTiredMaxSpeed() const override;
 };
 
 #endif // SCORPION_HPP

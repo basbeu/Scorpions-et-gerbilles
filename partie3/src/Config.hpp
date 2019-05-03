@@ -93,9 +93,11 @@ public:
     const float animal_mating_time;
     const double animal_min_energy;
     const float animal_base_energy_consumption;
+    const double animal_tired_threshold;
 
     // gerbils
     const double gerbil_max_speed;
+    const double gerbil_tired_max_speed;
     const double gerbil_mass;
     const double gerbil_energy_loss_factor;
     const double gerbil_view_range;
@@ -122,6 +124,7 @@ public:
 
     // scorpion
     const double scorpion_max_speed;
+    const double scorpion_tired_max_speed;
     const double scorpion_mass;
     const double scorpion_energy_loss_factor;
     const double scorpion_view_range;

@@ -1,12 +1,12 @@
 {
-   "debug":false,
+   "debug":true,
    "simulation":{
       "time":{
-         "factor":3,
+         "factor":1,
          "max dt":0.05
       },
        "food generator" : {
-	   "delta" : 0.5
+	   "delta" : 4
        },
       "food":{
          "texture":"food.png",
@@ -18,6 +18,7 @@
          "meal retention":0.7,
          "feed time":0.4,
 	  "base consumption" : 0.1,
+      "tired threshold": 35,
 	  "min energy" : 20,
          "reproduction":{
                "delivery time":10,
@@ -26,16 +27,17 @@
         "gerbil":{
             "mass":1,
             "size":70,
-            "longevity":100,
+            "longevity":70000,
 	    "min age mating" : 5,
             "max speed":80,
+            "tired max speed":40,
             "reproduction":{
                "gestation time":15,
                "min children":1,
                "max children":2
             },
             "view":{
-		"range":6.283185307,
+               "range":1.04719755,
                "distance":450
             },
             "random walk":{
@@ -44,12 +46,12 @@
                "distance":160
             },
             "energy":{
-               "initial":800,
+               "initial":80,
                "min mating male":450,
                "min mating female":800,
                "loss mating male":200,
                "loss female per child":100,
-               "loss factor":0.002
+               "loss factor":0.001
             },
 	    "wave" : {
 		"frequency" : 0.3,
@@ -63,9 +65,10 @@
          "scorpion":{
             "mass":0.7,
             "size":100,
-             "longevity":1000,
+             "longevity":80000,
 	     "min age mating" : 5,
             "max speed":100,
+            "tired max speed":50,
             "rotation":{
                "speed":1.570796327,
                "angle precision":.125663706
@@ -78,7 +81,7 @@
                "max children":1
             },
             "view":{
-               "range":1.04719755,
+               "range":6.283185307,
                "distance":300
             },
             "random walk":{
@@ -87,12 +90,12 @@
                "distance":100
             },
             "energy":{
-               "initial":400,
-               "min mating male":600,
-               "min mating female":600,
+               "initial":120,
+               "min mating male":650,
+               "min mating female":2600,
                "loss mating male":250,
                "loss female per child":130,
-               "loss factor":0.01
+               "loss factor":0.001
             },
             "idle":{
                "min":5,
@@ -124,7 +127,7 @@
        },
 	       
       "world":{
-         "size":4000,
+         "size":1000,
          "texture":"ground3.png",
           "debug texture":"sand.png"
       }
@@ -136,8 +139,8 @@
 	"antialiasing level":4,
 	"title":"INFOSV Simulation",
 	"simulation":{
-            "width": 700,
-            "height": 700
+            "width":700,
+            "height":700
 	},
 	"stats":{
             "width":1

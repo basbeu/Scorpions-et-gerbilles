@@ -89,3 +89,13 @@ sf::Time Gerbil::getLongevity() const
 {
     return getAppConfig().gerbil_longevity;
 }
+
+double Gerbil::getEnergyLossFactor() const
+{
+    return getAppConfig().gerbil_energy_loss_factor;
+}
+
+double Gerbil::getTiredMaxSpeed() const
+{
+    return getAppConfig().gerbil_tired_max_speed;
+}
