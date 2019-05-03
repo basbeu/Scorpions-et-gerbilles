@@ -28,6 +28,8 @@ public:
     virtual bool eatableBy(Scorpion  const* scorpion) const override;
     virtual bool eatableBy(Gerbil const* gerbil) const override;
     virtual bool eatableBy(Food const* food) const override;
+
+    virtual sf::Time getLongevity() const override;
 };
 
 #endif // GERBIL_HPP

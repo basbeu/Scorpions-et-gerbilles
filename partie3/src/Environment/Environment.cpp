@@ -4,13 +4,14 @@
  */
 
 #include <Environment/Environment.hpp>
+#include <Environment/OrganicEntity.hpp>
 #include <Animal/Animal.hpp>
 #include <Utility/Vec2d.hpp>
 #include <Utility/Utility.hpp>
 
 #include <list>
+#include <algorithm>
 #include <SFML/Graphics.hpp>
-#include <Environment/OrganicEntity.hpp>
 
 Environment::~Environment()
 {
@@ -22,10 +23,16 @@ void Environment::addEntity(OrganicEntity* entity)
     entities_.push_back(entity);
 }
 
-void Environment::update(sf::Time dt) const
+void Environment::update(sf::Time dt)
 {
-    for(auto entity : entities_)
+    for(auto& entity : entities_){
         entity->update(dt);
+        if(!entity->isAlive()){
+            delete entity;
+            entity = nullptr;
+        }
+    }
+    entities_.erase(std::remove(entities_.begin(), entities_.end(), nullptr), entities_.end());
 
     for(auto generator : generators_)
         generator->update(dt);
@@ -48,7 +55,7 @@ std::list<OrganicEntity *> Environment::getEntitiesInSightForAnimal(Animal* anim
 {
     std::list<OrganicEntity*> entitiesInSight;
     for(auto& entity:entities_) {
-        if(animal->isTargetInSight(entity->getPosition()))
+        if(entity != nullptr && animal->isTargetInSight(entity->getPosition()))
             entitiesInSight.push_back(entity);
     }
 

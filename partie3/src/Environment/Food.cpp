@@ -23,6 +23,7 @@ Food::~Food()
 void Food::update(sf::Time dt)
 {
     // TODO : Evolution de la source de nourriture à programmer
+    OrganicEntity::update(dt);
 }
 
 void Food::draw(sf::RenderTarget& targetWindow) const

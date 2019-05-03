@@ -46,7 +46,7 @@ public:
      * @brief Update the environment for the tic of time dt
      * @param dt elapsed time from the last update
      */
-    void update(sf::Time dt) const;
+    void update(sf::Time dt);
 
     /*!
      * @brief Draw the environment to a window

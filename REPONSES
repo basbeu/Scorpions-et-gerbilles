@@ -95,4 +95,9 @@ Q3.4 :
 Q3.5 :
     - Selon moi, les affichages de debug que l'on a pour le moment sont très spécifiques aux animaux, donc toutes les méthodes d'affichage de debugging sont placées dans la classe Animal. Ce qui donc ne change rien à l'héritage de Drawable discuté à la question 3.3.
 
+Q3.6 :
+    - J'ai utilisé le méchanisme des méthodes virtuelles. J'ai mis une méthode virtuelle getLongevity() dans la classe OrganicEntity. Cette méthode retourne la valeur par défaut. Ensuite, j'ai re-défini (override) getLongevity() dans les classes Scorpions et Gerbilles afin de retournées leur longévité.
+
+Q3.7 :
+    - Je teste si l'animal doit être enlevé dans la boucle de la méthode update de l'environnement. Je fais bien entendu ce test après avoir mis à jour l'animal. Il faut faire attention de bien delete l'entité pour éviter les fuites de mémoires. 
 

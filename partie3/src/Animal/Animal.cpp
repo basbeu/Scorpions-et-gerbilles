@@ -44,6 +44,8 @@ Vec2d Animal::getSpeedVector() const
 
 void Animal::update(sf::Time dt)
 {
+    OrganicEntity::update(dt);
+
     updateState(dt);
 
     Vec2d force(0,0);
@@ -58,17 +60,6 @@ void Animal::update(sf::Time dt)
         break;
     }
     update(force, dt);
-    /*std::list<Vec2d> targetsInsight(getAppEnv().getTargetsInSightForAnimal(this));
-    Vec2d force(0,0);
-    if(!targetsInsight.empty()) {
-        targetPosition_ = targetsInsight.front();
-        force = computeForce();
-    } else {
-        targetPosition_ = Vec2d(0,0);
-        force = randomWalk();
-    }
-
-    update(force, dt);*/
 }
 
 void Animal::draw(sf::RenderTarget& targetWindow) const

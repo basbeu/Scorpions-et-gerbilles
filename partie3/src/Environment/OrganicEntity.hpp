@@ -25,7 +25,7 @@ public:
 
     virtual ~OrganicEntity();
 
-    virtual void update(sf::Time dt) = 0;
+    virtual void update(sf::Time dt);
     virtual void draw(sf::RenderTarget& targetWindow) const = 0;
 
     virtual bool eatable(OrganicEntity const* other) = 0;
@@ -33,8 +33,12 @@ public:
     virtual bool eatableBy(Gerbil const* gerbil) const = 0;
     virtual bool eatableBy(Food const* food) const = 0;
 
+    virtual sf::Time getLongevity() const;
+    bool isAlive() const;
+
 private:
     double energyLevel_;
+    sf::Time age_;
 };
 
 #endif // ORGANICENTITY_HPP
