@@ -66,4 +66,23 @@ Q2.10 :
 Q2.11 :
     - il faut compléter la méthode update de la class Environment. Dans cette méthode, j'itère sur tous les animaux et appelle leur méthode update.
 
+Q3.1 :
+    - getStandardMaxSpeed, getMass, getRandomWalkRadius, getRandomWalkDistance, getRandomWalkJitter, getViewRange et getViewDistance sont désormais des méthodes virtuelles pures de la classe Animal. C'est un cas typique ou les méthode doivent être abstraite à ce niveau et spécialisées dans les sous-classes.
+
+    - Le mot clé override est pertinent dans les classes Gerbil et Scorpion dans le prototype des 7 méthodes virtuelles que l'on substitue de la super classe Animal. 
+
+Q3.2 :
+    - Il faut modifier la valeur associé à l'énergie initiale d'une gerbille.
+      Pour y accéder, il faut suivre la hierarchie suivante :
+{
+    ...   
+    "simulation":{
+        ...
+        "gerbil":{
+            ...
+            "energy":{
+               "initial":VALEUR_A_MODIFIER,
+
+Retouches à l'environnement :
+La methode getEntitiesInSightForAnimal casse l'encapsulation, car donne des pointeurs sur les entités organiques de l'environnement. Donc un utilisateur de la classe peut modifier ou supprimer des entités organiques.
 
