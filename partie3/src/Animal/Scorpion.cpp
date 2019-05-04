@@ -99,3 +99,13 @@ double Scorpion::getTiredMaxSpeed() const
 {
     return getAppConfig().scorpion_tired_max_speed;
 }
+
+sf::Time Scorpion::getFeedingBreak() const
+{
+    return getAppConfig().scorpion_feeding_break;
+}
+
+double Scorpion::getFeedingEfficiency() const
+{
+    return getAppConfig().scorpion_feeding_efficiency;
+}

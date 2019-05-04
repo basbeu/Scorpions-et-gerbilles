@@ -98,6 +98,8 @@ public:
     // gerbils
     const double gerbil_max_speed;
     const double gerbil_tired_max_speed;
+    const sf::Time gerbil_feeding_break;
+    const double gerbil_feeding_efficiency;
     const double gerbil_mass;
     const double gerbil_energy_loss_factor;
     const double gerbil_view_range;
@@ -125,6 +127,8 @@ public:
     // scorpion
     const double scorpion_max_speed;
     const double scorpion_tired_max_speed;
+    const sf::Time scorpion_feeding_break;
+    const double scorpion_feeding_efficiency;
     const double scorpion_mass;
     const double scorpion_energy_loss_factor;
     const double scorpion_view_range;

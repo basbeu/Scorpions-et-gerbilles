@@ -171,11 +171,13 @@ private:
 
     State state_;
 
+    sf::Time feedingBreak_;
+
     /*!
      * @brief Compute the attraction force between Animal and its target
      * @return the force vector (Vec2d)
      */
-    Vec2d computeForce() const;
+    Vec2d computeForce(Vec2d target) const;
 
     /*!
      * @brief update its attribute given a force and a time
@@ -211,10 +213,13 @@ private:
 
     void updateState(sf::Time dt);
 
-    void drawState(sf::RenderTarget& targetWindow) const;
+    void drawDebugState(sf::RenderTarget& targetWindow) const;
     virtual double getEnergyLossFactor() const = 0;
     void decreaseEnergyLevel(sf::Time dt);
     virtual double getTiredMaxSpeed() const = 0;
+    Vec2d computeForceFeeding() const;
+    virtual sf::Time getFeedingBreak() const = 0;
+    virtual double getFeedingEfficiency() const = 0;
 };
 
 #endif

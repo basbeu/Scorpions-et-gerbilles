@@ -32,6 +32,8 @@ public:
     virtual sf::Time getLongevity() const override;
     virtual double getEnergyLossFactor() const override;
     virtual double getTiredMaxSpeed() const override;
+    virtual sf::Time getFeedingBreak() const override;
+    virtual double getFeedingEfficiency() const override;
 };
 
 #endif // GERBIL_HPP

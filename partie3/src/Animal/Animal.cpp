@@ -23,6 +23,7 @@ Animal::Animal(Vec2d position, double size, double energyLevel, bool female)
     ,currentTarget_(1,0)
     ,female_(female)
     ,state_(WANDERING)
+    ,feedingBreak_(sf::Time::Zero)
 {
     setDeceleration(DECELERATION_MEDIUM);
 }
@@ -45,10 +46,14 @@ Vec2d Animal::getSpeedVector() const
 void Animal::update(sf::Time dt)
 {
     OrganicEntity::update(dt);
+    updateState(dt);
     Vec2d force(0,0);
     switch (state_) {
+    case FEEDING:
+        force = computeForceFeeding();
+        break;
     case FOOD_IN_SIGHT:
-        force = computeForce();
+        force = computeForce(targetPosition_);
         break;
     case WANDERING:
         force = randomWalk();
@@ -72,7 +77,7 @@ void Animal::draw(sf::RenderTarget& targetWindow) const
         if(targetPosition_ == Vec2d(0,0)) {
             drawRandomWalkTarget(targetWindow);
         }
-        drawState(targetWindow);
+        drawDebugState(targetWindow);
     }
 }
 
@@ -112,7 +117,7 @@ bool Animal::isFemale() const
 double Animal::getMaxSpeed() const
 {
     double maxSpeed = getStandardMaxSpeed();
-    if(OrganicEntity::getEnergyLevel() < getAppConfig().animal_tired_threshold)
+    if(getEnergyLevel() < getAppConfig().animal_tired_threshold)
         maxSpeed = getTiredMaxSpeed();
 
     switch (state_) {
@@ -133,9 +138,9 @@ void Animal::setRotation(double angle)
     direction_.y = sin(angle);
 }
 
-Vec2d Animal::computeForce() const
+Vec2d Animal::computeForce(Vec2d target) const
 {
-    Vec2d toTarget(targetPosition_ - getPosition());
+    Vec2d toTarget(target - getPosition());
     double speed(std::min(toTarget.length() / deceleration_, getMaxSpeed()));
 
     return toTarget.normalised() * speed - getSpeedVector();
@@ -185,22 +190,37 @@ void Animal::updateState(sf::Time dt)
     std::list<OrganicEntity*> entitiesInSight(getAppEnv().getEntitiesInSightForAnimal(this));
     Vec2d maxVector(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     Vec2d target(maxVector);
+    OrganicEntity* targetEntity(nullptr);
     for(auto& entity:entitiesInSight) {
         if(eatable(entity) && entity->distanceTo(getPosition()) < distanceTo(target)){
             target = entity->getPosition();
+            targetEntity = entity;
         }
     }
 
-    if(target != maxVector){
+    if(feedingBreak_ <= sf::Time::Zero){
+        state_ = WANDERING;
+        feedingBreak_ = sf::Time::Zero;
+    }
+
+    if(state_ == FEEDING){
+        feedingBreak_ -= dt;
+    }else if(target != maxVector){
         state_ = FOOD_IN_SIGHT;
         targetPosition_ = target;
+        if(isColliding(*targetEntity)){
+            state_= FEEDING;
+            feedingBreak_ = getFeedingBreak();
+            OrganicEntity::increaseEnergyLevel(getFeedingEfficiency() * targetEntity->getEnergyLevel());
+            targetEntity->eaten();
+        }
     }else{
         state_ = WANDERING;
         targetPosition_ = Vec2d(0,0);
     }
 }
 
-void Animal::drawState(sf::RenderTarget& targetWindow) const
+void Animal::drawDebugState(sf::RenderTarget& targetWindow) const
 {
     std::string debugText("");
     switch (state_) {
@@ -227,6 +247,13 @@ void Animal::drawState(sf::RenderTarget& targetWindow) const
         break;
     }
 
+    if(isFemale())
+        debugText += "\nFemale";
+    else
+        debugText += "\nMale";
+
+    debugText += "\n" ;
+    debugText += std::to_string(getEnergyLevel());
     targetWindow.draw(buildText(debugText,
                                 convertToGlobalCoord(Vec2d(getRandomWalkDistance(), 0)),
                                 getAppFont(),
@@ -240,4 +267,11 @@ void Animal::decreaseEnergyLevel(sf::Time dt)
 {
     double loss = getAppConfig().animal_base_energy_consumption + speed_ * getEnergyLossFactor() * dt.asSeconds();
     OrganicEntity::decreaseEnergyLevel(loss);
+}
+
+Vec2d Animal::computeForceFeeding() const
+{
+    if(isEqual(speed_, 0.0, 0.5))
+        return Vec2d(0,0);
+    return computeForce(convertToGlobalCoord(Vec2d(-1,0)));
 }

@@ -99,3 +99,15 @@ double Gerbil::getTiredMaxSpeed() const
 {
     return getAppConfig().gerbil_tired_max_speed;
 }
+
+
+sf::Time Gerbil::getFeedingBreak() const
+{
+    return getAppConfig().gerbil_feeding_break;
+}
+
+
+double Gerbil::getFeedingEfficiency() const
+{
+    return getAppConfig().scorpion_feeding_efficiency;
+}

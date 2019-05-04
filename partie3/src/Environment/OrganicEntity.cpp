@@ -36,12 +36,25 @@ bool OrganicEntity::isAlive() const
     return age_ < getLongevity() && energyLevel_ > getAppConfig().animal_min_energy;
 }
 
+double OrganicEntity::getEnergyLevel() const
+{
+    return energyLevel_;
+}
+
+void OrganicEntity::eaten()
+{
+    decreaseEnergyLevel(getEnergyLevel());
+}
+
 void OrganicEntity::decreaseEnergyLevel(double loss)
 {
     energyLevel_ -= loss;
 }
 
-double OrganicEntity::getEnergyLevel() const
+
+void OrganicEntity::increaseEnergyLevel(double increase)
 {
-    return energyLevel_;
+   energyLevel_ += increase;
 }
+
+
