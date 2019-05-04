@@ -9,13 +9,28 @@
 #include <Environment/OrganicEntity.hpp>
 #include <Utility/Vec2d.hpp>
 
+/*!
+ * @brief The Food class is an OrganicEntity that represents food
+ */
 class Food:public OrganicEntity
 {
 public:
+    /*!
+     * @brief build an instance of Food
+     * @param position of the food (Vec2d)
+     */
     Food(Vec2d position);
 
+    /*!
+     * @brief destroy a food instance
+     */
     virtual ~Food() override;
 
+private:
+    /*
+     * Virtual methods that are inherited from OrganicEntity
+     * see OrganiEntity.hpp for the corresponding documentation
+     */
     virtual void update(sf::Time dt) override;
     virtual void draw(sf::RenderTarget& targetWindow) const override;
 

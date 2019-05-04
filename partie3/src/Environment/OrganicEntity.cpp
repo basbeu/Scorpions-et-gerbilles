@@ -41,6 +41,11 @@ double OrganicEntity::getEnergyLevel() const
     return energyLevel_;
 }
 
+double OrganicEntity::getAge() const
+{
+    return age_.asSeconds();
+}
+
 void OrganicEntity::eaten()
 {
     decreaseEnergyLevel(getEnergyLevel());
@@ -57,7 +62,3 @@ void OrganicEntity::increaseEnergyLevel(double increase)
    energyLevel_ += increase;
 }
 
-double OrganicEntity::getAge() const
-{
-    return age_.asSeconds();
-}

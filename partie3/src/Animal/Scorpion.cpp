@@ -25,6 +25,51 @@ Scorpion::~Scorpion()
 
 }
 
+bool Scorpion::eatable(OrganicEntity const* entity)
+{
+    return entity->eatableBy(this);
+}
+
+bool Scorpion::eatableBy(Scorpion  const* scorpion) const
+{
+    return false;
+}
+
+bool Scorpion::eatableBy(Gerbil const* gerbil) const
+{
+    return false;
+}
+
+bool Scorpion::eatableBy(Food const* food) const
+{
+    return false;
+}
+
+bool Scorpion::matable(OrganicEntity const* other) const
+{
+    return other->canMate(this);
+}
+
+bool Scorpion::canMate(Scorpion const* scorpion) const
+{
+    return scorpion->isFemale() != isFemale()
+            && !scorpion->isPregnant()
+            && !scorpion->isGivingBirth()
+            && scorpion->getEnergyLevel() >= scorpion->getMinimumMatingEnergy()
+            && scorpion->getAge() >= getMinAgeMating();;
+}
+
+bool Scorpion::canMate(Gerbil const* Scorpion) const
+{
+    return false;
+}
+
+bool Scorpion::canMate(Food const* Scorpion) const
+{
+    return false;
+}
+
+
 double Scorpion::getStandardMaxSpeed() const
 {
     return getAppConfig().scorpion_max_speed;
@@ -65,26 +110,6 @@ std::string Scorpion::getTexture() const
     return getAppConfig().scorpion_texture;
 }
 
-bool Scorpion::eatable(OrganicEntity const* entity)
-{
-    return entity->eatableBy(this);
-}
-
-bool Scorpion::eatableBy(Scorpion  const* scorpion) const
-{
-    return false;
-}
-
-bool Scorpion::eatableBy(Gerbil const* gerbil) const
-{
-    return false;
-}
-
-bool Scorpion::eatableBy(Food const* food) const
-{
-    return false;
-}
-
 sf::Time Scorpion::getLongevity() const
 {
     return getAppConfig().scorpion_longevity;
@@ -108,30 +133,6 @@ sf::Time Scorpion::getFeedingBreak() const
 double Scorpion::getFeedingEfficiency() const
 {
     return getAppConfig().scorpion_feeding_efficiency;
-}
-
-bool Scorpion::matable(OrganicEntity const* other) const
-{
-    return other->canMate(this);
-}
-
-bool Scorpion::canMate(Scorpion const* scorpion) const
-{
-    return scorpion->isFemale() != isFemale()
-            && !scorpion->isPregnant()
-            && !scorpion->isGivingBirth()
-            && scorpion->getEnergyLevel() >= scorpion->getMinimumMatingEnergy()
-            && scorpion->getAge() >= getMinAgeMating();;
-}
-
-bool Scorpion::canMate(Gerbil const* Scorpion) const
-{
-    return false;
-}
-
-bool Scorpion::canMate(Food const* Scorpion) const
-{
-    return false;
 }
 
 double Scorpion::getMinimumMatingEnergy() const
@@ -173,7 +174,6 @@ sf::Time Scorpion::getGivingBirthBreak() const
 {
     return getAppConfig().scorpion_giving_birth_break;
 }
-
 
 Animal* Scorpion::giveBirth() const
 {

@@ -20,7 +20,6 @@ FoodGenerator::~FoodGenerator(){
 
 }
 
-
 void FoodGenerator::update(sf::Time dt)
 {
     counter_ += dt;

@@ -66,6 +66,10 @@ public:
      */
     std::list<OrganicEntity*> getEntitiesInSightForAnimal(Animal* animal);
 
+    /*!
+     * @brief add a food generator to the environment
+     * \param Pointer to the FoodGenerator added to the environment
+     */
     void addGenerator(FoodGenerator* gen);
 private:
 
@@ -74,6 +78,9 @@ private:
      */
     std::list<OrganicEntity*> entities_;
 
+    /*!
+     * @brief generators_ list of all food generators that are in the environment
+     */
     std::list<FoodGenerator*> generators_;
 };
 

@@ -25,6 +25,50 @@ Gerbil::~Gerbil()
 
 }
 
+bool Gerbil::eatable(OrganicEntity const* entity)
+{
+    return entity->eatableBy(this);
+}
+
+bool Gerbil::eatableBy(Scorpion  const* scorpion) const
+{
+    return true;
+}
+
+bool Gerbil::eatableBy(Gerbil const* gerbil) const
+{
+    return false;
+}
+
+bool Gerbil::eatableBy(Food const* food) const
+{
+    return false;
+}
+
+bool Gerbil::matable(OrganicEntity const* other) const
+{
+    return other->canMate(this);
+}
+
+bool Gerbil::canMate(Scorpion const* scorpion) const
+{
+    return false;
+}
+
+bool Gerbil::canMate(Gerbil const* gerbil) const
+{
+    return gerbil->isFemale() != isFemale()
+            && !gerbil->isPregnant()
+            && !gerbil->isGivingBirth()
+            && gerbil->getEnergyLevel() >= gerbil->getMinimumMatingEnergy()
+            && gerbil->getAge() >= getMinAgeMating();
+}
+
+bool Gerbil::canMate(Food const* Gerbil) const
+{
+    return false;
+}
+
 double Gerbil::getStandardMaxSpeed() const
 {
     return getAppConfig().gerbil_max_speed;
@@ -65,26 +109,6 @@ std::string Gerbil::getTexture() const
     return isFemale() ? getAppConfig().gerbil_texture_female : getAppConfig().gerbil_texture_male;
 }
 
-bool Gerbil::eatable(OrganicEntity const* entity)
-{
-    return entity->eatableBy(this);
-}
-
-bool Gerbil::eatableBy(Scorpion  const* scorpion) const
-{
-    return true;
-}
-
-bool Gerbil::eatableBy(Gerbil const* gerbil) const
-{
-    return false;
-}
-
-bool Gerbil::eatableBy(Food const* food) const
-{
-    return false;
-}
-
 sf::Time Gerbil::getLongevity() const
 {
     return getAppConfig().gerbil_longevity;
@@ -100,40 +124,14 @@ double Gerbil::getTiredMaxSpeed() const
     return getAppConfig().gerbil_tired_max_speed;
 }
 
-
 sf::Time Gerbil::getFeedingBreak() const
 {
     return getAppConfig().gerbil_feeding_break;
 }
 
-
 double Gerbil::getFeedingEfficiency() const
 {
     return getAppConfig().scorpion_feeding_efficiency;
-}
-
-bool Gerbil::matable(OrganicEntity const* other) const
-{
-    return other->canMate(this);
-}
-
-bool Gerbil::canMate(Scorpion const* scorpion) const
-{
-    return false;
-}
-
-bool Gerbil::canMate(Gerbil const* gerbil) const
-{
-    return gerbil->isFemale() != isFemale()
-            && !gerbil->isPregnant()
-            && !gerbil->isGivingBirth()
-            && gerbil->getEnergyLevel() >= gerbil->getMinimumMatingEnergy()
-            && gerbil->getAge() >= getMinAgeMating();
-}
-
-bool Gerbil::canMate(Food const* Gerbil) const
-{
-    return false;
 }
 
 double Gerbil::getMinimumMatingEnergy() const
@@ -166,12 +164,10 @@ double Gerbil::getEnergyLossMatingMale() const
     return getAppConfig().gerbil_energy_loss_mating_male;
 }
 
-
 double Gerbil::getGestationTime() const
 {
     return getAppConfig().gerbil_gestation_time;
 }
-
 
 sf::Time Gerbil::getGivingBirthBreak() const
 {

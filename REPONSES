@@ -120,3 +120,6 @@ Q3.12:
 Q3.13:
     - Le nombre d'enfant est stocké dans un attribut (childrenPending_). Cet attribut vaut zéro pour les mâles et lorsque que les femelles ne sont pas en gestation. 
 
+Q3.14:
+    - Il ne serait pas nécessaire d'avoir un attribut. Mais dans l'idée de modularisation et de séparation des taches par méthodes, je trouve essentiel d'avoir une liste d'ennemies. Car je découvre les ennemies dans la méthode AnalyseEnvironment() puis je décide le state dans update state et ensuite seulement je calcule la force dans depuis la méthode update. Donc pour calculer la force il me faut les prédateurs. Donc j'ai implémenté en gardant une liste de prédateur en attributs.
+
