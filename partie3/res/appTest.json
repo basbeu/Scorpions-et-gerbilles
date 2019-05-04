@@ -46,7 +46,7 @@
                "distance":450
             },
             "random walk":{
-               "jitter":2.0,
+               "jitter":2,
                "radius":50,
                "distance":160
             },

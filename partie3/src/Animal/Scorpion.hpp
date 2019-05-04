@@ -50,7 +50,7 @@ private:
     virtual double getEnergyLossMatingMale() const override;
     virtual double getGestationTime() const override;
     virtual sf::Time getGivingBirthBreak() const override;
-    virtual Animal* giveBirth() override;
+    virtual Animal* giveBirth() const override;
 };
 
 #endif // SCORPION_HPP

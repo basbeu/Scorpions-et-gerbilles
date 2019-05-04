@@ -28,7 +28,7 @@
             "mass":1,
             "size":70,
             "longevity":70000,
-	     "min age mating" : 0,
+	     "min age mating" : 3,
             "max speed":80,
             "tired max speed":40,
             "feeding":{

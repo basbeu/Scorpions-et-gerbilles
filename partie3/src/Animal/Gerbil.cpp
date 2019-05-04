@@ -178,7 +178,7 @@ sf::Time Gerbil::getGivingBirthBreak() const
     return getAppConfig().gerbil_giving_birth_break;
 }
 
-Animal* Gerbil::giveBirth()
+Animal* Gerbil::giveBirth() const
 {
     return new Gerbil(getPosition());
 }

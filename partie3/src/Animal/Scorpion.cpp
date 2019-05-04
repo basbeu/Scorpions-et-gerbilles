@@ -175,7 +175,7 @@ sf::Time Scorpion::getGivingBirthBreak() const
 }
 
 
-Animal* Scorpion::giveBirth()
+Animal* Scorpion::giveBirth() const
 {
     return new Scorpion(getPosition());
 }

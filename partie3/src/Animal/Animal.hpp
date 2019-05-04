@@ -8,6 +8,7 @@
 #include <Environment/OrganicEntity.hpp>
 #include <Utility/Vec2d.hpp>
 
+#include <list>
 #include <SFML/Graphics.hpp>
 
 /*!
@@ -140,7 +141,7 @@ private:
     sf::Time break_;
     OrganicEntity* nearestFood_;
     OrganicEntity* nearestMate_;
-    OrganicEntity* nearestEnemy_;
+    std::list<OrganicEntity*> enemies_;
     int childrenPending_;
     sf::Time gestation_;
     /*!
@@ -239,8 +240,9 @@ private:
     virtual double getGestationTime() const = 0;
     virtual sf::Time getGivingBirthBreak() const = 0;
     virtual sf::Time getMatingTime() const;
-    virtual Animal* giveBirth() = 0;
-    void makeChildren();
+    virtual Animal* giveBirth() const = 0;
+    void makeChildren() const;
+    Vec2d computeForceRunningAway() const;
 };
 
 #endif

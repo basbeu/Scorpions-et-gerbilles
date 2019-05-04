@@ -26,7 +26,7 @@ Animal::Animal(Vec2d position, double size, double energyLevel, bool female)
     ,break_(sf::Time::Zero)
     ,nearestFood_(nullptr)
     ,nearestMate_(nullptr)
-    ,nearestEnemy_(nullptr)
+    ,enemies_()
     ,childrenPending_(0)
     ,gestation_(sf::Time::Zero)
 {
@@ -55,6 +55,9 @@ void Animal::update(sf::Time dt)
     updateState(dt);
     Vec2d force(0,0);
     switch (state_) {
+    case RUNNING_AWAY:
+        force = computeForceRunningAway();
+        break;
     case MATING:
     case GIVING_BIRTH:
     case FEEDING:
@@ -212,6 +215,8 @@ void Animal::updateState(sf::Time dt)
 
     if(state_ == FEEDING || state_ == MATING || isGivingBirth()){
         break_ -= dt;
+    }else if(!enemies_.empty()){
+        state_ = RUNNING_AWAY;
     }else if(nearestMate_ != nullptr){
         state_ = MATE_IN_SIGHT;
         targetPosition_ = nearestMate_->getPosition();
@@ -257,7 +262,7 @@ void Animal::analyzeEnvironment(){
     Vec2d targetMate(maxVector);
     nearestFood_ = nullptr;
     nearestMate_ = nullptr;
-
+    enemies_.clear();
     for(auto& entity:entitiesInSight) {
         if(eatable(entity) && entity->distanceTo(getPosition()) < distanceTo(targetFood)){
             targetFood = entity->getPosition();
@@ -266,6 +271,8 @@ void Animal::analyzeEnvironment(){
             targetMate = entity->getPosition();
             nearestMate_ = entity;
         }
+        if(entity->eatable(this))
+            enemies_.push_back(entity);
     }
 }
 
@@ -296,6 +303,7 @@ void Animal::drawDebugState(sf::RenderTarget& targetWindow) const
         break;
     }
 
+    debugText += "\n age : "+std::to_string(getAge());
     if(isFemale())
         debugText += "\nFemale";
     else
@@ -349,9 +357,23 @@ sf::Time Animal::getMatingTime() const
     return sf::seconds(getAppConfig().animal_mating_time);
 }
 
-void Animal::makeChildren()
+void Animal::makeChildren() const
 {
     for(int i = 0; i < childrenPending_;++i){
         getAppEnv().addEntity(giveBirth());
     }
+}
+
+Vec2d Animal::computeForceRunningAway() const
+{
+    Vec2d force(0,0);
+    double delta1(500.0);
+    double delta2(1.2);
+    for(auto& enemy:enemies_){
+        if(enemy != nullptr){
+            Vec2d dir(enemy->getPosition()-getPosition());
+            force += delta1*dir/pow(dir.length(),delta2);
+        }
+    }
+    return -force;
 }
