@@ -37,44 +37,7 @@ public:
     /*!
      * @brief Destroy a Animal
      */
-    virtual ~Animal();
-
-    /*!
-     * @return the max speed of the Animal
-     */
-    virtual double getStandardMaxSpeed() const = 0;
-
-    /*!
-     * @return the mass of the Animal
-     */
-    virtual double getMass() const = 0;
-
-    /*!
-     * @return radius of the circle on which random targets are generated
-     */
-    virtual double getRandomWalkRadius() const = 0;
-
-    /*!
-     * @return the distance at which the random targets are generated
-     */
-    virtual double getRandomWalkDistance() const = 0;
-
-    /*!
-     * @return jitter coeficient for random targets generation
-     */
-    virtual double getRandomWalkJitter() const = 0;
-
-    /*!
-     * @return the view range of the Animal
-     */
-    virtual double getViewRange() const = 0;
-
-    /*!
-     * @return the max distance that the animal can see
-     */
-    virtual double getViewDistance() const = 0;
-
-    virtual std::string getTexture() const = 0;
+    virtual ~Animal() override;
 
     /*!
       * @brief set the position of the Animal's target
@@ -120,6 +83,9 @@ public:
     bool isFemale() const;
 
     double getMaxSpeed() const;
+
+    bool isPregnant() const;
+    bool isGivingBirth() const;
 
 protected:
     /*!
@@ -174,6 +140,43 @@ private:
     sf::Time feedingBreak_;
 
     /*!
+     * @return the max speed of the Animal
+     */
+    virtual double getStandardMaxSpeed() const = 0;
+
+    /*!
+     * @return the mass of the Animal
+     */
+    virtual double getMass() const = 0;
+
+    /*!
+     * @return radius of the circle on which random targets are generated
+     */
+    virtual double getRandomWalkRadius() const = 0;
+
+    /*!
+     * @return the distance at which the random targets are generated
+     */
+    virtual double getRandomWalkDistance() const = 0;
+
+    /*!
+     * @return jitter coeficient for random targets generation
+     */
+    virtual double getRandomWalkJitter() const = 0;
+
+    /*!
+     * @return the view range of the Animal
+     */
+    virtual double getViewRange() const = 0;
+
+    /*!
+     * @return the max distance that the animal can see
+     */
+    virtual double getViewDistance() const = 0;
+
+    virtual std::string getTexture() const = 0;
+
+    /*!
      * @brief Compute the attraction force between Animal and its target
      * @return the force vector (Vec2d)
      */
@@ -220,6 +223,9 @@ private:
     Vec2d computeForceFeeding() const;
     virtual sf::Time getFeedingBreak() const = 0;
     virtual double getFeedingEfficiency() const = 0;
+
+    virtual double getMinimumMatingEnergy() const = 0;
+    virtual double getMinAgeMating()const = 0;
 };
 
 #endif

@@ -37,6 +37,13 @@ public:
     bool isAlive() const;
     double getEnergyLevel() const;
     void eaten();
+
+    virtual bool matable(OrganicEntity const* other) const = 0;
+    virtual bool canMate(Scorpion const* scorpion) const = 0;
+    virtual bool canMate(Gerbil const* gerbil) const = 0;
+    virtual bool canMate(Food const* food) const = 0;
+
+    virtual double getAge() const;
 protected:
     void decreaseEnergyLevel(double loss);
     void increaseEnergyLevel(double increase);

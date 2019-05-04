@@ -57,4 +57,7 @@ void OrganicEntity::increaseEnergyLevel(double increase)
    energyLevel_ += increase;
 }
 
-
+double OrganicEntity::getAge() const
+{
+    return age_.asSeconds();
+}

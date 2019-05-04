@@ -16,7 +16,7 @@ public:
     Scorpion(Vec2d position);
 
     virtual ~Scorpion() override;
-
+private:
     virtual double getStandardMaxSpeed() const override;
     virtual double getMass() const override;
     virtual double getRandomWalkRadius() const override;
@@ -36,6 +36,14 @@ public:
     virtual double getTiredMaxSpeed() const override;
     virtual sf::Time getFeedingBreak() const override;
     virtual double getFeedingEfficiency() const override;
+
+    virtual bool matable(OrganicEntity const* other) const override;
+    virtual bool canMate(Scorpion const* scorpion) const override;
+    virtual bool canMate(Gerbil const* gerbil) const override;
+    virtual bool canMate(Food const* food) const override;
+
+    virtual double getMinimumMatingEnergy() const override;
+    virtual double getMinAgeMating()const override;
 };
 
 #endif // SCORPION_HPP

@@ -111,3 +111,37 @@ double Gerbil::getFeedingEfficiency() const
 {
     return getAppConfig().scorpion_feeding_efficiency;
 }
+
+bool Gerbil::matable(OrganicEntity const* other) const
+{
+    return other->canMate(this);
+}
+
+bool Gerbil::canMate(Scorpion const* scorpion) const
+{
+    return false;
+}
+
+bool Gerbil::canMate(Gerbil const* gerbil) const
+{
+    return gerbil->isFemale() != isFemale()
+            && !gerbil->isPregnant()
+            && !gerbil->isGivingBirth()
+            && gerbil->getEnergyLevel() >= gerbil->getMinimumMatingEnergy()
+            && gerbil->getAge() >= getMinAgeMating();
+}
+
+bool Gerbil::canMate(Food const* Gerbil) const
+{
+    return false;
+}
+
+double Gerbil::getMinimumMatingEnergy() const
+{
+    return isFemale()?getAppConfig().gerbil_energy_min_mating_female:getAppConfig().gerbil_energy_min_mating_male;
+}
+
+double Gerbil::getMinAgeMating()const
+{
+    return getAppConfig().gerbil_min_age_mating;
+}

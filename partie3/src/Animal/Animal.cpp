@@ -132,6 +132,15 @@ double Animal::getMaxSpeed() const
     }
 }
 
+bool Animal::isPregnant() const{
+    return false;
+}
+
+bool Animal::isGivingBirth() const
+{
+    return state_ == GIVING_BIRTH;
+}
+
 void Animal::setRotation(double angle)
 {
     direction_.x = cos(angle);
