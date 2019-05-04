@@ -137,8 +137,12 @@ private:
 
     State state_;
 
-    sf::Time feedingBreak_;
-
+    sf::Time break_;
+    OrganicEntity* nearestFood_;
+    OrganicEntity* nearestMate_;
+    OrganicEntity* nearestEnemy_;
+    int childrenPending_;
+    sf::Time gestation_;
     /*!
      * @return the max speed of the Animal
      */
@@ -215,17 +219,28 @@ private:
     void drawRandomWalkTarget(sf::RenderTarget& targetWindow) const;
 
     void updateState(sf::Time dt);
+    void analyzeEnvironment();
 
     void drawDebugState(sf::RenderTarget& targetWindow) const;
     virtual double getEnergyLossFactor() const = 0;
     void decreaseEnergyLevel(sf::Time dt);
     virtual double getTiredMaxSpeed() const = 0;
-    Vec2d computeForceFeeding() const;
+    Vec2d computeForceDecelerate() const;
     virtual sf::Time getFeedingBreak() const = 0;
     virtual double getFeedingEfficiency() const = 0;
 
     virtual double getMinimumMatingEnergy() const = 0;
     virtual double getMinAgeMating()const = 0;
+    void meet(OrganicEntity * entity);
+    virtual int getMinChildren() const = 0;
+    virtual int getMaxChildren() const = 0;
+    virtual double getEnergyLossFemalePerChild() const = 0;
+    virtual double getEnergyLossMatingMale() const = 0;
+    virtual double getGestationTime() const = 0;
+    virtual sf::Time getGivingBirthBreak() const = 0;
+    virtual sf::Time getMatingTime() const;
+    virtual Animal* giveBirth() = 0;
+    void makeChildren();
 };
 
 #endif

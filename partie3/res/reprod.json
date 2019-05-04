@@ -18,6 +18,7 @@
          "meal retention":0.7,
          "feed time":0.4,
 	  "base consumption" : 0.1,
+      "tired threshold": 35,
 	  "min energy" : 20,
          "reproduction":{
                "delivery time":10,
@@ -27,12 +28,18 @@
             "mass":1,
             "size":70,
             "longevity":70000,
-	     "min age mating" : 3,
+	     "min age mating" : 0,
             "max speed":80,
+            "tired max speed":40,
+            "feeding":{
+                "break time": 3,
+                "efficiency": 0.7
+            },
             "reproduction":{
                "gestation time":15,
                "min children":1,
-               "max children":2
+               "max children":2,
+               "giving birth time":5
             },
             "view":{
                "range":1.04719755,
@@ -66,6 +73,11 @@
              "longevity":80000,
 	     "min age mating" : 0,
             "max speed":100,
+            "tired max speed":50,
+            "feeding":{
+                "break time": 5,
+                "efficiency": 0.7 
+            },
             "rotation":{
                "speed":1.570796327,
                "angle precision":.125663706
@@ -75,7 +87,8 @@
             "reproduction":{
                "gestation time":25,
 		"min children":1,
-               "max children":1
+               "max children":1,
+               "giving birth time":5
             },
             "view":{
                "range":6.283185307,

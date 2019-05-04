@@ -44,6 +44,13 @@ private:
 
     virtual double getMinimumMatingEnergy() const override;
     virtual double getMinAgeMating()const override;
+    virtual int getMinChildren() const override;
+    virtual int getMaxChildren() const override;
+    virtual double getEnergyLossFemalePerChild() const override;
+    virtual double getEnergyLossMatingMale() const override;
+    virtual double getGestationTime() const override;
+    virtual sf::Time getGivingBirthBreak() const override;
+    virtual Animal* giveBirth() override;
 };
 
 #endif // SCORPION_HPP

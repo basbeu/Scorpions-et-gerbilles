@@ -38,7 +38,8 @@
             "reproduction":{
                "gestation time":15,
                "min children":1,
-               "max children":2
+               "max children":2,
+               "giving birth time":3
             },
             "view":{
                "range":1.04719755,
@@ -86,7 +87,8 @@
             "reproduction":{
                "gestation time":25,
                "min children":1,
-               "max children":1
+               "max children":1,
+               "giving birth time":5
             },
             "view":{
                "range":6.283185307,

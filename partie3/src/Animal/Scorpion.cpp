@@ -143,3 +143,39 @@ double Scorpion::getMinAgeMating()const
 {
     return getAppConfig().scorpion_min_age_mating;
 }
+
+int Scorpion::getMinChildren() const
+{
+    return getAppConfig().scorpion_min_children;
+}
+
+int Scorpion::getMaxChildren() const
+{
+    return getAppConfig().scorpion_max_children;
+}
+
+double Scorpion::getEnergyLossFemalePerChild() const
+{
+    return getAppConfig().scorpion_energy_loss_female_per_child;
+}
+
+double Scorpion::getEnergyLossMatingMale() const
+{
+    return getAppConfig().scorpion_energy_loss_mating_male;
+}
+
+double Scorpion::getGestationTime() const
+{
+    return getAppConfig().scorpion_gestation_time;
+}
+
+sf::Time Scorpion::getGivingBirthBreak() const
+{
+    return getAppConfig().scorpion_giving_birth_break;
+}
+
+
+Animal* Scorpion::giveBirth()
+{
+    return new Scorpion(getPosition());
+}

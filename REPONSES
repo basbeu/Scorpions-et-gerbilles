@@ -105,5 +105,18 @@ Q3.8:
     - J'ai tout d'abord ajouté trois parametres dans les fichiers JSON pour le seuil de fatigue (parametre des animaux) et pour la vitesse en étant fatigué (pour la gerbille et le scorpion). Ensuite, dans la méthode getMaxSpeed je teste si le niveau d'énergie est au dessous du seuil et dans ce cas j'utilise la vitesse fatigué au lieu de la standard maximale.
 
 Q3.9:
-    - On aurait pu mettre toutes les méthodes gérant les collisions directement dans OrganicEntity. L'avantage que je vois est que l'on réduit la profondeur de notre hierarchie de classe, mais par contre cela rend la conception moins souple. Avec circular collider on pourrait ajouter des entités non organiques étant des circular collider par exemple. Il y a aussi un avantage pour l'organisation des méthodes, toutes les méthodes servant juste aux collisions sont dans un fichier séparé. Cela nous donne donc une séparation logique des méthodes par thème. 
+    - On aurait pu mettre toutes les méthodes gérant les collisions directement dans OrganicEntity. L'avantage que je vois est que l'on réduit la profondeur de notre hierarchie de classe, mais par contre cela rend la conception moins souple. Avec circular collider on pourrait ajouter des entités non organiques étant des circular collider par exemple. Il y a aussi un avantage pour l'organisation des méthodes, toutes les méthodes servant juste aux collisions sont dans un fichier séparé. Cela nous donne donc une séparation logique des méthodes par thème.
+
+Q3.10:
+    - La méthode meet test la condition suivante this->matable(entity) && entity->matable(this). Ce qui utilise le double dispatch sans faire de tests de type.
+
+Q3.11:
+    - La gestation est implémentée sous la forme d'un compteur qui est initialisé au temps de gestation de l'animal et qui est décrémenté à chaque update. Lorsque le temps est écoulé, l'animal s'arrête et donne naissance à ses enfants.
+
+Q3.12:
+    - Dans la classe Animal, la méthode virtuelle pure suivante  est déclarée :  virtual Animal* giveBirth() = 0;
+      Cette méthode est implémentée dans Scorpion et Gerbille et renvoit un nouvel animal du même type.
+
+Q3.13:
+    - Le nombre d'enfant est stocké dans un attribut (childrenPending_). Cet attribut vaut zéro pour les mâles et lorsque que les femelles ne sont pas en gestation. 
 

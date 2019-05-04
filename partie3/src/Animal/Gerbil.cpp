@@ -145,3 +145,40 @@ double Gerbil::getMinAgeMating()const
 {
     return getAppConfig().gerbil_min_age_mating;
 }
+
+int Gerbil::getMinChildren() const
+{
+    return getAppConfig().gerbil_min_children;
+}
+
+int Gerbil::getMaxChildren() const
+{
+    return getAppConfig().gerbil_max_children;
+}
+
+double Gerbil::getEnergyLossFemalePerChild() const
+{
+    return getAppConfig().gerbil_energy_loss_female_per_child;
+}
+
+double Gerbil::getEnergyLossMatingMale() const
+{
+    return getAppConfig().gerbil_energy_loss_mating_male;
+}
+
+
+double Gerbil::getGestationTime() const
+{
+    return getAppConfig().gerbil_gestation_time;
+}
+
+
+sf::Time Gerbil::getGivingBirthBreak() const
+{
+    return getAppConfig().gerbil_giving_birth_break;
+}
+
+Animal* Gerbil::giveBirth()
+{
+    return new Gerbil(getPosition());
+}

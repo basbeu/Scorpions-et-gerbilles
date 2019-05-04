@@ -23,7 +23,12 @@ Animal::Animal(Vec2d position, double size, double energyLevel, bool female)
     ,currentTarget_(1,0)
     ,female_(female)
     ,state_(WANDERING)
-    ,feedingBreak_(sf::Time::Zero)
+    ,break_(sf::Time::Zero)
+    ,nearestFood_(nullptr)
+    ,nearestMate_(nullptr)
+    ,nearestEnemy_(nullptr)
+    ,childrenPending_(0)
+    ,gestation_(sf::Time::Zero)
 {
     setDeceleration(DECELERATION_MEDIUM);
 }
@@ -46,13 +51,17 @@ Vec2d Animal::getSpeedVector() const
 void Animal::update(sf::Time dt)
 {
     OrganicEntity::update(dt);
+    analyzeEnvironment();
     updateState(dt);
     Vec2d force(0,0);
     switch (state_) {
+    case MATING:
+    case GIVING_BIRTH:
     case FEEDING:
-        force = computeForceFeeding();
+        force = computeForceDecelerate();
         break;
     case FOOD_IN_SIGHT:
+    case MATE_IN_SIGHT:
         force = computeForce(targetPosition_);
         break;
     case WANDERING:
@@ -133,7 +142,7 @@ double Animal::getMaxSpeed() const
 }
 
 bool Animal::isPregnant() const{
-    return false;
+    return gestation_ > sf::Time::Zero && childrenPending_ > 0;
 }
 
 bool Animal::isGivingBirth() const
@@ -196,36 +205,67 @@ void Animal::drawRandomWalkTarget(sf::RenderTarget& targetWindow) const
 
 void Animal::updateState(sf::Time dt)
 {
-    std::list<OrganicEntity*> entitiesInSight(getAppEnv().getEntitiesInSightForAnimal(this));
-    Vec2d maxVector(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
-    Vec2d target(maxVector);
-    OrganicEntity* targetEntity(nullptr);
-    for(auto& entity:entitiesInSight) {
-        if(eatable(entity) && entity->distanceTo(getPosition()) < distanceTo(target)){
-            target = entity->getPosition();
-            targetEntity = entity;
-        }
-    }
-
-    if(feedingBreak_ <= sf::Time::Zero){
+    if(break_ < sf::Time::Zero){
         state_ = WANDERING;
-        feedingBreak_ = sf::Time::Zero;
+        break_ = sf::Time::Zero;
     }
 
-    if(state_ == FEEDING){
-        feedingBreak_ -= dt;
-    }else if(target != maxVector){
+    if(state_ == FEEDING || state_ == MATING || isGivingBirth()){
+        break_ -= dt;
+    }else if(nearestMate_ != nullptr){
+        state_ = MATE_IN_SIGHT;
+        targetPosition_ = nearestMate_->getPosition();
+        if(isColliding(*nearestMate_)){
+            state_ = MATING;
+            break_ = getMatingTime();
+            meet(nearestMate_);
+            ((Animal*)nearestMate_)->state_ = MATING;
+            ((Animal*)nearestMate_)->break_ = getMatingTime();
+            ((Animal*)nearestMate_)->meet(this);
+        }
+    }else if(nearestFood_ != nullptr){
         state_ = FOOD_IN_SIGHT;
-        targetPosition_ = target;
-        if(isColliding(*targetEntity)){
+        targetPosition_ = nearestFood_->getPosition();
+        if(isColliding(*nearestFood_)){
             state_= FEEDING;
-            feedingBreak_ = getFeedingBreak();
-            OrganicEntity::increaseEnergyLevel(getFeedingEfficiency() * targetEntity->getEnergyLevel());
-            targetEntity->eaten();
+            break_ = getFeedingBreak();
+            OrganicEntity::increaseEnergyLevel(getFeedingEfficiency() * nearestFood_->getEnergyLevel());
+            nearestFood_->eaten();
         }
     }else{
         state_ = WANDERING;
         targetPosition_ = Vec2d(0,0);
+    }
+
+    if(isPregnant()){
+        gestation_ -= dt;
+
+        if(gestation_ <= sf::Time::Zero){
+            state_ = GIVING_BIRTH;
+            break_ = getGivingBirthBreak();
+            makeChildren();
+            childrenPending_ = 0;
+            gestation_ = sf::Time::Zero;
+        }
+    }
+}
+
+void Animal::analyzeEnvironment(){
+    std::list<OrganicEntity*> entitiesInSight(getAppEnv().getEntitiesInSightForAnimal(this));
+    Vec2d maxVector(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
+    Vec2d targetFood(maxVector);
+    Vec2d targetMate(maxVector);
+    nearestFood_ = nullptr;
+    nearestMate_ = nullptr;
+
+    for(auto& entity:entitiesInSight) {
+        if(eatable(entity) && entity->distanceTo(getPosition()) < distanceTo(targetFood)){
+            targetFood = entity->getPosition();
+            nearestFood_ = entity;
+        }else if(matable(entity) && entity->matable(this) && entity->distanceTo(getPosition()) < distanceTo(targetMate)){
+            targetMate = entity->getPosition();
+            nearestMate_ = entity;
+        }
     }
 }
 
@@ -270,6 +310,9 @@ void Animal::drawDebugState(sf::RenderTarget& targetWindow) const
                                 getAppConfig().debug_text_color,
                                 getRotation() / DEG_TO_RAD + 90
                                ));
+    if(isPregnant())
+        targetWindow.draw(buildAnnulus(getPosition(), getRadius(),sf::Color::Magenta,2));
+
 }
 
 void Animal::decreaseEnergyLevel(sf::Time dt)
@@ -278,9 +321,37 @@ void Animal::decreaseEnergyLevel(sf::Time dt)
     OrganicEntity::decreaseEnergyLevel(loss);
 }
 
-Vec2d Animal::computeForceFeeding() const
+Vec2d Animal::computeForceDecelerate() const
 {
     if(isEqual(speed_, 0.0, 0.5))
         return Vec2d(0,0);
     return computeForce(convertToGlobalCoord(Vec2d(-1,0)));
+}
+
+void Animal::meet(OrganicEntity * entity)
+{
+    if(matable(entity) && entity->matable(this)){
+        Animal* female = (Animal*)entity;
+        Animal* male = this;
+        if(isFemale()){
+            female = this;
+            male = (Animal*)entity;
+        }
+        female->childrenPending_ = uniform(female->getMinChildren(), female->getMaxChildren());
+        female->OrganicEntity::decreaseEnergyLevel(childrenPending_*female->getEnergyLossFemalePerChild());
+        male->OrganicEntity::decreaseEnergyLevel(male->getEnergyLossMatingMale());
+        female->gestation_ = sf::seconds(female->getGestationTime());
+    }
+}
+
+sf::Time Animal::getMatingTime() const
+{
+    return sf::seconds(getAppConfig().animal_mating_time);
+}
+
+void Animal::makeChildren()
+{
+    for(int i = 0; i < childrenPending_;++i){
+        getAppEnv().addEntity(giveBirth());
+    }
 }

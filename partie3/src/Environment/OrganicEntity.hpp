@@ -43,7 +43,7 @@ public:
     virtual bool canMate(Gerbil const* gerbil) const = 0;
     virtual bool canMate(Food const* food) const = 0;
 
-    virtual double getAge() const;
+    double getAge() const;
 protected:
     void decreaseEnergyLevel(double loss);
     void increaseEnergyLevel(double increase);
