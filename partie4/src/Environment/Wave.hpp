@@ -28,12 +28,16 @@ public:
     double getEnergy() const;
     double getIntensity() const;
 private:
+    typedef std::pair<double,double> Arc;
+
     const double initialEnergyLevel_;
     const double initialRadius_;
     const double mu_;
     const double propagationSpeed_;
     sf::Time timer_;
-    std::list<std::pair<double,double>> arcs_;
+    std::list<Arc> arcs_;
+
+    Arc findArcColliding(double obstacleAngle) const;
 };
 
 #endif // WAVE_HPP

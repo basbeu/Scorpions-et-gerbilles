@@ -23,6 +23,6 @@ Obstacle::~Obstacle()
 void Obstacle::draw(sf::RenderTarget& target) const
 {
     sf::Texture& texture = getAppTexture(getTexture());
-    target.draw(buildSprite(getPosition(),2 * getRadius(), texture,orientation_/DEG_TO_RAD));
+    target.draw(buildSprite(getPosition(), 2 * getRadius(), texture, orientation_/DEG_TO_RAD));
 }
 

@@ -77,6 +77,8 @@ public:
     void addWave(Wave* wave);
 
     void addObstacle(Obstacle* obstacle);
+
+    std::list<Obstacle *> getObstacleColliding(Wave* wave);
 private:
 
     /*!

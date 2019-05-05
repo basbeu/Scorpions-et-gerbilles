@@ -133,4 +133,4 @@ Q4.3:
     - Afin de gérer les waves dans l'environnement, il faut y ajouter une liste de waves qui sera populé par addWave, et ensuite ajouter les traitements sur cette liste dans les méthodes update, draw et clean.
 
 Q4.4:
-    - Il faut ajouter une boucle de dessin des obstacles dans la méthode draw et gérer la fin de vie des objets dans la méthode clean.
+    - Il faut ajouter une boucle de dessin des obstacles dans la méthode draw et gérer la fin de vie des objets dans la méthode clean. J'ai auss ajouté std::list<Obstacle *> getObstacleColliding(Wave* wave) qui retourne les obstacles qui sont en collisions avec une onde afin de détecter les collisions avec les arcs.

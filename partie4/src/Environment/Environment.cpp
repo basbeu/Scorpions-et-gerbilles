@@ -109,3 +109,15 @@ void Environment::addObstacle(Obstacle* obstacle)
 {
     obstacles_.push_back(obstacle);
 }
+
+std::list<Obstacle *> Environment::getObstacleColliding(Wave* wave)
+{
+    std::list<Obstacle*> obstaclesColliding;
+    for(auto& obstacle:obstacles_){
+        if(obstacle->isColliding(*wave)){
+            obstaclesColliding.push_back(obstacle);
+        }
+    }
+
+    return obstaclesColliding;
+}
