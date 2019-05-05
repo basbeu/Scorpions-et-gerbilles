@@ -107,6 +107,9 @@ public:
      */
     CircularCollider& operator+=(Vec2d const& dx);
 
+protected:
+    void setRadius(double radius);
+
 private:
     /*!
      * @brief position of the CircularCollider

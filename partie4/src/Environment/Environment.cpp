@@ -9,6 +9,7 @@
 #include <Animal/Animal.hpp>
 #include <Utility/Vec2d.hpp>
 #include <Utility/Utility.hpp>
+#include <Application.hpp>
 
 #include <list>
 #include <algorithm>
@@ -37,12 +38,24 @@ void Environment::update(sf::Time dt)
 
     for(auto generator : generators_)
         generator->update(dt);
+
+    for(auto& wave:waves_){
+        wave->update(dt);
+        if(wave->getIntensity() < getAppConfig().wave_intensity_threshold){
+            delete wave;
+            wave = nullptr;
+        }
+    }
+    waves_.erase(std::remove(waves_.begin(), waves_.end(), nullptr), waves_.end());
 }
 
 void Environment::draw(sf::RenderTarget& targetWindow) const
 {
-    for(auto entity: entities_)
+    for(auto entity : entities_)
         entity->draw(targetWindow);
+
+    for(auto wave : waves_)
+        wave->draw(targetWindow);
 }
 
 void Environment::clean()
@@ -50,6 +63,16 @@ void Environment::clean()
     for(auto& entity:entities_)
         delete entity;
     entities_.clear();
+
+    for(auto& generator:generators_)
+        delete generator;
+
+    generators_.clear();
+
+    for(auto& wave:waves_)
+        delete wave;
+
+    waves_.clear();
 }
 
 std::list<OrganicEntity *> Environment::getEntitiesInSightForAnimal(Animal* animal)
@@ -70,5 +93,5 @@ void Environment::addGenerator(FoodGenerator* gen)
 
 void Environment::addWave(Wave* wave)
 {
-
+    waves_.push_back(wave);
 }

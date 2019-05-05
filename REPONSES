@@ -123,3 +123,11 @@ Q3.13:
 Q3.14:
     - Il ne serait pas nécessaire d'avoir un attribut. Mais dans l'idée de modularisation et de séparation des taches par méthodes, je trouve essentiel d'avoir une liste d'ennemies. Car je découvre les ennemies dans la méthode AnalyseEnvironment() puis je décide le state dans update state et ensuite seulement je calcule la force dans depuis la méthode update. Donc pour calculer la force il me faut les prédateurs. Donc j'ai implémenté en gardant une liste de prédateur en attributs.
 
+Q4.1:
+    - La classe Wave hérite de CircularCollider comme demandé dans l'énoncé, mais aussi de Updatable et Drawable car c'est un objet qui évolue au cours du temps et qui sera dessiné.
+
+Q4.2:
+    - Le temps écoulé depuis le début de la propagation est comptabilisé avec un timer en attribut (sf::Time timer_). Ce timer est incrémenté par la méthode update.
+
+Q4.3:
+    - Afin de gérer les waves dans l'environnement, il faut y ajouter une liste de waves qui sera populé par addWave, et ensuite ajouter les traitements sur cette liste dans les méthodes update, draw et clean.

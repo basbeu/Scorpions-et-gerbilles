@@ -112,6 +112,12 @@ CircularCollider& CircularCollider::operator+=(Vec2d const& dx)
     return *this;
 }
 
+void CircularCollider::setRadius(double radius)
+{
+    if(radius > 0)
+       radius_ = radius;
+}
+
 void CircularCollider::clampPosition()
 {
     double worldSize = getAppConfig().simulation_world_size;

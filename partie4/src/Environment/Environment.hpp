@@ -85,6 +85,8 @@ private:
      * @brief generators_ list of all food generators that are in the environment
      */
     std::list<FoodGenerator*> generators_;
+
+    std::list<Wave *> waves_;
 };
 
 #endif //ENVIRONMENT_HPP
