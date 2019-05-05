@@ -11,6 +11,7 @@
 #include <list>
 #include <SFML/Graphics.hpp>
 #include <Environment/OrganicEntity.hpp>
+#include <Environment/Wave.hpp>
 #include <Environment/FoodGenerator.hpp>
 
 class Animal;
@@ -71,6 +72,8 @@ public:
      * \param Pointer to the FoodGenerator added to the environment
      */
     void addGenerator(FoodGenerator* gen);
+
+    void addWave(Wave* wave);
 private:
 
     /*!

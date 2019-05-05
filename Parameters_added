@@ -1,0 +1,12 @@
+Paramêtres ajoutés :
+
+const double animal_tired_threshold;
+const double gerbil_tired_max_speed;
+const sf::Time gerbil_feeding_break;
+const double gerbil_feeding_efficiency;
+const sf::Time gerbil_giving_birth_break;
+const double scorpion_tired_max_speed;
+const sf::Time scorpion_feeding_break;
+const double scorpion_feeding_efficiency;
+const sf::Time scorpion_giving_birth_break;
+    

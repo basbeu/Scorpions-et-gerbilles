@@ -93,9 +93,13 @@ public:
     const float animal_mating_time;
     const double animal_min_energy;
     const float animal_base_energy_consumption;
+    const double animal_tired_threshold;
 
     // gerbils
     const double gerbil_max_speed;
+    const double gerbil_tired_max_speed;
+    const sf::Time gerbil_feeding_break;
+    const double gerbil_feeding_efficiency;
     const double gerbil_mass;
     const double gerbil_energy_loss_factor;
     const double gerbil_view_range;
@@ -110,6 +114,7 @@ public:
     const int gerbil_min_children;
     const int gerbil_max_children;
     const double gerbil_gestation_time;
+    const sf::Time gerbil_giving_birth_break;
     const double gerbil_energy_loss_female_per_child;
     const double gerbil_energy_loss_mating_male;
     const std::string gerbil_texture_male;
@@ -122,6 +127,9 @@ public:
 
     // scorpion
     const double scorpion_max_speed;
+    const double scorpion_tired_max_speed;
+    const sf::Time scorpion_feeding_break;
+    const double scorpion_feeding_efficiency;
     const double scorpion_mass;
     const double scorpion_energy_loss_factor;
     const double scorpion_view_range;
@@ -136,6 +144,7 @@ public:
     const int scorpion_min_children;
     const int scorpion_max_children;
     const double scorpion_gestation_time;
+    const sf::Time scorpion_giving_birth_break;
     const double scorpion_energy_loss_female_per_child;
     const double scorpion_energy_loss_mating_male;
     const std::string scorpion_texture;

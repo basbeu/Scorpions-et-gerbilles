@@ -131,7 +131,7 @@ sf::Time Gerbil::getFeedingBreak() const
 
 double Gerbil::getFeedingEfficiency() const
 {
-    return getAppConfig().scorpion_feeding_efficiency;
+    return getAppConfig().gerbil_feeding_efficiency;
 }
 
 double Gerbil::getMinimumMatingEnergy() const

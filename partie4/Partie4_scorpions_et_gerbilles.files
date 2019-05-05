@@ -20,6 +20,8 @@ src/Environment/FoodGenerator.cpp
 src/Environment/FoodGenerator.hpp
 src/Environment/OrganicEntity.cpp
 src/Environment/OrganicEntity.hpp
+src/Environment/Wave.cpp
+src/Environment/Wave.hpp
 src/FinalApplication.cpp
 src/FinalApplication.hpp
 src/Interface/Drawable.hpp

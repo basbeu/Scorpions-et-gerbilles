@@ -5,6 +5,7 @@
 
 #include <Environment/Environment.hpp>
 #include <Environment/OrganicEntity.hpp>
+#include <Environment/Wave.hpp>
 #include <Animal/Animal.hpp>
 #include <Utility/Vec2d.hpp>
 #include <Utility/Utility.hpp>
@@ -65,4 +66,9 @@ std::list<OrganicEntity *> Environment::getEntitiesInSightForAnimal(Animal* anim
 void Environment::addGenerator(FoodGenerator* gen)
 {
     generators_.push_back(gen);
+}
+
+void Environment::addWave(Wave* wave)
+{
+
 }
