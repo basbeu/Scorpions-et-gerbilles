@@ -34,6 +34,10 @@ src/JSON/JSONSerialiser.cpp
 src/JSON/JSONSerialiser.hpp
 src/Obstacle/CircularCollider.cpp
 src/Obstacle/CircularCollider.hpp
+src/Obstacle/Obstacle.cpp
+src/Obstacle/Obstacle.hpp
+src/Obstacle/Rock.cpp
+src/Obstacle/Rock.hpp
 src/Random/Exponential.cpp
 src/Random/Exponential.hpp
 src/Random/Normal.cpp

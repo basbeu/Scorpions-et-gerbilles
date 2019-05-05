@@ -13,6 +13,7 @@
 #include <Environment/OrganicEntity.hpp>
 #include <Environment/Wave.hpp>
 #include <Environment/FoodGenerator.hpp>
+#include <Obstacle/Obstacle.hpp>
 
 class Animal;
 
@@ -74,6 +75,8 @@ public:
     void addGenerator(FoodGenerator* gen);
 
     void addWave(Wave* wave);
+
+    void addObstacle(Obstacle* obstacle);
 private:
 
     /*!
@@ -87,6 +90,7 @@ private:
     std::list<FoodGenerator*> generators_;
 
     std::list<Wave *> waves_;
+    std::list<Obstacle*> obstacles_;
 };
 
 #endif //ENVIRONMENT_HPP

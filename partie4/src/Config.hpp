@@ -75,6 +75,9 @@ public:
     const std::string entity_texture_tracked = "target.png";
     const double entity_energy_critical = 5;
 
+    //rock
+    const std::string rock_texture;
+
     //food generator
     const double food_generator_delta;
 

@@ -7,6 +7,7 @@
 #include <Environment/OrganicEntity.hpp>
 #include <Environment/Wave.hpp>
 #include <Animal/Animal.hpp>
+#include <Obstacle/Obstacle.hpp>
 #include <Utility/Vec2d.hpp>
 #include <Utility/Utility.hpp>
 #include <Application.hpp>
@@ -56,6 +57,9 @@ void Environment::draw(sf::RenderTarget& targetWindow) const
 
     for(auto wave : waves_)
         wave->draw(targetWindow);
+
+    for(auto obstacle : obstacles_)
+        obstacle->draw(targetWindow);
 }
 
 void Environment::clean()
@@ -73,6 +77,11 @@ void Environment::clean()
         delete wave;
 
     waves_.clear();
+
+    for(auto& obstacle:obstacles_)
+        delete obstacle;
+
+    obstacles_.clear();
 }
 
 std::list<OrganicEntity *> Environment::getEntitiesInSightForAnimal(Animal* animal)
@@ -94,4 +103,9 @@ void Environment::addGenerator(FoodGenerator* gen)
 void Environment::addWave(Wave* wave)
 {
     waves_.push_back(wave);
+}
+
+void Environment::addObstacle(Obstacle* obstacle)
+{
+    obstacles_.push_back(obstacle);
 }

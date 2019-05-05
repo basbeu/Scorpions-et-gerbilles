@@ -19,7 +19,8 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
     , simulation_world_size(mConfig["simulation"]["world"]["size"].toDouble())
     , simulation_time_factor(mConfig["simulation"]["time"]["factor"].toDouble())
     , simulation_time_max_dt(sf::seconds(mConfig["simulation"]["time"]["max dt"].toDouble()))
-
+// rock
+    , rock_texture(mConfig["simulation"]["obstacle"]["rock"]["texture"].toString())
 // food generator
     , food_generator_delta(mConfig["simulation"]["food generator"]["delta"].toDouble())
 // food
