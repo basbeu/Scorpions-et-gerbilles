@@ -20,10 +20,10 @@ class Wave:public CircularCollider, public Drawable, public Updatable
 public:
     Wave(Vec2d origin, double energyLevel, double initialRadius, double mu, double propagationSpeed);
 
-    virtual ~Wave();
+    virtual ~Wave() override;
 
-    virtual void draw(sf::RenderTarget& target) const;
-    virtual void update(sf::Time dt);
+    virtual void draw(sf::RenderTarget& target) const override;
+    virtual void update(sf::Time dt) override;
 
     double getEnergy() const;
     double getIntensity() const;

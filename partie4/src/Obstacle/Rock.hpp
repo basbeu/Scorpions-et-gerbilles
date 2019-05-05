@@ -13,9 +13,9 @@ class Rock:public Obstacle
 public:
     Rock(Vec2d position);
 
-    virtual ~Rock();
+    virtual ~Rock() override;
 
-    virtual std::string getTexture() const;
+    virtual std::string getTexture() const override;
 };
 
 #endif // ROCK_HPP

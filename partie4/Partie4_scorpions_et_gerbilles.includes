@@ -2,3 +2,4 @@
 src
 src/Environment
 src/Obstacle
+src/Animal/NeuronalScorpion

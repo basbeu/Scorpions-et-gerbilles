@@ -5,6 +5,11 @@
          "factor":1,
          "max dt":0.05
       },
+      "obstacle": {
+            "rock":{
+                "texture":"rock.png"            
+            }        
+        },
        "food generator" : {
 	   "delta" : 4
        },

@@ -14,9 +14,9 @@ class Obstacle:public CircularCollider, Drawable
 public:
     Obstacle(Vec2d position, double radius, double orientation);
 
-    virtual ~Obstacle();
+    virtual ~Obstacle() override;
 
-    virtual void draw(sf::RenderTarget& target) const;
+    virtual void draw(sf::RenderTarget& target) const override;
 
     virtual std::string getTexture() const = 0;
 
