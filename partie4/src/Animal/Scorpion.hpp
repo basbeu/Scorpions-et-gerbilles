@@ -33,6 +33,10 @@ public:
      */
     virtual ~Scorpion() override;
 
+    /*
+     * Virtual methods that are inherited from Animal
+     * see Animal.hpp for the corresponding documentation
+     */
     virtual double getRandomWalkDistance() const override;
     virtual double getStandardMaxSpeed() const override;
 private:

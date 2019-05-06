@@ -74,12 +74,30 @@ public:
      */
     void addGenerator(FoodGenerator* gen);
 
+    /**
+     * @brief add a wave to the environment
+     * @param pointer to the wave added to the environment
+     */
     void addWave(Wave* wave);
 
+    /**
+     * @brief add an obstacle to the environment
+     * @param pointer to the obstacle added to the environment
+     */
     void addObstacle(Obstacle* obstacle);
 
+    /**
+     * @brief get the obstacles that are colliding with a given wave
+     * @param pointer to the wave
+     * @return a list of obstacles that are colliding with a wave
+     */
     std::list<Obstacle *> getObstacleColliding(Wave* wave);
 
+    /**
+     * @brief get the total wave intensity for a given point of the simulation world
+     * @param position in the simulation world
+     * @return the total wave intensity for the given position
+     */
     double getWaveIntensity(Vec2d position) const;
 private:
 
@@ -93,7 +111,14 @@ private:
      */
     std::list<FoodGenerator*> generators_;
 
+    /**
+     * @brief stores the waves that are propagating in the environment
+     */
     std::list<Wave *> waves_;
+
+    /**
+     * @brief stores the obstacles of the environment
+     */
     std::list<Obstacle*> obstacles_;
 };
 

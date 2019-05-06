@@ -163,6 +163,20 @@ Q4.10 :
     - Je modélise ces états d'une manière similaires aux états de Animal. J'ai donc mis un enum State contenant les 4 états. L'enum est privé à la classe car il modélise un état interne à la classe. Un attribut state_ stocke l'état actuel.
 
 Q4.11 :
-    - En mettant un seul timer en attribut. L'état en cours suffit pour déterminer pour quelle horloge le timer compte le temps.
+    - En mettant un seul timer en attribut. L'état en cours suffit pour déterminer pour quelle horloge le timer compte le temps. Il me faut un timer en plus pour gérer le temps de réceptions des senseurs.
 
 Q4.12:
+    - J'ai deux horloges : une pour les états et une autre pour gérer les senseurs.
+
+    1) horloge d'états :
+        - initialisation à zéro au constructeur
+        - incrémentation de dt dans la méthode update
+        - test de durée d'état pour les états IDLE et MOVING dans la méthode updateState
+        - ré-initialisation à zéro à chaque changement d'état
+Remarque : il n'y aurait pas eu nécessairement de besoin de minuter tous les états. Mais j'ai trouvé cette façon de faire plus générique et plus simple à mettre en place, sans pour autant perdre de la clarté ou des performances.
+
+    2) horloge des senseurs :
+        - initialisation à zéro au constructeur
+        - si un senseur est actif, incrémentation de dt dans la méthode update
+        - si le temps d'activation est dépassé, ré-initialisation dans la méthode update
+

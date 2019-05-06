@@ -19,7 +19,6 @@ Obstacle::~Obstacle()
 
 }
 
-
 void Obstacle::draw(sf::RenderTarget& target) const
 {
     sf::Texture& texture = getAppTexture(getTexture());

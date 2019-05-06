@@ -111,6 +111,9 @@ protected:
      */
     void analyzeEnvironment();
 
+    /**
+     * @return a pointer to the nearest OrganicEntity that is eatable by the current instance
+     */
     OrganicEntity* getNearestEatable() const;
 
     /*!

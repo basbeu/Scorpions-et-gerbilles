@@ -59,16 +59,22 @@ void Sensor::connect(Sensor* sensor)
     connectedSensors_.push_back(sensor);
 }
 
-bool Sensor::isActive() const
-{
-    return active_;
-}
 
 void Sensor::reset()
 {
     active_ = false;
     score_ = 0.0;
     inhibitor_ = 0.0;
+}
+
+bool Sensor::isActive() const
+{
+    return active_;
+}
+
+double Sensor::getScore() const
+{
+    return score_;
 }
 
 void Sensor::setInhibitor(double inhibitor)
@@ -79,9 +85,4 @@ void Sensor::setInhibitor(double inhibitor)
 void Sensor::increaseInhibitor(double increase)
 {
     setInhibitor(inhibitor_ + increase);
-}
-
-double Sensor::getScore() const
-{
-    return score_;
 }

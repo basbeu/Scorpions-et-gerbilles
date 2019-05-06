@@ -42,46 +42,6 @@ NeuronalScorpion::~NeuronalScorpion()
     sensors_.clear();
 }
 
-void NeuronalScorpion::initSensors()
-{
-    std::vector<std::pair<Sensor*, double >> sensors = {
-        std::pair<Sensor*,double>(new Sensor(this), 18.0),
-        std::pair<Sensor*,double>(new Sensor(this), 54.0),
-        std::pair<Sensor*,double>(new Sensor(this), 90.0),
-        std::pair<Sensor*,double>(new Sensor(this), 140.0),
-        std::pair<Sensor*,double>(new Sensor(this), -140.0),
-        std::pair<Sensor*,double>(new Sensor(this), -90.0),
-        std::pair<Sensor*,double>(new Sensor(this), -54.0),
-        std::pair<Sensor*,double>(new Sensor(this), -18.0)
-    };
-
-    for(size_t i = 0; i < sensors.size(); ++i){
-        for(size_t j = 3 ; j <=5; ++j){
-            sensors[i].first->connect(sensors[(j+i) % sensors.size()].first);
-        }
-    }
-
-    sensors_ = std::unordered_map<Sensor *,double>(sensors.begin(),sensors.end());
-    /*sensors_ = {
-        {new Sensor(), 18.0},
-        {new Sensor(), 54.0},
-        {new Sensor(), 90.0},
-        {new Sensor(), 140.0},
-        {new Sensor(), -140.0},
-        {new Sensor(), -90.0},
-        {new Sensor(), -54.0},
-        {new Sensor(), -18.0}
-    };*/
-}
-
-/*Vec2d NeuronalScorpion::getPositionOfSensor(size_t i) const
-{
-    if (i > sensors_.size()-1)
-        throw "Out of bound exception";
-    double angle(sensors_[i].second*DEG_TO_RAD);
-    return convertToGlobalCoord(getAppConfig().scorpion_sensor_radius * Vec2d(cos(angle),sin(angle)));
-}*/
-
 
 void NeuronalScorpion::update(sf::Time dt)
 {
@@ -102,8 +62,6 @@ void NeuronalScorpion::update(sf::Time dt)
         }
     }
 
-    //Scorpion::update(dt);
-
     updateState(dt);
 
     Vec2d force(0,0);
@@ -122,6 +80,12 @@ void NeuronalScorpion::update(sf::Time dt)
     }
     Scorpion::update(force, dt);
     Animal::decreaseEnergyLevel(dt);
+}
+
+Vec2d NeuronalScorpion::getPositionOfSensor(Sensor const * sensor) const
+{
+    double angle(sensors_.at((Sensor *)sensor)*DEG_TO_RAD);
+    return convertToGlobalCoord(getAppConfig().scorpion_sensor_radius * Vec2d(cos(angle),sin(angle)));
 }
 
 void NeuronalScorpion::updateState(sf::Time dt)
@@ -160,22 +124,10 @@ void NeuronalScorpion::updateState(sf::Time dt)
     }
 }
 
-Vec2d NeuronalScorpion::getPositionOfSensor(Sensor const * sensor) const
-{
-    double angle(sensors_.at((Sensor *)sensor)*DEG_TO_RAD);
-    return convertToGlobalCoord(getAppConfig().scorpion_sensor_radius * Vec2d(cos(angle),sin(angle)));
-}
-
 void NeuronalScorpion::drawDebugState(sf::RenderTarget& targetWindow) const
 {
-    //for(size_t i = 0; i < sensors_.size(); ++i){
-        //targetWindow.draw(buildCircle(getPositionOfSensor(i), 0.25 * getRadius(), sf::Color::Green));
     for(auto& sensor:sensors_){
         sensor.first->draw(targetWindow);
-        //targetWindow.draw(buildCircle(getPositionOfSensor(sensor.first), 0.25 * getRadius(), sf::Color::Green));
-        /*targetWindow.draw(buildText(std::to_string((int)sensor.second),getPositionOfSensor(sensor.first),getAppFont(),
-                                    getAppConfig().default_debug_text_size,
-                                    getAppConfig().debug_text_color));*/
     }
     std::string state("");
     switch (state_) {
@@ -200,6 +152,38 @@ void NeuronalScorpion::drawDebugState(sf::RenderTarget& targetWindow) const
                                 getRotation() / DEG_TO_RAD + 90
                                ));
 
+}
+
+double NeuronalScorpion::getMaxSpeed() const
+{
+    double maxSpeed(getStandardMaxSpeed());
+
+    if(state_ == TARGET_IN_SIGHT)
+        maxSpeed = 3 * maxSpeed;
+
+    return std::max(maxSpeed, Animal::getMaxSpeed());
+}
+
+void NeuronalScorpion::initSensors()
+{
+    std::vector<std::pair<Sensor*, double >> sensors = {
+        std::pair<Sensor*,double>(new Sensor(this), 18.0),
+        std::pair<Sensor*,double>(new Sensor(this), 54.0),
+        std::pair<Sensor*,double>(new Sensor(this), 90.0),
+        std::pair<Sensor*,double>(new Sensor(this), 140.0),
+        std::pair<Sensor*,double>(new Sensor(this), -140.0),
+        std::pair<Sensor*,double>(new Sensor(this), -90.0),
+        std::pair<Sensor*,double>(new Sensor(this), -54.0),
+        std::pair<Sensor*,double>(new Sensor(this), -18.0)
+    };
+
+    for(size_t i = 0; i < sensors.size(); ++i){
+        for(size_t j = 3 ; j <=5; ++j){
+            sensors[i].first->connect(sensors[(j+i) % sensors.size()].first);
+        }
+    }
+
+    sensors_ = std::unordered_map<Sensor *,double>(sensors.begin(),sensors.end());
 }
 
 void NeuronalScorpion::switchToState(State state)
@@ -228,7 +212,7 @@ void NeuronalScorpion::resetSensors()
 Vec2d NeuronalScorpion::move()
 {
     Vec2d force(0,0);
-    double p = getAppConfig().simulation_world_size/25;
+    double p = getAppConfig().simulation_world_size / 25.0;
     if(abs(targetDirection_.angle() - getRotation()) > getAppConfig().scorpion_rotation_angle_precision){
         setRotation(targetDirection_.angle());
         force = computeForceDecelerate();
@@ -238,14 +222,4 @@ Vec2d NeuronalScorpion::move()
     }
 
     return force;
-}
-
-double NeuronalScorpion::getMaxSpeed() const
-{
-    double maxSpeed(getStandardMaxSpeed());
-
-    if(state_ == TARGET_IN_SIGHT)
-        maxSpeed = 3 * maxSpeed;
-
-    return std::max(maxSpeed, Animal::getMaxSpeed());
 }
