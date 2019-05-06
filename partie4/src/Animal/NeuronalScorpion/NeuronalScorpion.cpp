@@ -85,6 +85,7 @@ void NeuronalScorpion::initSensors()
 
 void NeuronalScorpion::update(sf::Time dt)
 {
+    OrganicEntity::update(dt);
     stateTimer_ += dt;
     bool receptive = false;
     for(auto& sensor:sensors_){
@@ -120,6 +121,7 @@ void NeuronalScorpion::update(sf::Time dt)
         break;
     }
     Scorpion::update(force, dt);
+    Animal::decreaseEnergyLevel(dt);
 }
 
 void NeuronalScorpion::updateState(sf::Time dt)
@@ -130,6 +132,9 @@ void NeuronalScorpion::updateState(sf::Time dt)
     if(target != nullptr){
         switchToState(TARGET_IN_SIGHT);
         setTargetPosition(target->getPosition());
+        if(isColliding(*target)){
+            target->eaten();
+        }
     }else{
         switch (state_) {
         case IDLE:
@@ -223,7 +228,7 @@ void NeuronalScorpion::resetSensors()
 Vec2d NeuronalScorpion::move()
 {
     Vec2d force(0,0);
-    double p = 1000;
+    double p = getAppConfig().simulation_world_size/25;
     if(abs(targetDirection_.angle() - getRotation()) > getAppConfig().scorpion_rotation_angle_precision){
         setRotation(targetDirection_.angle());
         force = computeForceDecelerate();
@@ -233,4 +238,14 @@ Vec2d NeuronalScorpion::move()
     }
 
     return force;
+}
+
+double NeuronalScorpion::getMaxSpeed() const
+{
+    double maxSpeed(getStandardMaxSpeed());
+
+    if(state_ == TARGET_IN_SIGHT)
+        maxSpeed = 3 * maxSpeed;
+
+    return std::max(maxSpeed, Animal::getMaxSpeed());
 }

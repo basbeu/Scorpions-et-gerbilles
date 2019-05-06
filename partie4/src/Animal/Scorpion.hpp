@@ -34,6 +34,7 @@ public:
     virtual ~Scorpion() override;
 
     virtual double getRandomWalkDistance() const override;
+    virtual double getStandardMaxSpeed() const override;
 private:
     /*
      * Virtual methods that are inherited from OrganicEntity
@@ -53,7 +54,6 @@ private:
      * Virtual methods that are inherited from Animal
      * see Animal.hpp for the corresponding documentation
      */
-    virtual double getStandardMaxSpeed() const override;
     virtual double getMass() const override;
     virtual double getRandomWalkRadius() const override;
     virtual double getRandomWalkJitter() const override;

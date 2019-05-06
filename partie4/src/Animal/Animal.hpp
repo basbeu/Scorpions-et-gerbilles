@@ -79,7 +79,7 @@ public:
      * @brief get the max speed depending on the current state of the animal
      * @return the current max speed
      */
-    double getMaxSpeed() const;
+    virtual double getMaxSpeed() const;
 
     /*!
      * @brief test if the animal is pregnant
@@ -150,6 +150,12 @@ protected:
      * @return Vec2d corresponding to the local point in the global coordinate system
      */
     Vec2d convertToGlobalCoord(Vec2d local) const;
+
+    /*!
+     * @brief Decrease the energy level of the animal for the elapsed time
+     * @param dt elapsed time since the last update
+     */
+    void decreaseEnergyLevel(sf::Time dt);
 
 private:
     /*!
@@ -381,12 +387,6 @@ private:
      * @param targetWindow on which the text is rendered
      */
     virtual void drawDebugState(sf::RenderTarget& targetWindow) const;
-
-    /*!
-     * @brief Decrease the energy level of the animal for the elapsed time
-     * @param dt elapsed time since the last update
-     */
-    void decreaseEnergyLevel(sf::Time dt);
 };
 
 #endif

@@ -56,7 +56,7 @@
                "distance":160
             },
             "energy":{
-               "initial":80,
+               "initial":800000,
                "min mating male":450,
                "min mating female":800,
                "loss mating male":200,

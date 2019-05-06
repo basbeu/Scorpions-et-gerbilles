@@ -52,6 +52,7 @@ private:
     Vec2d computeTargetDirection() const;
     void resetSensors();
     Vec2d move();
+    virtual double getMaxSpeed() const override;
 };
 
 #endif // NEURONALSCORPION_H

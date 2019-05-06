@@ -83,7 +83,7 @@ bool Animal::isFemale() const
 
 double Animal::getMaxSpeed() const
 {
-    double maxSpeed = getStandardMaxSpeed();
+    double maxSpeed(getStandardMaxSpeed());
     if(getEnergyLevel() < getAppConfig().animal_tired_threshold)
         maxSpeed = getTiredMaxSpeed();
 
