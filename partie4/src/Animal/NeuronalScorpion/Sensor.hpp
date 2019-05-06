@@ -22,9 +22,12 @@ public:
     virtual ~Sensor() override;
 
     virtual void update(sf::Time dt) override;
-    void draw(sf::RenderTarget& target) const override;
+    virtual void draw(sf::RenderTarget& target) const override;
 
     void connect(Sensor* sensor);
+    bool isActive() const;
+    void reset();
+    double getScore() const;
 private:
     bool active_;
     double score_;

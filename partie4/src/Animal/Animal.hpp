@@ -107,6 +107,38 @@ public:
 
 protected:
     /*!
+     * @brief analyse the environment of the animal. This methods analyse all OrganicEntities that are visible for the animal
+     */
+    void analyzeEnvironment();
+
+    OrganicEntity* getNearestEatable() const;
+
+    /*!
+     * @brief update its attribute given a force and a time
+     * @param force Vec2d representing the current attraction force
+     * @param dt elapsed time since the last update
+     */
+    void update(Vec2d force, sf::Time dt);
+
+    /*!
+     * @brief Compute the attraction force between Animal and its target
+     * @return the force vector (Vec2d)
+     */
+    Vec2d computeAttractionForce() const;
+
+    /*!
+     * @brief Compute the force that will stop the animal
+     * @return the force vector (Vec2d)
+     */
+    Vec2d computeForceDecelerate() /*const*/;
+
+    /*!
+     * @brief Algorithm that randomly generate a next target
+     * @return the attraction force for the generated target
+     */
+    Vec2d randomWalk();
+
+    /*!
      * @brief Rotate the direction of the animal
      * @param rotation angle (in radians)
      */
@@ -312,44 +344,13 @@ private:
      * @brief update the internal state of the animal
      * @param dt elapsed time since the last update
      */
-    void updateState(sf::Time dt);
-
-    /*!
-     * @brief analyse the environment of the animal. This methods analyse all OrganicEntities that are visible for the animal
-     */
-    void analyzeEnvironment();
-
-    /*!
-     * @brief update its attribute given a force and a time
-     * @param force Vec2d representing the current attraction force
-     * @param dt elapsed time since the last update
-     */
-    void update(Vec2d force, sf::Time dt);
-
-    /*!
-     * @brief Compute the attraction force between Animal and its target
-     * @return the force vector (Vec2d)
-     */
-    Vec2d computeForce(Vec2d target) const;
-
-
-    /*!
-     * @brief Compute the force that will stop the animal
-     * @return the force vector (Vec2d)
-     */
-    Vec2d computeForceDecelerate() const;
+    virtual void updateState(sf::Time dt);
 
     /*!
      * @brief Compute the force with which the animal runs away when he see predators
      * @return the force vector (Vec2d)
      */
     Vec2d computeForceRunningAway() const;
-
-    /*!
-     * @brief Algorithm that randomly generate a next target
-     * @return the attraction force for the generated target
-     */
-    Vec2d randomWalk();
 
     /*!
      * @brief manage the meeting with the entity

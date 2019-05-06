@@ -32,6 +32,8 @@ public:
      * @brief destroy a Scorpion
      */
     virtual ~Scorpion() override;
+
+    virtual double getRandomWalkDistance() const override;
 private:
     /*
      * Virtual methods that are inherited from OrganicEntity
@@ -54,7 +56,6 @@ private:
     virtual double getStandardMaxSpeed() const override;
     virtual double getMass() const override;
     virtual double getRandomWalkRadius() const override;
-    virtual double getRandomWalkDistance() const override;
     virtual double getRandomWalkJitter() const override;
     virtual double getViewRange() const override;
     virtual double getViewDistance() const override;

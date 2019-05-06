@@ -125,7 +125,7 @@ void Animal::update(sf::Time dt)
         break;
     case FOOD_IN_SIGHT:
     case MATE_IN_SIGHT:
-        force = computeForce(targetPosition_);
+        force = computeAttractionForce();
         break;
     case WANDERING:
         force = randomWalk();
@@ -242,6 +242,12 @@ void Animal::analyzeEnvironment(){
     }
 }
 
+
+OrganicEntity* Animal::getNearestEatable() const
+{
+    return nearestFood_;
+}
+
 void Animal::update(Vec2d force, sf::Time dt)
 {
     Vec2d acceleration = force / getMass();
@@ -252,19 +258,21 @@ void Animal::update(Vec2d force, sf::Time dt)
 }
 
 
-Vec2d Animal::computeForce(Vec2d target) const
+Vec2d Animal::computeAttractionForce() const
 {
-    Vec2d toTarget(target - getPosition());
+    Vec2d toTarget(targetPosition_ - getPosition());
     double speed(std::min(toTarget.length() / deceleration_, getMaxSpeed()));
 
     return toTarget.normalised() * speed - getSpeedVector();
 }
 
-Vec2d Animal::computeForceDecelerate() const
+Vec2d Animal::computeForceDecelerate() //const
 {
     if(isEqual(speed_, 0.0, 0.5))
         return Vec2d(0,0);
-    return computeForce(convertToGlobalCoord(Vec2d(-1,0)));
+    //return computeForce(convertToGlobalCoord(Vec2d(-1,0)));
+    targetPosition_ = convertToGlobalCoord(Vec2d(-1,0));
+    return computeAttractionForce();
 }
 
 Vec2d Animal::computeForceRunningAway() const
