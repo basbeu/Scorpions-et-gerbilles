@@ -79,6 +79,8 @@ public:
     void addObstacle(Obstacle* obstacle);
 
     std::list<Obstacle *> getObstacleColliding(Wave* wave);
+
+    double getWaveIntensity(Vec2d position) const;
 private:
 
     /*!

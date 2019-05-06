@@ -153,11 +153,18 @@ void Animal::draw(sf::RenderTarget& targetWindow) const
     }
 }
 
-
 void Animal::setRotation(double angle)
 {
     direction_.x = cos(angle);
     direction_.y = sin(angle);
+}
+
+Vec2d Animal::convertToGlobalCoord(Vec2d local) const
+{
+    sf::Transform matTransform;
+    matTransform.translate(getPosition());
+    matTransform.rotate(getRotation()/DEG_TO_RAD);
+    return matTransform.transformPoint(local);
 }
 
 sf::Time Animal::getMatingTime() const
@@ -366,15 +373,6 @@ void Animal::drawDebugState(sf::RenderTarget& targetWindow) const
         targetWindow.draw(buildAnnulus(getPosition(), getRadius(),sf::Color::Magenta,2));
 
 }
-
-Vec2d Animal::convertToGlobalCoord(Vec2d local) const
-{
-    sf::Transform matTransform;
-    matTransform.translate(getPosition());
-    matTransform.rotate(getRotation()/DEG_TO_RAD);
-    return matTransform.transformPoint(local);
-}
-
 
 void Animal::decreaseEnergyLevel(sf::Time dt)
 {

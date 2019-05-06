@@ -121,3 +121,14 @@ std::list<Obstacle *> Environment::getObstacleColliding(Wave* wave)
 
     return obstaclesColliding;
 }
+
+double Environment::getWaveIntensity(Vec2d position) const
+{
+    double intensity(0.0);
+    for(auto& wave : waves_){
+        std::cerr << wave->getIntensityAt(position);
+        intensity += wave->getIntensityAt(position);
+    }
+
+    return intensity;
+}

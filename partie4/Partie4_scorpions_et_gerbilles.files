@@ -8,6 +8,8 @@ src/Animal/Gerbil.cpp
 src/Animal/Gerbil.hpp
 src/Animal/NeuronalScorpion/NeuronalScorpion.cpp
 src/Animal/NeuronalScorpion/NeuronalScorpion.hpp
+src/Animal/NeuronalScorpion/Sensor.cpp
+src/Animal/NeuronalScorpion/Sensor.hpp
 src/Animal/NeuronalScorpion/WaveGerbil.cpp
 src/Animal/NeuronalScorpion/WaveGerbil.hpp
 src/Animal/Scorpion.cpp

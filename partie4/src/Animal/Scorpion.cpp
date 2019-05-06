@@ -15,7 +15,7 @@ Scorpion::Scorpion(Vec2d position, double energyLevel, bool female)
 }
 
 Scorpion::Scorpion(Vec2d position)
-    :Animal (position, getAppConfig().scorpion_size, getAppConfig().scorpion_energy_initial, uniform(0, 1) == 0)
+    :Animal(position, getAppConfig().scorpion_size, getAppConfig().scorpion_energy_initial, uniform(0, 1) == 0)
 {
 
 }

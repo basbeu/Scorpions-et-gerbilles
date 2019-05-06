@@ -112,6 +112,13 @@ protected:
      */
     void setRotation(double angle);
 
+    /*!
+     * @brief Convert a Vec2d from the local animal centered coordinate system to the global coordinate system
+     * @param local Vec2d
+     * @return Vec2d corresponding to the local point in the global coordinate system
+     */
+    Vec2d convertToGlobalCoord(Vec2d local) const;
+
 private:
     /*!
      * @brief The State enum represents the differents internal states of an animal
@@ -372,14 +379,7 @@ private:
      * @brief Draw text that shows the current internal state of the animal
      * @param targetWindow on which the text is rendered
      */
-    void drawDebugState(sf::RenderTarget& targetWindow) const;
-
-    /*!
-     * @brief Convert a Vec2d from the local animal centered coordinate system to the global coordinate system
-     * @param local Vec2d
-     * @return Vec2d corresponding to the local point in the global coordinate system
-     */
-    Vec2d convertToGlobalCoord(Vec2d local) const;
+    virtual void drawDebugState(sf::RenderTarget& targetWindow) const;
 
     /*!
      * @brief Decrease the energy level of the animal for the elapsed time

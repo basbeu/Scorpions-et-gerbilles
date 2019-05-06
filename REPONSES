@@ -134,3 +134,27 @@ Q4.3:
 
 Q4.4:
     - Il faut ajouter une boucle de dessin des obstacles dans la méthode draw et gérer la fin de vie des objets dans la méthode clean. J'ai auss ajouté std::list<Obstacle *> getObstacleColliding(Wave* wave) qui retourne les obstacles qui sont en collisions avec une onde afin de détecter les collisions avec les arcs.
+
+Q4.5:
+    - J'ai choisi de faire de stocker les sensors et leur angle associé dans un tableau (vector) de std::pair<Sensor, double>. L'avantage d'un tableau est que l'accès y est constant (par rapport à la liste ou l'accès est en O(n)), on sait qu'on aura 8 senseurs par NeuralScorpion, donc un indexage de 0 à 7 est particulièrement approprié. L'usage d'une paire permet de stocker les deux informations et leur lien dans un seul attribut.
+
+    - J'ai choisi de stocker les sensors et leur angle associé dans une hash table. La hash table est stocké dans un attribut du type std::unordered_map<Sensor *, double>. Une hash table a l'avantage de retourner le résultat en un temps constant. Le grand avantage ici c'est son utilisation dans la méthode getPositionOfSensor. Il suffit d'avoir un pointeur vers le senseur pour connaître son angle en un temps constant. De plus, pour un std::unordered_map est tout à fait itérable, et donc ne présente pas de désavantage par rapport à une autre collection sur ce point là.
+L'initialisation de cette structure est faite dans une méthode privée. Cela est dû au fait qu'il faut initialiser les senseurs avant de les ajouter afin qu'ils connaissent les senseurs qui leur sont connectés.
+
+Q4.6:
+    - la signature choisie est la suivante : Vec2d getPositionOfSensor(Sensor const * sensor) const;. Le paramêtre est un pointeur sur un senseur car cela nous suffit pour retrouver son angle dans la hash table (voir Q4.5).
+
+Q4.7: 
+    - J'ai ajouté les méthodes suivantes :
+        - Dans la classe Environment : double getWaveIntensity(Vec2d position) const
+          Cette méthode retourne l'intensité totale dûe à des Wave pour un point donné de l'environnement
+        - Dans la classe Wave : double Wave::getIntensityAt(Vec2d position) const
+          Cette méthode retourne l'intensité de la wave à un point de l'environnement. Cette méthode est utilisé par la précédente pour calculer l'intensité totale en un point.
+
+        - Dans la classe Wave : 2 méthodes privées ont été ajouté afin de modulariser les traitements. Il s'agit de Wave::Arc Wave::findArcColliding(double obstacleAngle) const et double Wave::computeRelativeAngle(Vec2d position) const
+
+Q4.8 :
+    - Cela implique une dépendance circulaire entre NeuronalScorpion et Sensor, car NeuronalScorpion possède des Sensors et un Sensor doit connaître son propriétaire. Cela se règle en pré-déclarant NeuronalScorpion en haut du fichier Sensor.hpp.
+
+Q4.9 : 
+    - Un Sensor doit initialiser son propriétaire à la construction. Donc son constructeur prend en paramêtre un NeuronalScorpion.

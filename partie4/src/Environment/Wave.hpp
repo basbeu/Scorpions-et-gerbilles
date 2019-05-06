@@ -27,6 +27,8 @@ public:
 
     double getEnergy() const;
     double getIntensity() const;
+
+    double getIntensityAt(Vec2d position) const;
 private:
     typedef std::pair<double,double> Arc;
 
@@ -38,6 +40,7 @@ private:
     std::list<Arc> arcs_;
 
     Arc findArcColliding(double obstacleAngle) const;
+    double computeRelativeAngle(Vec2d position) const;
 };
 
 #endif // WAVE_HPP

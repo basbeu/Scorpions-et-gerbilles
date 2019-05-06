@@ -45,9 +45,7 @@ void Wave::update(sf::Time dt)
     std::list<Obstacle*> obstacles = getAppEnv().getObstacleColliding(this);
 
     for(auto& obstacle:obstacles){
-        double obstacleAngle((obstacle->getPosition() - getPosition()).angle());
-        if(obstacleAngle < 0)
-            obstacleAngle += 2*PI;
+        double obstacleAngle(computeRelativeAngle(obstacle->getPosition()));
         Arc arcColliding = findArcColliding(obstacleAngle) ;
         if(arcColliding != Arc(0,0)){
             double separationAngle(std::atan2(obstacle->getRadius(), getRadius() + obstacle->getRadius()));
@@ -68,6 +66,19 @@ double Wave::getIntensity() const
     return getEnergy()/(2 * PI * getRadius());
 }
 
+double Wave::getIntensityAt(Vec2d position) const
+{
+    double margin(getAppConfig().wave_on_wave_marging);
+    double distance((position-getPosition()).length());
+    if(distance > getRadius() - margin
+            && distance < getRadius() + margin
+            && findArcColliding(computeRelativeAngle(position)) != Arc(0,0)){
+        return getIntensity();
+    }
+
+    return 0.0;
+}
+
 Wave::Arc Wave::findArcColliding(double obstacleAngle) const
 {
     for(auto& arc:arcs_){
@@ -76,4 +87,13 @@ Wave::Arc Wave::findArcColliding(double obstacleAngle) const
         }
     }
     return Arc(0,0);
+}
+
+double Wave::computeRelativeAngle(Vec2d position) const
+{
+    double angle((position - getPosition()).angle());
+    if(angle < 0)
+        angle += 2*PI;
+
+    return angle;
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.7.0, 2019-05-05T18:34:36. -->
+<!-- Written by QtCreator 4.7.0, 2019-05-05T20:31:25. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -73,7 +73,7 @@
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
-      <value type="QString" key="ProjectExplorer.ProcessStep.Arguments">application</value>
+      <value type="QString" key="ProjectExplorer.ProcessStep.Arguments">NeuronalTest</value>
       <value type="QString" key="ProjectExplorer.ProcessStep.Command">scons</value>
       <value type="QString" key="ProjectExplorer.ProcessStep.WorkingDirectory">%{buildDir}</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Étape personnalisée</value>
@@ -164,7 +164,7 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Arguments">application-run</value>
+    <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Arguments">NeuronalTest-run</value>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Executable">scons</value>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.WorkingDirectory">/home/bastien/Bureau/Lien vers Documents/EPFL/semestre_6/c++/Projet/Scorpions-et-gerbilles/partie4</value>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.WorkingDirectory.default"></value>
