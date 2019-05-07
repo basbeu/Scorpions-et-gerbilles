@@ -11,18 +11,18 @@
 Gerbil::Gerbil(Vec2d position, double energyLevel, bool female)
     :Animal(position, getAppConfig().gerbil_size, energyLevel, female)
 {
-
+    getAppEnv().increaseCounter(this);
 }
 
 Gerbil::Gerbil(Vec2d position)
     :Animal(position, getAppConfig().gerbil_size, getAppConfig().gerbil_energy_initial, uniform(0,1) == 0)
 {
-
+    getAppEnv().increaseCounter(this);
 }
 
 Gerbil::~Gerbil()
 {
-
+    getAppEnv().decreaseCounter(this);
 }
 
 bool Gerbil::eatable(OrganicEntity const* entity)

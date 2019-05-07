@@ -11,7 +11,7 @@
 /*!
  * @brief The Scorpion class represents a Scorpion in the simulation
  */
-class Scorpion:public Animal
+class Scorpion:public Animal//, public Countable
 {
 public:
     /*!
@@ -39,7 +39,11 @@ public:
      */
     virtual double getRandomWalkDistance() const override;
     virtual double getStandardMaxSpeed() const override;
+
+    //static int getNumberScorpions();
 private:
+    //static int counter_;
+
     /*
      * Virtual methods that are inherited from OrganicEntity
      * see OrganiEntity.hpp for the corresponding documentation

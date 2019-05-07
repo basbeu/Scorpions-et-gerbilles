@@ -12,12 +12,12 @@
 Food::Food(Vec2d position)
 :OrganicEntity (position, getAppConfig().food_size, getAppConfig().food_energy)
 {
-
+    getAppEnv().increaseCounter(this);
 }
 
 Food::~Food()
 {
-
+    getAppEnv().decreaseCounter(this);
 }
 
 void Food::update(sf::Time dt)

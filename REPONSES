@@ -180,3 +180,17 @@ Remarque : il n'y aurait pas eu nécessairement de besoin de minuter tous les é
         - si un senseur est actif, incrémentation de dt dans la méthode update
         - si le temps d'activation est dépassé, ré-initialisation dans la méthode update
 
+Q5.1 : 
+    - Ce n'est pas la classe stats qui gère l'identifiant, donc avec un tableau cela pourrait créer des trous et cela serait difficile de ne pas sortir du tableau. Avec une hashtable il n'y a pas de contrainte sur la valeur de l'identifiant.
+
+Q5.2 : J'ai rajouté 6 méthodes dans la classe Environment afin de décrémenter/incrémenté les compteurs associés aux trois entitée organiques (Scorpion, Gerbil et Food). Ces méthodes prennent en paramêtre un pointeur correspondant au type associé au compteur. Ces méthodes sont appelé à la construction et à la destruction des objets. Exemple pour un constructeur de scorpion : 
+
+Scorpion::Scorpion(Vec2d position)
+    :Animal(position, getAppConfig().scorpion_size, getAppConfig().scorpion_energy_initial, uniform(0, 1) == 0)
+{
+    getAppEnv().increaseCounter(this);
+}
+
+5.3 : 
+ - avec la solution présenté en Q5.2, il n'y a que le nombre d'onde à rajouter. Les autres composants se comportent déjà de la manière voulue. Le nombre d'onde est plus facile à obtenir, il suffit de récupérer le nombre d'onde contenu dans la liste d'onde de l'environnement. 
+

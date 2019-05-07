@@ -14,6 +14,10 @@
 #include <Environment/Wave.hpp>
 #include <Environment/FoodGenerator.hpp>
 #include <Obstacle/Obstacle.hpp>
+#include <Animal/Scorpion.hpp>
+#include <Animal/NeuronalScorpion/NeuronalScorpion.hpp>
+
+#include <unordered_map>
 
 class Animal;
 
@@ -99,6 +103,16 @@ public:
      * @return the total wave intensity for the given position
      */
     double getWaveIntensity(Vec2d position) const;
+
+    std::unordered_map<std::string, double> fetchData(std::string title);
+
+    void increaseCounter(Scorpion *);
+    void increaseCounter(Gerbil *);
+    void increaseCounter(Food *);
+
+    void decreaseCounter(Scorpion *);
+    void decreaseCounter(Gerbil *);
+    void decreaseCounter(Food *);
 private:
 
     /*!
@@ -120,6 +134,10 @@ private:
      * @brief stores the obstacles of the environment
      */
     std::list<Obstacle*> obstacles_;
+
+    int nbScorpions_ = 0;
+    int nbGerbils_ = 0;
+    int nbFood_ = 0;
 };
 
 #endif //ENVIRONMENT_HPP

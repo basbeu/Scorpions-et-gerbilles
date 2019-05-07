@@ -7,6 +7,7 @@
 #include <Environment/OrganicEntity.hpp>
 #include <Environment/Wave.hpp>
 #include <Animal/Animal.hpp>
+#include <Animal/Scorpion.hpp>
 #include <Obstacle/Obstacle.hpp>
 #include <Utility/Vec2d.hpp>
 #include <Utility/Utility.hpp>
@@ -28,6 +29,7 @@ void Environment::addEntity(OrganicEntity* entity)
 
 void Environment::update(sf::Time dt)
 {
+    //std::cerr << nbScorpions_ << std::endl;
     for(auto& entity : entities_){
         entity->update(dt);
         if(!entity->isAlive()){
@@ -130,4 +132,48 @@ double Environment::getWaveIntensity(Vec2d position) const
     }
 
     return intensity;
+}
+
+std::unordered_map<std::string, double> Environment::fetchData(std::string title)
+{
+    std::unordered_map<std::string, double> newData;
+
+    if(title == s::GENERAL){
+        newData[s::SCORPIONS] = nbScorpions_;//Scorpion::getNumberOfInstances();//Scorpion::getNumberScorpions();
+        newData[s::GERBILS] = nbGerbils_;
+        newData[s::FOOD] = nbFood_;
+    }else if(title == s::WAVES){
+        newData[s::WAVES] =  waves_.size();
+    }
+
+    return newData;
+}
+
+void Environment::increaseCounter(Scorpion *)
+{
+    ++nbScorpions_;
+}
+void Environment::increaseCounter(Gerbil *)
+{
+    ++nbGerbils_;
+}
+
+void Environment::increaseCounter(Food *)
+{
+    ++nbFood_;
+}
+
+void Environment::decreaseCounter(Scorpion *)
+{
+    --nbScorpions_;
+}
+
+void Environment::decreaseCounter(Gerbil *)
+{
+    --nbGerbils_;
+}
+
+void Environment::decreaseCounter(Food *)
+{
+    --nbFood_;
 }
