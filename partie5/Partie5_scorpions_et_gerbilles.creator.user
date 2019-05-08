@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.7.0, 2019-05-06T22:26:32. -->
+<!-- Written by QtCreator 4.7.0, 2019-05-08T10:23:17. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -164,7 +164,7 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Arguments">application-run --cfg=appPPS.json</value>
+    <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Arguments">application-run --cfg=app.json</value>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.Executable">scons</value>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.WorkingDirectory">/home/bastien/Bureau/Lien vers Documents/EPFL/semestre_6/c++/Projet/Scorpions-et-gerbilles/partie5</value>
     <value type="QString" key="ProjectExplorer.CustomExecutableRunConfiguration.WorkingDirectory.default"></value>

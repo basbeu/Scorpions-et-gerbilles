@@ -192,5 +192,5 @@ Scorpion::Scorpion(Vec2d position)
 }
 
 5.3 : 
- - avec la solution présenté en Q5.2, il n'y a que le nombre d'onde à rajouter. Les autres composants se comportent déjà de la manière voulue. Le nombre d'onde est plus facile à obtenir, il suffit de récupérer le nombre d'onde contenu dans la liste d'onde de l'environnement. 
+ - avec la solution présentée en Q5.2, il n'y a que le nombre d'onde à rajouter. Les autres composants se comportent déjà de la manière voulue. Le nombre d'onde est plus facile à obtenir, il suffit de récupérer le nombre d'onde contenu dans la liste d'onde de l'environnement. 
 

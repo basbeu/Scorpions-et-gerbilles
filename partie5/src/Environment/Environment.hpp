@@ -104,14 +104,41 @@ public:
      */
     double getWaveIntensity(Vec2d position) const;
 
+    /**
+     * @brief fetch the data needed to plot a graph
+     * @param title of the graph for which we need data
+     * @return the datas
+     */
     std::unordered_map<std::string, double> fetchData(std::string title);
 
+    /**
+     * @brief increase the counter of scorpions
+     */
     void increaseCounter(Scorpion *);
+
+    /**
+     * @brief increase the counter of gerbil
+     */
     void increaseCounter(Gerbil *);
+
+    /**
+     * @brief increase the counter of food
+     */
     void increaseCounter(Food *);
 
+    /**
+     * @brief decrease the counter of scorpion
+     */
     void decreaseCounter(Scorpion *);
+
+    /**
+     * @brief decrease the counter of gerbil
+     */
     void decreaseCounter(Gerbil *);
+
+    /**
+     * @brief decrease the counter of food
+     */
     void decreaseCounter(Food *);
 private:
 
@@ -135,8 +162,19 @@ private:
      */
     std::list<Obstacle*> obstacles_;
 
+    /**
+     * @brief count the number of scorpions
+     */
     int nbScorpions_ = 0;
+
+    /**
+     * @brief count the number of gerbils
+     */
     int nbGerbils_ = 0;
+
+    /**
+     * @brief count the number of food
+     */
     int nbFood_ = 0;
 };
 
