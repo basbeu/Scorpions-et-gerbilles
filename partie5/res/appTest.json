@@ -113,10 +113,14 @@
                "loss factor":0.001
             },
             "idle":{
+               "duration": 5,
                "min":5,
                "max":10,
                "probability":0.05
             },
+            "moving":{
+                "duration": 3
+             },
              "texture":"scorpion.png",
 	     "sensor radius" : 100
          }

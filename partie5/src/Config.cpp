@@ -94,6 +94,8 @@ Config::Config(std::string path) : mConfig(j::readFromFile(path))
     , scorpion_minimal_score_for_action(mConfig["simulation"]["animal"]["scorpion"]["score for action"].toDouble())
     , scorpion_rotation_angle_precision(mConfig["simulation"]["animal"]["scorpion"]["rotation"]["angle precision"].toDouble())
     , neuronal_scorpion_texture(mConfig["simulation"]["animal"]["scorpion"]["neuronal texture"].toString())
+    , scorpion_idle_duration(mConfig["simulation"]["animal"]["scorpion"]["idle"]["duration"].toDouble())
+    , scorpion_moving_duration(mConfig["simulation"]["animal"]["scorpion"]["moving"]["duration"].toDouble())
 // sensor
     ,sensor_intensity_threshold(mConfig["simulation"]["sensor"]["intensity threshold"].toDouble())
     ,sensor_inhibition_factor(mConfig["simulation"]["sensor"]["inhibition"]["factor"].toDouble())

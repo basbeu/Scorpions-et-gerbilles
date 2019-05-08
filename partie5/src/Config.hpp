@@ -157,6 +157,8 @@ public:
     const double scorpion_minimal_score_for_action;
     const double scorpion_rotation_angle_precision;
     const std::string neuronal_scorpion_texture;
+    const double scorpion_idle_duration;
+    const double scorpion_moving_duration;
     // sensor
     const double sensor_intensity_threshold;
     const double sensor_inhibition_factor;

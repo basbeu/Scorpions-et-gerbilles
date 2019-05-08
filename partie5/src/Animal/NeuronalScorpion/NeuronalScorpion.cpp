@@ -104,11 +104,11 @@ void NeuronalScorpion::updateState(sf::Time dt)
         case IDLE:
             if(targetDirection_.length() > getAppConfig().scorpion_minimal_score_for_action)
                 switchToState(MOVING);
-            else if (stateTimer_.asSeconds() > 5)
+            else if (stateTimer_.asSeconds() > getAppConfig().scorpion_idle_duration)
                 switchToState(WANDERING);
             break;
         case MOVING:
-            if(stateTimer_.asSeconds() > 3){
+            if(stateTimer_.asSeconds() > getAppConfig().scorpion_moving_duration){
                 switchToState(IDLE);
                 targetDirection_ = Vec2d(0,0);
             }
