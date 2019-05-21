@@ -141,8 +141,8 @@ Application::Application(int argc, char const** argv)
 //, mJSONRead(mAppDirectory + mCfgFile)
 , mConfig(new Config(mAppDirectory + mCfgFile))
 , mCurrentGraphId(-1)
-,mEnvPPS(nullptr)
-, mEnvNeuronal(nullptr) 
+, mEnvPPS(new Environment())
+, mEnvNeuronal(nullptr)
 , mStats(nullptr)
 , mPaused(false)
 , mIsResetting(false)
@@ -195,7 +195,7 @@ Application::~Application()
 void Application::run()
 {
     // Load Environment and stats
-	mEnvPPS = new Environment();
+    //mEnvPPS = new Environment();
     mEnvNeuronal = new Environment();
 	mStats = new Stats();
     // Set up subclasses
