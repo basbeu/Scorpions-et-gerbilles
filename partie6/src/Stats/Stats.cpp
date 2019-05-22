@@ -33,11 +33,6 @@ void Stats::update(sf::Time dt)
     timer_ += dt;
     if(timer_.asSeconds() > getAppConfig().stats_refresh_rate){
         for(auto& graph:graphs_){
-
-            /*for(auto stat:getAppEnv().fetchData(labels_.at(graph.first))){
-                std::cerr << stat.first << " " << stat.second << std::endl;
-            }*/
-            //std::cerr << std::endl << labels_.at(graph.first) <<std::endl;
             if(graph.first == active_)
                 graph.second->updateData(dt, getAppEnv().fetchData(labels_.at(graph.first)));
         }
@@ -54,6 +49,7 @@ void Stats::focusOn(std::string graph_title)
     for(auto& label:labels_){
         if(label.second == graph_title){
             active_ = label.first;
+            graphs_[active_]->reset();
         }
     }
 }
