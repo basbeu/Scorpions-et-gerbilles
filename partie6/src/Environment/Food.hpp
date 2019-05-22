@@ -34,7 +34,7 @@ private:
     virtual void update(sf::Time dt) override;
     virtual void draw(sf::RenderTarget& targetWindow) const override;
 
-    virtual bool eatable(OrganicEntity const* entity) override;
+    virtual bool eatable(OrganicEntity const* entity) const override;
     virtual bool eatableBy(Scorpion  const* scorpion) const override;
     virtual bool eatableBy(Gerbil const* gerbil) const override;
     virtual bool eatableBy(Food const* food) const override;

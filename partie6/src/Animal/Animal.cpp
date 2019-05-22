@@ -68,7 +68,7 @@ double Animal::getRotation() const
     return direction_.angle();
 }
 
-bool Animal::isTargetInSight(Vec2d const& target)
+bool Animal::isTargetInSight(Vec2d const& target) const
 {
     Vec2d d = target - getPosition();
 
@@ -266,11 +266,11 @@ Vec2d Animal::computeAttractionForce() const
     return toTarget.normalised() * speed - getSpeedVector();
 }
 
-Vec2d Animal::computeForceDecelerate() //const
+Vec2d Animal::computeForceDecelerate()
 {
     if(isEqual(speed_, 0.0, 0.5))
         return Vec2d(0,0);
-    //return computeForce(convertToGlobalCoord(Vec2d(-1,0)));
+
     targetPosition_ = convertToGlobalCoord(Vec2d(-1,0));
     return computeAttractionForce();
 }
@@ -297,7 +297,7 @@ Vec2d Animal::randomWalk()
     return convertToGlobalCoord(currentTarget_ + Vec2d(getRandomWalkDistance(), 0)) - getPosition();
 }
 
-void Animal::meet(OrganicEntity * entity)
+void Animal::meet(OrganicEntity const * entity)
 {
     if(matable(entity) && entity->matable(this)){
         Animal* female = (Animal*)entity;

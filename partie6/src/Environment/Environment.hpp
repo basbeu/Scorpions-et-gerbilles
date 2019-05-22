@@ -70,7 +70,7 @@ public:
      * @param animal Pointer to the animal for which the potential targets are requested
      * @return a list (std::list) of OrganicEntity representing the different entitys seen by the given animal
      */
-    std::list<OrganicEntity*> getEntitiesInSightForAnimal(Animal* animal);
+    std::list<OrganicEntity*> getEntitiesInSightForAnimal(Animal const* animal) const;
 
     /*!
      * @brief add a food generator to the environment
@@ -88,14 +88,14 @@ public:
      * @brief add an obstacle to the environment
      * @param pointer to the obstacle added to the environment
      */
-    void addObstacle(Obstacle* obstacle);
+    void addObstacle(Obstacle const* obstacle);
 
     /**
      * @brief get the obstacles that are colliding with a given wave
      * @param pointer to the wave
      * @return a list of obstacles that are colliding with a wave
      */
-    std::list<Obstacle *> getObstacleColliding(Wave* wave);
+    std::list<Obstacle const*> getObstacleColliding(Wave const* wave) const;
 
     /**
      * @brief get the total wave intensity for a given point of the simulation world
@@ -114,32 +114,32 @@ public:
     /**
      * @brief increase the counter of scorpions
      */
-    void increaseCounter(Scorpion *);
+    void increaseCounter(Scorpion const *);
 
     /**
      * @brief increase the counter of gerbil
      */
-    void increaseCounter(Gerbil *);
+    void increaseCounter(Gerbil const *);
 
     /**
      * @brief increase the counter of food
      */
-    void increaseCounter(Food *);
+    void increaseCounter(Food const *);
 
     /**
      * @brief decrease the counter of scorpion
      */
-    void decreaseCounter(Scorpion *);
+    void decreaseCounter(Scorpion const *);
 
     /**
      * @brief decrease the counter of gerbil
      */
-    void decreaseCounter(Gerbil *);
+    void decreaseCounter(Gerbil const *);
 
     /**
      * @brief decrease the counter of food
      */
-    void decreaseCounter(Food *);
+    void decreaseCounter(Food const *);
 private:
 
     /*!
@@ -160,7 +160,7 @@ private:
     /**
      * @brief stores the obstacles of the environment
      */
-    std::list<Obstacle*> obstacles_;
+    std::list<Obstacle const*> obstacles_;
 
     /**
      * @brief count the number of scorpions

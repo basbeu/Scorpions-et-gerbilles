@@ -12,7 +12,7 @@
 #include <math.h>
 #include <SFML/Graphics.hpp>
 
-Sensor::Sensor(NeuronalScorpion* scorpion)
+Sensor::Sensor(NeuronalScorpion const * scorpion)
     :active_(false)
     ,score_(0.0)
     ,inhibitor_(0.0)
@@ -54,7 +54,7 @@ void Sensor::draw(sf::RenderTarget& target) const
     target.draw(buildCircle(scorpion_->getPositionOfSensor(this), 0.25 * scorpion_->getRadius(), color));
 }
 
-void Sensor::connect(Sensor* sensor)
+void Sensor::connect(Sensor * sensor)
 {
     connectedSensors_.push_back(sensor);
 }

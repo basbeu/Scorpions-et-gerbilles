@@ -26,7 +26,7 @@ public:
      * @brief build an instance of Gerbil
      * @param initial position of the gerbil (Vec2d)
      */
-    Gerbil(Vec2d position);
+    Gerbil(Vec2d const& position);
 
     /*!
      * @brief destroy the Gerbil instance
@@ -37,7 +37,7 @@ private:
      * Virtual methods that are inherited from OrganicEntity
      * see OrganiEntity.hpp for the corresponding documentation
      */
-    virtual bool eatable(OrganicEntity const* entity) override;
+    virtual bool eatable(OrganicEntity const* entity) const override;
     virtual bool eatableBy(Scorpion  const* scorpion) const override;
     virtual bool eatableBy(Gerbil const* gerbil) const override;
     virtual bool eatableBy(Food const* food) const override;

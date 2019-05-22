@@ -25,7 +25,7 @@ Scorpion::~Scorpion()
     getAppEnv().decreaseCounter(this);
 }
 
-bool Scorpion::eatable(OrganicEntity const* entity)
+bool Scorpion::eatable(OrganicEntity const* entity) const
 {
     return entity->eatableBy(this);
 }

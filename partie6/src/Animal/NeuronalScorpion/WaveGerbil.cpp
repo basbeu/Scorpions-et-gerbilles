@@ -9,14 +9,14 @@
 
 #include <SFML/Graphics.hpp>
 
-WaveGerbil::WaveGerbil(Vec2d position, double energyLevel, bool female)
+WaveGerbil::WaveGerbil(Vec2d const& position, double energyLevel, bool female)
     :Gerbil(position, energyLevel, female)
     ,waveGenElapsedTime_(sf::Time::Zero)
 {
 
 }
 
-WaveGerbil::WaveGerbil(Vec2d position)
+WaveGerbil::WaveGerbil(Vec2d const& position)
     :Gerbil(position)
     ,waveGenElapsedTime_(sf::Time::Zero)
 {

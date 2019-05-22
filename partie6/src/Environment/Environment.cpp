@@ -86,7 +86,7 @@ void Environment::clean()
     obstacles_.clear();
 }
 
-std::list<OrganicEntity *> Environment::getEntitiesInSightForAnimal(Animal* animal)
+std::list<OrganicEntity *> Environment::getEntitiesInSightForAnimal(Animal const * animal) const
 {
     std::list<OrganicEntity*> entitiesInSight;
     for(auto& entity:entities_) {
@@ -107,14 +107,14 @@ void Environment::addWave(Wave* wave)
     waves_.push_back(wave);
 }
 
-void Environment::addObstacle(Obstacle* obstacle)
+void Environment::addObstacle(Obstacle const* obstacle)
 {
     obstacles_.push_back(obstacle);
 }
 
-std::list<Obstacle *> Environment::getObstacleColliding(Wave* wave)
+std::list<Obstacle const*> Environment::getObstacleColliding(Wave const* wave) const
 {
-    std::list<Obstacle*> obstaclesColliding;
+    std::list<Obstacle const*> obstaclesColliding;
     for(auto& obstacle:obstacles_){
         if(obstacle->isColliding(*wave)){
             obstaclesColliding.push_back(obstacle);
@@ -149,31 +149,31 @@ std::unordered_map<std::string, double> Environment::fetchData(std::string const
     return newData;
 }
 
-void Environment::increaseCounter(Scorpion *)
+void Environment::increaseCounter(Scorpion const *)
 {
     ++nbScorpions_;
 }
-void Environment::increaseCounter(Gerbil *)
+void Environment::increaseCounter(Gerbil const *)
 {
     ++nbGerbils_;
 }
 
-void Environment::increaseCounter(Food *)
+void Environment::increaseCounter(Food const *)
 {
     ++nbFood_;
 }
 
-void Environment::decreaseCounter(Scorpion *)
+void Environment::decreaseCounter(Scorpion const *)
 {
     --nbScorpions_;
 }
 
-void Environment::decreaseCounter(Gerbil *)
+void Environment::decreaseCounter(Gerbil const *)
 {
     --nbGerbils_;
 }
 
-void Environment::decreaseCounter(Food *)
+void Environment::decreaseCounter(Food const *)
 {
     --nbFood_;
 }

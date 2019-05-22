@@ -67,7 +67,7 @@ public:
      * @param target to test
      * @return true if the target is in sight of the animal
      */
-    bool isTargetInSight(Vec2d const& target);
+    bool isTargetInSight(Vec2d const& target) const;
 
     /*!
      * @brief test if the animal is a female or male
@@ -133,7 +133,7 @@ protected:
      * @brief Compute the force that will stop the animal
      * @return the force vector (Vec2d)
      */
-    Vec2d computeForceDecelerate() /*const*/;
+    Vec2d computeForceDecelerate();
 
     /*!
      * @brief Algorithm that randomly generate a next target
@@ -217,17 +217,17 @@ private:
     /*!
      * @brief nearestFood_ points to the nearest entity eatable by the animal
      */
-    OrganicEntity* nearestFood_;
+    OrganicEntity * nearestFood_;
 
     /*!
      * @brief nearestMate_ points to the nearest entity matable with the animal
      */
-    OrganicEntity* nearestMate_;
+    OrganicEntity * nearestMate_;
 
     /*!
      * @brief enemies_ registers predators in the field of view
      */
-    std::list<OrganicEntity*> enemies_;
+    std::list<OrganicEntity const*> enemies_;
 
     /*!
      * @brief childrenPending_ counts the future number of child, when the animal is not pregnant the value is 0
@@ -365,7 +365,7 @@ private:
      * @brief manage the meeting with the entity
      * @param entity that the animal meet, nothing is done if entity is from a different type than this
      */
-    void meet(OrganicEntity * entity);
+    void meet(OrganicEntity const * entity);
 
     /*!
      * @brief makeChildren

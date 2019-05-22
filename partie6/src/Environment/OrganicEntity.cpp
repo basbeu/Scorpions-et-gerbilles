@@ -8,7 +8,7 @@
 
 #include <SFML/Graphics.hpp>
 
-OrganicEntity::OrganicEntity(Vec2d position, double size, double energyLevel)
+OrganicEntity::OrganicEntity(Vec2d const& position, double size, double energyLevel)
     :CircularCollider (position, size/2)
     ,energyLevel_(energyLevel)
     ,age_(sf::Time::Zero)

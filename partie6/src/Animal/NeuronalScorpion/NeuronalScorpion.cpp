@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <utility>
 
-NeuronalScorpion::NeuronalScorpion(Vec2d position, double energyLevel, bool female)
+NeuronalScorpion::NeuronalScorpion(Vec2d const& position, double energyLevel, bool female)
     :Scorpion (position, energyLevel,female)
     ,targetDirection_(0,0)
     ,state_(WANDERING)
@@ -23,7 +23,7 @@ NeuronalScorpion::NeuronalScorpion(Vec2d position, double energyLevel, bool fema
     initSensors();
 }
 
-NeuronalScorpion::NeuronalScorpion(Vec2d position)
+NeuronalScorpion::NeuronalScorpion(Vec2d const& position)
     :Scorpion (position)
     ,targetDirection_(0,0)
     ,state_(WANDERING)

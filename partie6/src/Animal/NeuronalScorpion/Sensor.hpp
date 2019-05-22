@@ -24,7 +24,7 @@ public:
      * @brief buil an instance of Sensor
      * @param NeuronalScorpion that "owns" the sensor
      */
-    Sensor(NeuronalScorpion* scorpion);
+    Sensor(NeuronalScorpion const * scorpion);
 
     /**
      * @brief destroy the Sensor instance
@@ -41,7 +41,7 @@ public:
      * @brief connect to an another sensor
      * @param sensor connected, this sensor will be inhibitted by this
      */
-    void connect(Sensor* sensor);
+    void connect(Sensor * sensor);
 
     /**
      * @brief reset the sensor to initial values
@@ -76,12 +76,12 @@ private:
     /**
      * @brief owner of the sensor
      */
-    NeuronalScorpion* scorpion_;
+    NeuronalScorpion const * scorpion_;
 
     /**
      * @brief list of connected sensor, these sensors will be inhibitted by the current sensor
      */
-    std::list<Sensor*> connectedSensors_;
+    std::list<Sensor *> connectedSensors_;
 
     /**
      * @brief set the inhibitor score value

@@ -42,7 +42,7 @@ void Wave::update(sf::Time dt)
 {
     timer_ += dt;
     setRadius(propagationSpeed_ * timer_.asSeconds() + initialRadius_);
-    std::list<Obstacle*> obstacles = getAppEnv().getObstacleColliding(this);
+    std::list<Obstacle const*> obstacles = getAppEnv().getObstacleColliding(this);
 
     for(auto& obstacle:obstacles){
         double obstacleAngle(computeRelativeAngle(obstacle->getPosition()));

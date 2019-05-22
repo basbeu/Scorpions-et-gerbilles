@@ -33,7 +33,7 @@ void Food::draw(sf::RenderTarget& targetWindow) const
     targetWindow.draw(image_to_draw);
 }
 
-bool Food::eatable(OrganicEntity const* entity)
+bool Food::eatable(OrganicEntity const* entity) const
 {
     return entity->eatableBy(this);
 }

@@ -48,7 +48,7 @@ private:
      * Virtual methods that are inherited from OrganicEntity
      * see OrganiEntity.hpp for the corresponding documentation
      */
-    virtual bool eatable(OrganicEntity const* entity) override;
+    virtual bool eatable(OrganicEntity const* entity) const override;
     virtual bool eatableBy(Scorpion  const* scorpion) const override;
     virtual bool eatableBy(Gerbil const* gerbil) const override;
     virtual bool eatableBy(Food const* food) const override;

@@ -29,7 +29,7 @@ public:
      * @param size double representing the diameter of the animal
      * @param energyLevel initial level of the animal
      */
-    OrganicEntity(Vec2d position, double size, double energyLevel);
+    OrganicEntity(Vec2d const& position, double size, double energyLevel);
 
     /*!
      * @brief destroy an OrganicEntity
@@ -47,7 +47,7 @@ public:
      * @param other OrganicEntity to be checked
      * @return true if other is eatable by this, false otherwise
      */
-    virtual bool eatable(OrganicEntity const* other) = 0;
+    virtual bool eatable(OrganicEntity const* other) const = 0;
 
     /*!
      * @brief check if other is matable by this
