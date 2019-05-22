@@ -124,7 +124,7 @@ std::list<Obstacle *> Environment::getObstacleColliding(Wave* wave)
     return obstaclesColliding;
 }
 
-double Environment::getWaveIntensity(Vec2d position) const
+double Environment::getWaveIntensity(Vec2d const& position) const
 {
     double intensity(0.0);
     for(auto& wave : waves_){
@@ -134,7 +134,7 @@ double Environment::getWaveIntensity(Vec2d position) const
     return intensity;
 }
 
-std::unordered_map<std::string, double> Environment::fetchData(std::string title)
+std::unordered_map<std::string, double> Environment::fetchData(std::string const& title)
 {
     std::unordered_map<std::string, double> newData;
 

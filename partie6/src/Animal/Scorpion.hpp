@@ -20,13 +20,13 @@ public:
      * @param energyLevel initial level of the scorpion
      * @param female gender of the Scorpion instance : true => female, false => male
      */
-    Scorpion(Vec2d position, double energyLevel, bool female);
+    Scorpion(Vec2d const& position, double energyLevel, bool female);
 
     /*!
      * @brief build an instance of Scorpion
      * @param initial position of the scorpion (Vec2d)
      */
-    Scorpion(Vec2d position);
+    Scorpion(Vec2d const& position);
 
     /*!
      * @brief destroy a Scorpion

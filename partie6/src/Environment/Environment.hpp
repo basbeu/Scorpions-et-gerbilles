@@ -102,14 +102,14 @@ public:
      * @param position in the simulation world
      * @return the total wave intensity for the given position
      */
-    double getWaveIntensity(Vec2d position) const;
+    double getWaveIntensity(Vec2d const& position) const;
 
     /**
      * @brief fetch the data needed to plot a graph
      * @param title of the graph for which we need data
      * @return the datas
      */
-    std::unordered_map<std::string, double> fetchData(std::string title);
+    std::unordered_map<std::string, double> fetchData(std::string const& title);
 
     /**
      * @brief increase the counter of scorpions

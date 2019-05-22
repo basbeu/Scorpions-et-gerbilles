@@ -8,7 +8,7 @@
 #include <Application.hpp>
 #include <Random/Uniform.hpp>
 
-Gerbil::Gerbil(Vec2d position, double energyLevel, bool female)
+Gerbil::Gerbil(Vec2d const& position, double energyLevel, bool female)
     :Animal(position, getAppConfig().gerbil_size, energyLevel, female)
 {
     getAppEnv().increaseCounter(this);

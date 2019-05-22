@@ -7,7 +7,7 @@
 #include <Utility/Utility.hpp>
 #include <Application.hpp>
 
-Obstacle::Obstacle(Vec2d position, double radius, double orientation)
+Obstacle::Obstacle(Vec2d const& position, double radius, double orientation)
     :CircularCollider (position, radius)
     ,orientation_(orientation)
 {

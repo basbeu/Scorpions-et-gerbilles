@@ -15,7 +15,7 @@
 
 #include <SFML/Graphics.hpp>
 
-Animal::Animal(Vec2d position, double size, double energyLevel, bool female)
+Animal::Animal(Vec2d const& position, double size, double energyLevel, bool female)
     :OrganicEntity (position, size, energyLevel)
     ,direction_(1,0)
     ,speed_(0)
@@ -38,7 +38,7 @@ Animal::~Animal()
 
 }
 
-void Animal::setTargetPosition(Vec2d targetPosition)
+void Animal::setTargetPosition(Vec2d const& targetPosition)
 {
     targetPosition_ = targetPosition;
 }
@@ -159,7 +159,7 @@ void Animal::setRotation(double angle)
     direction_.y = sin(angle);
 }
 
-Vec2d Animal::convertToGlobalCoord(Vec2d local) const
+Vec2d Animal::convertToGlobalCoord(Vec2d const& local) const
 {
     sf::Transform matTransform;
     matTransform.translate(getPosition());
@@ -248,7 +248,7 @@ OrganicEntity* Animal::getNearestEatable() const
     return nearestFood_;
 }
 
-void Animal::update(Vec2d force, sf::Time dt)
+void Animal::update(Vec2d const& force, sf::Time dt)
 {
     Vec2d acceleration = force / getMass();
     Vec2d newSpeed = getSpeedVector() + acceleration * dt.asSeconds();

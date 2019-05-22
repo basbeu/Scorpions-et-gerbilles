@@ -15,7 +15,7 @@
 #include <utility>
 #include <SFML/Graphics.hpp>
 
-Wave::Wave(Vec2d origin, double energyLevel, double initialRadius, double mu, double propagationSpeed)
+Wave::Wave(Vec2d const& origin, double energyLevel, double initialRadius, double mu, double propagationSpeed)
     :CircularCollider (origin,initialRadius)
     ,initialEnergyLevel_(energyLevel)
     ,initialRadius_(initialRadius)
@@ -66,7 +66,7 @@ double Wave::getIntensity() const
     return getEnergy()/(2 * PI * getRadius());
 }
 
-double Wave::getIntensityAt(Vec2d position) const
+double Wave::getIntensityAt(Vec2d const& position) const
 {
     double margin(getAppConfig().wave_on_wave_marging);
     double distance((position-getPosition()).length());
@@ -89,7 +89,7 @@ Wave::Arc Wave::findArcColliding(double obstacleAngle) const
     return Arc(0,0);
 }
 
-double Wave::computeRelativeAngle(Vec2d position) const
+double Wave::computeRelativeAngle(Vec2d const& position) const
 {
     double angle((position - getPosition()).angle());
     if(angle < 0)

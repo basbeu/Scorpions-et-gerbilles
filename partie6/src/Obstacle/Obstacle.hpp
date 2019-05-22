@@ -21,7 +21,7 @@ public:
      * @param radius of the circularCollider of the obstacle
      * @param orientation of the obstacle
      */
-    Obstacle(Vec2d position, double radius, double orientation);
+    Obstacle(Vec2d const& position, double radius, double orientation);
 
     /**
      * @brief destroy an Obstacle instance

@@ -38,7 +38,7 @@ double ChasingAutomaton::getMass() const
     return CHASING_AUTOMATON_MASS;
 }
 
-void ChasingAutomaton::setTargetPosition(Vec2d targetPosition)
+void ChasingAutomaton::setTargetPosition(Vec2d const& targetPosition)
 {
     targetPosition_ = targetPosition;
 }
@@ -84,7 +84,7 @@ Vec2d ChasingAutomaton::computeForce() const
     return toTarget.normalised() * speed - getSpeedVector();
 }
 
-void ChasingAutomaton::update(Vec2d force, sf::Time dt)
+void ChasingAutomaton::update(Vec2d const& force, sf::Time dt)
 {
     Vec2d acceleration = force / getMass();
     Vec2d newSpeed = getSpeedVector() + acceleration * dt.asSeconds();

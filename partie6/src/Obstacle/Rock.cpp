@@ -10,7 +10,7 @@
 
 #include <algorithm>
 
-Rock::Rock(Vec2d position)
+Rock::Rock(Vec2d const& position)
     :Obstacle (position, std::max(1, uniform(getAppConfig().simulation_world_size/50, 2*getAppConfig().simulation_world_size/50)), uniform(-PI,PI))
 {
 

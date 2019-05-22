@@ -29,7 +29,7 @@ public:
      * @param mu electromagnetic constant
      * @param propagation speed
      */
-    Wave(Vec2d origin, double energyLevel, double initialRadius, double mu, double propagationSpeed);
+    Wave(Vec2d const& origin, double energyLevel, double initialRadius, double mu, double propagationSpeed);
 
     /**
      * @brief destroy a Wave
@@ -57,7 +57,7 @@ public:
      * @param position in the simulation world
      * @return the intensity of the wave at the given point
      */
-    double getIntensityAt(Vec2d position) const;
+    double getIntensityAt(Vec2d const& position) const;
 private:
     /**
      * @brief Internal type representing an arc belonging to the wave
@@ -106,7 +106,7 @@ private:
      * @param position in the simulation world
      * @return the angle betwen the point and the origin point of the wave
      */
-    double computeRelativeAngle(Vec2d position) const;
+    double computeRelativeAngle(Vec2d const& position) const;
 };
 
 #endif // WAVE_HPP

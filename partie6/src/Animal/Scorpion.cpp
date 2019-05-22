@@ -8,13 +8,13 @@
 #include <Application.hpp>
 #include <Random/Uniform.hpp>
 
-Scorpion::Scorpion(Vec2d position, double energyLevel, bool female)
+Scorpion::Scorpion(Vec2d const& position, double energyLevel, bool female)
     :Animal(position, getAppConfig().scorpion_size, energyLevel, female)
 {
     getAppEnv().increaseCounter(this);
 }
 
-Scorpion::Scorpion(Vec2d position)
+Scorpion::Scorpion(Vec2d const& position)
     :Animal(position, getAppConfig().scorpion_size, getAppConfig().scorpion_energy_initial, uniform(0, 1) == 0)
 {
     getAppEnv().increaseCounter(this);

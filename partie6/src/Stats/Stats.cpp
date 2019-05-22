@@ -44,7 +44,7 @@ void Stats::draw(sf::RenderTarget& target) const
     graphs_.at(active_)->draw(target);
 }
 
-void Stats::focusOn(std::string graph_title)
+void Stats::focusOn(std::string const& graph_title)
 {
     for(auto& label:labels_){
         if(label.second == graph_title){

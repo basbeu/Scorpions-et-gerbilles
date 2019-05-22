@@ -33,7 +33,7 @@ public:
      * @param energyLevel initial level of the animal
      * @param female gender of the animal instance : true => female, false => male
      */
-    Animal(Vec2d position, double size, double energyLevel, bool female);
+    Animal(Vec2d const& position, double size, double energyLevel, bool female);
 
     /*!
      * @brief Destroy a Animal
@@ -44,7 +44,7 @@ public:
       * @brief set the position of the Animal's target
       * @param targetPosition Vec2d representing the position of the target
       */
-    void setTargetPosition(Vec2d targetPosition);
+    void setTargetPosition(Vec2d const& targetPosition);
 
     /*!
      * @return the current speed vector of the Animal
@@ -121,7 +121,7 @@ protected:
      * @param force Vec2d representing the current attraction force
      * @param dt elapsed time since the last update
      */
-    void update(Vec2d force, sf::Time dt);
+    void update(Vec2d const& force, sf::Time dt);
 
     /*!
      * @brief Compute the attraction force between Animal and its target
@@ -152,7 +152,7 @@ protected:
      * @param local Vec2d
      * @return Vec2d corresponding to the local point in the global coordinate system
      */
-    Vec2d convertToGlobalCoord(Vec2d local) const;
+    Vec2d convertToGlobalCoord(Vec2d const& local) const;
 
     /*!
      * @brief Decrease the energy level of the animal for the elapsed time

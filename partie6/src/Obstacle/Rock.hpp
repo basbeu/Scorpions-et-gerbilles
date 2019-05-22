@@ -18,7 +18,7 @@ public:
      * @brief build a Rock instance
      * @param position of the rock
      */
-    Rock(Vec2d position);
+    Rock(Vec2d const& position);
 
     /**
      * @brief destroy a Rock

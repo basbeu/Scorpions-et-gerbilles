@@ -20,7 +20,7 @@ public:
      * @param position vector of the center of the CircularCollider
      * @param radius of the CircularCollider
      */
-    CircularCollider(Vec2d position, double radius);
+    CircularCollider(Vec2d const& position, double radius);
 
     /*!
      * @brief CircularCollider's copy constructor

@@ -20,7 +20,7 @@ public:
      * @param energyLevel initial level of the gerbil
      * @param female gender of the Gerbil instance : true => female, false => male
      */
-    Gerbil(Vec2d position, double energyLevel, bool female);
+    Gerbil(Vec2d const& position, double energyLevel, bool female);
 
     /*!
      * @brief build an instance of Gerbil

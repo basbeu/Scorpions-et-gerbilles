@@ -11,7 +11,7 @@
 //#include <utility>
 #include <limits>
 
-CircularCollider::CircularCollider(Vec2d position, double radius)
+CircularCollider::CircularCollider(Vec2d const& position, double radius)
     :position_(position)
     ,radius_(radius)
 {

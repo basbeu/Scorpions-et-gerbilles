@@ -43,7 +43,7 @@ public:
      * @brief set the graph that is currently focus (drawn)
      * @param title of the graph currently shown
      */
-    void focusOn(std::string graph_title);
+    void focusOn(std::string const& graph_title);
     /**
      * @brief reset the stats
      */

@@ -51,7 +51,7 @@ public:
      * @brief set the position of the ChasingAutomaton's target
      * @param targetPosition Vec2d representing the position of the target
      */
-    void setTargetPosition(Vec2d targetPosition);
+    void setTargetPosition(Vec2d const& targetPosition);
 
     /*!
      * @return the current speed vector of the ChasingAutomaton
@@ -108,7 +108,7 @@ private:
      * @param force Vec2d representing the current attraction force
      * @param dt elapsed time since the last update
      */
-    void update(Vec2d force, sf::Time dt);
+    void update(Vec2d const& force, sf::Time dt);
 };
 
 #endif // CHASINGAUTOMATON_HPP
