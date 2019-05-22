@@ -13,7 +13,9 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+
 #include <utility>
+#include <list>
 #include <memory>
 #include <SFML/Graphics.hpp>
 
@@ -70,7 +72,7 @@ void Stats::addGraph(int graphId, std::string const& title, std::vector<std::str
     std::unordered_map<int,std::unique_ptr<Graph>>::const_iterator graph = graphs_.find (graphId);
 
     if(graph == graphs_.end()){
-        graphs_.insert(std::pair<int, std::unique_ptr<Graph>>(graphId, new Graph(titles, statsSize, min, max)));
+        graphs_.insert(std::pair<int, std::unique_ptr<Graph>>(graphId, std::unique_ptr<Graph>(new Graph(titles, statsSize, min, max))));
     }else{
         graphs_[graphId].reset(new Graph(titles, statsSize, min, max));
     }
