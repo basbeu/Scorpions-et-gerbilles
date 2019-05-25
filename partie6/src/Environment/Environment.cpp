@@ -30,9 +30,9 @@ void Environment::addEntity(OrganicEntity* entity)
 void Environment::update(sf::Time dt)
 {
     //std::cerr << nbScorpions_ << std::endl;
-    for(auto& entity : entities_){
+    for(auto& entity : entities_) {
         entity->update(dt);
-        if(!entity->isAlive()){
+        if(!entity->isAlive()) {
             delete entity;
             entity = nullptr;
         }
@@ -42,9 +42,9 @@ void Environment::update(sf::Time dt)
     for(auto generator : generators_)
         generator->update(dt);
 
-    for(auto& wave:waves_){
+    for(auto& wave:waves_) {
         wave->update(dt);
-        if(wave->getIntensity() < getAppConfig().wave_intensity_threshold){
+        if(wave->getIntensity() < getAppConfig().wave_intensity_threshold) {
             delete wave;
             wave = nullptr;
         }
@@ -115,8 +115,8 @@ void Environment::addObstacle(Obstacle const* obstacle)
 std::list<Obstacle const*> Environment::getObstacleColliding(Wave const* wave) const
 {
     std::list<Obstacle const*> obstaclesColliding;
-    for(auto& obstacle:obstacles_){
-        if(obstacle->isColliding(*wave)){
+    for(auto& obstacle:obstacles_) {
+        if(obstacle->isColliding(*wave)) {
             obstaclesColliding.push_back(obstacle);
         }
     }
@@ -127,7 +127,7 @@ std::list<Obstacle const*> Environment::getObstacleColliding(Wave const* wave) c
 double Environment::getWaveIntensity(Vec2d const& position) const
 {
     double intensity(0.0);
-    for(auto& wave : waves_){
+    for(auto& wave : waves_) {
         intensity += wave->getIntensityAt(position);
     }
 
@@ -138,11 +138,11 @@ std::unordered_map<std::string, double> Environment::fetchData(std::string const
 {
     std::unordered_map<std::string, double> newData;
 
-    if(title == s::GENERAL){
+    if(title == s::GENERAL) {
         newData[s::SCORPIONS] = nbScorpions_;//Scorpion::getNumberOfInstances();//Scorpion::getNumberScorpions();
         newData[s::GERBILS] = nbGerbils_;
         newData[s::FOOD] = nbFood_;
-    }else if(title == s::WAVES){
+    } else if(title == s::WAVES) {
         newData[s::WAVES] =  waves_.size();
     }
 

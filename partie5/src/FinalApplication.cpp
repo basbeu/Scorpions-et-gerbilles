@@ -18,18 +18,17 @@ IMPLEMENT_MAIN(FinalApplication)
 void FinalApplication::onRun()
 {
     // Setup stats
-	Application::onRun();
-	addGraph(s::GENERAL, { s::SCORPIONS, s::GERBILS, s::FOOD,}, 0, 200);
-	addGraph(s::WAVES, { s::WAVES}, 0, 100);
-	focusOnStat(s::GENERAL);
+    Application::onRun();
+    addGraph(s::GENERAL, { s::SCORPIONS, s::GERBILS, s::FOOD,}, 0, 200);
+    addGraph(s::WAVES, { s::WAVES}, 0, 100);
+    focusOnStat(s::GENERAL);
 }
 void FinalApplication::onEvent(sf::Event event, sf::RenderWindow& window)
 {
     bool const toggle = event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Tab;
-    
-    if (toggle)
-	{
-		switch (getSimulationMode()) {
+
+    if (toggle) {
+        switch (getSimulationMode()) {
         case SimulationMode::PPS:
             setSimulationMode(SimulationMode::NEURONAL);
             break;
@@ -38,42 +37,43 @@ void FinalApplication::onEvent(sf::Event event, sf::RenderWindow& window)
             setSimulationMode(SimulationMode::PPS);
             break;
         case SimulationMode::TEST :
-				/*nothing to do */
-			break;
-		}
-		toggleStats();	
-	}
-	
-	else { switch (getSimulationMode()) {
-			case SimulationMode::PPS:
-				onEventPPS(event, window);
-				break;
+            /*nothing to do */
+            break;
+        }
+        toggleStats();
+    }
 
-			case SimulationMode::NEURONAL:
-				onEventNeuronal(event, window);
-				break;
-			case SimulationMode::TEST :
-				/*nothing to do */
-				break;		
-		}
-	}
-	
+    else {
+        switch (getSimulationMode()) {
+        case SimulationMode::PPS:
+            onEventPPS(event, window);
+            break;
+
+        case SimulationMode::NEURONAL:
+            onEventNeuronal(event, window);
+            break;
+        case SimulationMode::TEST :
+            /*nothing to do */
+            break;
+        }
+    }
+
 }
 
 void FinalApplication::onUpdate(sf::Time dt)
 {
-	Application::onUpdate(dt);
+    Application::onUpdate(dt);
     switch (getSimulationMode()) {
-        case SimulationMode::PPS:
-            onUpdatePPS(dt);
-            break;
+    case SimulationMode::PPS:
+        onUpdatePPS(dt);
+        break;
 
-        case SimulationMode::NEURONAL:
-            onUpdateNeuronal(dt);
-            break;
-		case SimulationMode::TEST :
-				/*nothing to do */
-			break;		
+    case SimulationMode::NEURONAL:
+        onUpdateNeuronal(dt);
+        break;
+    case SimulationMode::TEST :
+        /*nothing to do */
+        break;
     }
 }
 
@@ -90,20 +90,20 @@ void FinalApplication::onEventPPS(sf::Event event, sf::RenderWindow&)
 {
     if (event.type == sf::Event::KeyPressed) {
         switch (event.key.code) {
-            case sf::Keyboard::S:
-                getAppEnv().addEntity(new Scorpion(getCursorPositionInView()));
-                break;
+        case sf::Keyboard::S:
+            getAppEnv().addEntity(new Scorpion(getCursorPositionInView()));
+            break;
 
-            case sf::Keyboard::G:
-                getAppEnv().addEntity(new Gerbil(getCursorPositionInView()));
-                break;
+        case sf::Keyboard::G:
+            getAppEnv().addEntity(new Gerbil(getCursorPositionInView()));
+            break;
 
-            case sf::Keyboard::F:
-                getAppEnv().addEntity(new Food(getCursorPositionInView()));
-                break;
+        case sf::Keyboard::F:
+            getAppEnv().addEntity(new Food(getCursorPositionInView()));
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
     }
 }
@@ -126,16 +126,16 @@ void FinalApplication::onEventNeuronal(sf::Event event, sf::RenderWindow&)
 {
     if (event.type == sf::Event::KeyPressed) {
         switch (event.key.code) {
-            case sf::Keyboard::W:
-                getAppEnv().addEntity(new WaveGerbil(getCursorPositionInView()));
-                break;
+        case sf::Keyboard::W:
+            getAppEnv().addEntity(new WaveGerbil(getCursorPositionInView()));
+            break;
 
-            case sf::Keyboard::N:
-                getAppEnv().addEntity(new NeuronalScorpion(getCursorPositionInView()));
-                break;
+        case sf::Keyboard::N:
+            getAppEnv().addEntity(new NeuronalScorpion(getCursorPositionInView()));
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
     }
 }
@@ -145,40 +145,39 @@ void FinalApplication::onUpdateNeuronal(sf::Time)
     // Nothing
 }
 
-std::vector<std::string> FinalApplication::getHelperText() const 
+std::vector<std::string> FinalApplication::getHelperText() const
 {
-	if (getSimulationMode() == SimulationMode::PPS)
-    {
+    if (getSimulationMode() == SimulationMode::PPS) {
         return {    "---------------------",
-					"(MP : mouse position)",
+                    "(MP : mouse position)",
                     "R   : Reset the simulation",
-					"Esc : End of program",
-			     	"C   : Reload config file",
+                    "Esc : End of program",
+                    "C   : Reload config file",
                     "G   : Add a gerbil at MP",
                     "S   : Add a scorpion at MP",
-					"F   : Add a food at MP",
+                    "F   : Add a food at MP",
                     "D   : Toggle debug mode",
-					"Tab : Switch macro/micro view",
-					"Z   : Zoom",
-					"->  : Move view to right",
-					"<-  : Move view to left",
-					"Space : Pause"
-                    };
+                    "Tab : Switch macro/micro view",
+                    "Z   : Zoom",
+                    "->  : Move view to right",
+                    "<-  : Move view to left",
+                    "Space : Pause"
+               };
     } else {
         return  {    "---------------------",
-                    "(MP: mouse position)",
-					"R  : Reset the simulation",
-					"Esc : End of program",
-					"C   : Reload config file"
-                    "N  : Add a neuronal scorpion",
-					"         at MP",
-                    "W  : Add a wave gerbil at MP",
-					"D  : Toggle debug mode",
-                    "Tab: Switch macro/micro view",
-					"Z   : Zoom",
-					"->  : Move view to right",
-					"<-  : Move view to left",
-					"Space : Pause"
-                    };
+                     "(MP: mouse position)",
+                     "R  : Reset the simulation",
+                     "Esc : End of program",
+                     "C   : Reload config file"
+                     "N  : Add a neuronal scorpion",
+                     "         at MP",
+                     "W  : Add a wave gerbil at MP",
+                     "D  : Toggle debug mode",
+                     "Tab: Switch macro/micro view",
+                     "Z   : Zoom",
+                     "->  : Move view to right",
+                     "<-  : Move view to left",
+                     "Space : Pause"
+                };
     }
 }

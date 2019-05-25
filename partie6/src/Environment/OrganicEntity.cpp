@@ -59,6 +59,6 @@ void OrganicEntity::decreaseEnergyLevel(double loss)
 
 void OrganicEntity::increaseEnergyLevel(double increase)
 {
-   energyLevel_ += increase;
+    energyLevel_ += increase;
 }
 

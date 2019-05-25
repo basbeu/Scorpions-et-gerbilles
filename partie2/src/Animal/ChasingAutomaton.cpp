@@ -15,10 +15,10 @@
 #include <SFML/Graphics.hpp>
 
 ChasingAutomaton::ChasingAutomaton(Vec2d position)
-:CircularCollider (position, CHASING_AUTOMATON_RADIUS)
-,direction_(1,0)
-,speed_(0)
-,targetPosition_(0,0)
+    :CircularCollider (position, CHASING_AUTOMATON_RADIUS)
+    ,direction_(1,0)
+    ,speed_(0)
+    ,targetPosition_(0,0)
 {
     setDeceleration(DECELERATION_MEDIUM);
 }
@@ -61,17 +61,18 @@ void ChasingAutomaton::draw(sf::RenderTarget& targetWindow) const
     targetWindow.draw(image_to_draw);
 }
 
-void ChasingAutomaton::setDeceleration(Deceleration deceleration){
+void ChasingAutomaton::setDeceleration(Deceleration deceleration)
+{
     switch (deceleration) {
-        case DECELERATION_STRONG:
-            deceleration_ = 0.9;
-            break;
-        case DECELERATION_MEDIUM:
-            deceleration_ = 0.6;
-            break;
-        case DECELERATION_WEAK:
-            deceleration_ = 0.3;
-            break;
+    case DECELERATION_STRONG:
+        deceleration_ = 0.9;
+        break;
+    case DECELERATION_MEDIUM:
+        deceleration_ = 0.6;
+        break;
+    case DECELERATION_WEAK:
+        deceleration_ = 0.3;
+        break;
     }
 }
 

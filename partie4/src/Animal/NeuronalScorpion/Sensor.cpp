@@ -28,12 +28,12 @@ Sensor::~Sensor()
 
 void Sensor::update(sf::Time dt)
 {
-    if(active_){
+    if(active_) {
         score_ +=  2.0 * (1.0 - inhibitor_);
-        for(auto& sensor:connectedSensors_){
+        for(auto& sensor:connectedSensors_) {
             sensor->increaseInhibitor(getAppConfig().sensor_inhibition_factor * score_);
         }
-    }else{
+    } else {
         active_ = (getAppEnv().getWaveIntensity(scorpion_->getPositionOfSensor(this)) > getAppConfig().sensor_intensity_threshold);
     }
 }
@@ -41,12 +41,12 @@ void Sensor::update(sf::Time dt)
 void Sensor::draw(sf::RenderTarget& target) const
 {
     sf::Color color(sf::Color::Green);
-    if(inhibitor_ > 0.2){
+    if(inhibitor_ > 0.2) {
         if(active_)
-           color = sf::Color::Magenta;
+            color = sf::Color::Magenta;
         else
-           color = sf::Color::Blue;
-    }else{
+            color = sf::Color::Blue;
+    } else {
         if(active_)
             color = sf::Color::Red;
     }

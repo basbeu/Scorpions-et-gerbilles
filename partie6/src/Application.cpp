@@ -51,11 +51,11 @@ std::string configFileRelativePath(int argc, char const** argv)
 Vec2d getWindowSize()
 {
     auto width =
-            getAppConfig().window_simulation_width +
-            getAppConfig().window_control_width;;
+        getAppConfig().window_simulation_width +
+        getAppConfig().window_control_width;;
     auto height =
-            getAppConfig().window_simulation_height +
-            getAppConfig().window_stats_width;
+        getAppConfig().window_simulation_height +
+        getAppConfig().window_stats_width;
     return { width, height };
 }
 
@@ -81,7 +81,7 @@ Vec2d getControlSize()
 Vec2d getControlPosition()
 {
     return { getAppConfig().window_simulation_width, 0 };
-}	
+}
 Vec2d getSimulationPosition()
 {
     return { 0, 0 };
@@ -90,7 +90,7 @@ Vec2d getSimulationPosition()
 Vec2d getStatsSize()
 {
     auto width = getAppConfig().window_simulation_width
-            + getAppConfig().window_control_width;
+                 + getAppConfig().window_control_width;
     auto height = getAppConfig().window_stats_width;
     return { width, height };
 }
@@ -128,7 +128,8 @@ sf::View setupView(Vec2d const& viewSize,
     view.setViewport({ static_cast<float>(position.x / windowSize.x),
                        static_cast<float>(position.y / windowSize.y),
                        static_cast<float>(allocation.x / windowSize.x),
-                       static_cast<float>(allocation.y / windowSize.y) });
+                       static_cast<float>(allocation.y / windowSize.y)
+                     });
 
     return view;
 }
@@ -138,7 +139,7 @@ sf::View setupView(Vec2d const& viewSize,
 Application::Application(int argc, char const** argv)
     : mAppDirectory(applicationDirectory(argc, argv))
     , mCfgFile(configFileRelativePath(argc, argv))
-    //, mJSONRead(mAppDirectory + mCfgFile)
+      //, mJSONRead(mAppDirectory + mCfgFile)
     , mConfig(new Config(mAppDirectory + mCfgFile))
     , mCurrentGraphId(-1)
     , mEnvPPS(new Environment())
@@ -174,12 +175,12 @@ Application::Application(int argc, char const** argv)
 Application::~Application()
 {
     // Destroy lab and stats, in reverse order
-    if(getSimulationMode()== SimulationMode::PPS){
+    if(getSimulationMode()== SimulationMode::PPS) {
         delete mEnvNeuronal;
         mEnvNeuronal = nullptr;
         delete mEnvPPS;
         mEnvPPS = nullptr;
-    }else{
+    } else {
         delete mEnvPPS;
         mEnvPPS = nullptr;
         delete mEnvNeuronal;
@@ -355,8 +356,8 @@ void Application::chooseBackground()
 
     mSimulationBackground = mSimulationBackground;
     mSimulationBackground.setTexture(&getAppTexture(isDebugOn() ?
-                                                        getAppConfig().simulation_world_debug_texture :
-                                                        getAppConfig().simulation_world_texture)
+                                     getAppConfig().simulation_world_debug_texture :
+                                     getAppConfig().simulation_world_texture)
                                      , true);
 
 }
@@ -455,7 +456,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
             switchDebug();
             break;
 
-            // Exit simulation
+        // Exit simulation
         case sf::Keyboard::Escape:
             window.close();
             break;
@@ -466,12 +467,12 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
             chooseBackground();
             break;
 
-            // Toggle pause for simulation
+        // Toggle pause for simulation
         case sf::Keyboard::Space:
             mPaused = !mPaused;
             break;
 
-            // Reset the simulation
+        // Reset the simulation
         case sf::Keyboard::R:
             getEnv().clean();
             getStats().reset();
@@ -481,7 +482,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
             // TODO add TAB binding for switching from graphs
             break;
 
-            // Reset the simulation
+        // Reset the simulation
         case sf::Keyboard::Right:
             mSimulationView.move(100, 0);
             break;
@@ -517,7 +518,7 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
         }
         break;
 #else
-        // MouseWheelMoved is deprecated. If possible, use MouseWheelScrolled as replacement
+    // MouseWheelMoved is deprecated. If possible, use MouseWheelScrolled as replacement
     case sf::Event::MouseWheelMoved: {
         sf::Vector2i pos = { event.mouseWheel.x, event.mouseWheel.y };
 
@@ -530,33 +531,33 @@ void Application::handleEvent(sf::Event event, sf::RenderWindow& window)
     }
 #endif
 
-        // Drag view: initiate drag
-        //  - or -
-        // Select a bee to follow
-        // case sf::Event::MouseButtonPressed:
-        //     if (event.mouseButton.button == sf::Mouse::Left) {
-        //         mIsDragging = true;
-        //         mLastCursorPosition = { event.mouseButton.x, event.mouseButton.y };
-        //     } else if (event.mouseButton.button == sf::Mouse::Right) {
-        //         auto pos = getCursorPositionInView();
-        //         auto* bee = getLab().getAnimalAt(pos);
-        //         if (bee == nullptr) {
-        //             // Stop tracking animal
-        //             getAnimalTracker().stopTrackingAnimal();
-        //         } else {
-        //             // Track the animal
-        //             getAnimalTracker().startTrackingAnimal(bee);
-        //         }
-        //     }
-        //     break;
+    // Drag view: initiate drag
+    //  - or -
+    // Select a bee to follow
+    // case sf::Event::MouseButtonPressed:
+    //     if (event.mouseButton.button == sf::Mouse::Left) {
+    //         mIsDragging = true;
+    //         mLastCursorPosition = { event.mouseButton.x, event.mouseButton.y };
+    //     } else if (event.mouseButton.button == sf::Mouse::Right) {
+    //         auto pos = getCursorPositionInView();
+    //         auto* bee = getLab().getAnimalAt(pos);
+    //         if (bee == nullptr) {
+    //             // Stop tracking animal
+    //             getAnimalTracker().stopTrackingAnimal();
+    //         } else {
+    //             // Track the animal
+    //             getAnimalTracker().startTrackingAnimal(bee);
+    //         }
+    //     }
+    //     break;
 
-        // Drag view: end drag
+    // Drag view: end drag
     case sf::Event::MouseButtonReleased:
         if (event.mouseButton.button == sf::Mouse::Left)
             mIsDragging = false;
         break;
 
-        // Drag view: move view
+    // Drag view: move view
     case sf::Event::MouseMoved:
         if (mIsDragging) {
             sf::Vector2i newCurosrPosition = { event.mouseMove.x, event.mouseMove.y };
@@ -620,7 +621,7 @@ void Application::togglePause()
 
 void Application::toggleStats()
 {
-    switch(mMode){
+    switch(mMode) {
     case SimulationMode::PPS :
         focusOnStat(s::GENERAL);
         break;
@@ -681,7 +682,7 @@ void Application::updateSimulationView()
                                 getSimulationPosition(), getSimulationSize(),
 
                                 mRenderWindow.getSize());
-*/
+    */
     /*
      auto viewSize = getWorldSize();
      mSimulationView.reset({ { 0, 0 }, viewSize });
@@ -700,7 +701,7 @@ void Application::switchDebug()
     chooseBackground();
 }
 
-std::vector<std::string> Application::getHelperText() const 
+std::vector<std::string> Application::getHelperText() const
 {
     // by default no helper text displayed
     return { };
@@ -714,8 +715,7 @@ void Application::drawOnHelp(sf::RenderWindow& window) const
 
     auto text(getHelperText());
 
-    for (auto& command : text)
-    {
+    for (auto& command : text) {
         auto legend = sf::Text(command, getAppFont(), FONT_SIZE);
         legend.setPosition(LEGEND_MARGIN, lastLegendY);
 #if SFML_VERSION_MAJOR >= 2 && SFML_VERSION_MINOR >= 4
@@ -770,7 +770,8 @@ bool isDebugOn()
 }
 
 
-void Application::drawControls(sf::RenderWindow& target) {
+void Application::drawControls(sf::RenderWindow& target)
+{
     auto const LEGEND_MARGIN(10);
     auto lastLegendY(std::max (10., getSimulationSize().y/5));
     auto const FONT_SIZE = 20;
@@ -795,11 +796,11 @@ void Application::drawTitle(sf::RenderWindow& target
                             , size_t xcoord
                             , size_t ycoord
                             , size_t font_size
-                            )
+                           )
 {
     std::string text;
 
-    switch(mMode){
+    switch(mMode) {
     case SimulationMode::PPS :
         text = s::PPS;
         break;
@@ -830,7 +831,7 @@ void Application::drawOneControl(sf::RenderWindow& target
                                  , size_t xcoord
                                  , size_t ycoord
                                  , size_t font_size
-                                 )
+                                )
 {
     std::stringstream tmpStream;
 
@@ -865,7 +866,7 @@ Stats& Application::getStats()
 
 void Application::addGraph(std::string const& title, std::vector<std::string> const& series, double min, double max)
 {
-    if (series.size() > 0){
+    if (series.size() > 0) {
         mCurrentGraphId += 1;
         getStats().addGraph(mCurrentGraphId, title, series, min, max, getStatsSize() );
     }

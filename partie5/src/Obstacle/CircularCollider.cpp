@@ -115,7 +115,7 @@ CircularCollider& CircularCollider::operator+=(Vec2d const& dx)
 void CircularCollider::setRadius(double radius)
 {
     if(radius > 0)
-       radius_ = radius;
+        radius_ = radius;
 }
 
 void CircularCollider::clampPosition()

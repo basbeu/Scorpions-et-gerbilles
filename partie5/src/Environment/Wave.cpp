@@ -33,7 +33,7 @@ Wave::~Wave()
 
 void Wave::draw(sf::RenderTarget& target) const
 {
-    for(auto& arc:arcs_){
+    for(auto& arc:arcs_) {
         target.draw(buildArc(arc.first/DEG_TO_RAD, arc.second/DEG_TO_RAD,  getRadius(), getPosition(), sf::Color::Black, 0, getAppConfig().wave_intensity_thickness_ratio * getIntensity()));
     }
 }
@@ -44,10 +44,10 @@ void Wave::update(sf::Time dt)
     setRadius(propagationSpeed_ * timer_.asSeconds() + initialRadius_);
     std::list<Obstacle*> obstacles = getAppEnv().getObstacleColliding(this);
 
-    for(auto& obstacle:obstacles){
+    for(auto& obstacle:obstacles) {
         double obstacleAngle(computeRelativeAngle(obstacle->getPosition()));
         Arc arcColliding = findArcColliding(obstacleAngle) ;
-        if(arcColliding != Arc(0,0)){
+        if(arcColliding != Arc(0,0)) {
             double separationAngle(std::atan2(obstacle->getRadius(), getRadius() + obstacle->getRadius()));
             arcs_.remove(arcColliding);
             arcs_.push_back(Arc(arcColliding.first,obstacleAngle - separationAngle));
@@ -71,8 +71,8 @@ double Wave::getIntensityAt(Vec2d position) const
     double margin(getAppConfig().wave_on_wave_marging);
     double distance((position-getPosition()).length());
     if(distance > getRadius() - margin
-            && distance < getRadius() + margin
-            && findArcColliding(computeRelativeAngle(position)) != Arc(0,0)){
+       && distance < getRadius() + margin
+       && findArcColliding(computeRelativeAngle(position)) != Arc(0,0)) {
         return getIntensity();
     }
 
@@ -81,8 +81,8 @@ double Wave::getIntensityAt(Vec2d position) const
 
 Wave::Arc Wave::findArcColliding(double obstacleAngle) const
 {
-    for(auto& arc:arcs_){
-        if(obstacleAngle >= arc.first && obstacleAngle <= arc.second){
+    for(auto& arc:arcs_) {
+        if(obstacleAngle >= arc.first && obstacleAngle <= arc.second) {
             return arc;
         }
     }

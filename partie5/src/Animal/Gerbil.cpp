@@ -58,10 +58,10 @@ bool Gerbil::canMate(Scorpion const* scorpion) const
 bool Gerbil::canMate(Gerbil const* gerbil) const
 {
     return gerbil->isFemale() != isFemale()
-            && !gerbil->isPregnant()
-            && !gerbil->isGivingBirth()
-            && gerbil->getEnergyLevel() >= gerbil->getMinimumMatingEnergy()
-            && gerbil->getAge() >= getMinAgeMating();
+           && !gerbil->isPregnant()
+           && !gerbil->isGivingBirth()
+           && gerbil->getEnergyLevel() >= gerbil->getMinimumMatingEnergy()
+           && gerbil->getAge() >= getMinAgeMating();
 }
 
 bool Gerbil::canMate(Food const* Gerbil) const

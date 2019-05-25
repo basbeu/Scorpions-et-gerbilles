@@ -25,9 +25,9 @@ void Environment::addEntity(OrganicEntity* entity)
 
 void Environment::update(sf::Time dt)
 {
-    for(auto& entity : entities_){
+    for(auto& entity : entities_) {
         entity->update(dt);
-        if(!entity->isAlive()){
+        if(!entity->isAlive()) {
             delete entity;
             entity = nullptr;
         }

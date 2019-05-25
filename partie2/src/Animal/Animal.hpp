@@ -19,7 +19,7 @@ public:
     /*!
     * @brief The Deceleration enum represent the differents magnitude that a Animal can be set
     */
-    enum Deceleration{
+    enum Deceleration {
         DECELERATION_STRONG,
         DECELERATION_MEDIUM,
         DECELERATION_WEAK

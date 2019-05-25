@@ -35,7 +35,7 @@ NeuronalScorpion::NeuronalScorpion(Vec2d const& position)
 
 NeuronalScorpion::~NeuronalScorpion()
 {
-    for(auto& sensor:sensors_){
+    for(auto& sensor:sensors_) {
         delete sensor.first;
     }
 
@@ -48,14 +48,14 @@ void NeuronalScorpion::update(sf::Time dt)
     OrganicEntity::update(dt);
     stateTimer_ += dt;
     bool receptive = false;
-    for(auto& sensor:sensors_){
+    for(auto& sensor:sensors_) {
         sensor.first->update(dt);
         receptive |= sensor.first->isActive();
     }
 
-    if(receptive){
+    if(receptive) {
         receptionTimer_ += dt;
-        if(receptionTimer_.asSeconds() > getAppConfig().sensor_activation_duration){
+        if(receptionTimer_.asSeconds() > getAppConfig().sensor_activation_duration) {
             targetDirection_ = computeTargetDirection();
             receptionTimer_ = sf::Time::Zero;
             resetSensors();
@@ -93,13 +93,13 @@ void NeuronalScorpion::updateState(sf::Time dt)
     analyzeEnvironment();
     OrganicEntity* target = getNearestEatable();
 
-    if(target != nullptr){
+    if(target != nullptr) {
         switchToState(TARGET_IN_SIGHT);
         setTargetPosition(target->getPosition());
-        if(isColliding(*target)){
+        if(isColliding(*target)) {
             target->eaten();
         }
-    }else{
+    } else {
         switch (state_) {
         case IDLE:
             if(targetDirection_.length() > getAppConfig().scorpion_minimal_score_for_action)
@@ -108,7 +108,7 @@ void NeuronalScorpion::updateState(sf::Time dt)
                 switchToState(WANDERING);
             break;
         case MOVING:
-            if(stateTimer_.asSeconds() > getAppConfig().scorpion_moving_duration){
+            if(stateTimer_.asSeconds() > getAppConfig().scorpion_moving_duration) {
                 switchToState(IDLE);
                 targetDirection_ = Vec2d(0,0);
             }
@@ -126,7 +126,7 @@ void NeuronalScorpion::updateState(sf::Time dt)
 
 void NeuronalScorpion::drawDebugState(sf::RenderTarget& targetWindow) const
 {
-    for(auto& sensor:sensors_){
+    for(auto& sensor:sensors_) {
         sensor.first->draw(targetWindow);
     }
     std::string state("");
@@ -177,8 +177,8 @@ void NeuronalScorpion::initSensors()
         std::pair<Sensor*,double>(new Sensor(this), -18.0)
     };
 
-    for(size_t i = 0; i < sensors.size(); ++i){
-        for(size_t j = 3 ; j <=5; ++j){
+    for(size_t i = 0; i < sensors.size(); ++i) {
+        for(size_t j = 3 ; j <=5; ++j) {
             sensors[i].first->connect(sensors[(j+i) % sensors.size()].first);
         }
     }
@@ -196,7 +196,7 @@ Vec2d NeuronalScorpion::computeTargetDirection() const
 {
     Vec2d direction(0,0);
 
-    for(auto& sensor:sensors_){
+    for(auto& sensor:sensors_) {
         direction += (getPositionOfSensor(sensor.first)-getPosition()) * sensor.first->getScore();
     }
     return direction;
@@ -204,7 +204,7 @@ Vec2d NeuronalScorpion::computeTargetDirection() const
 
 void NeuronalScorpion::resetSensors()
 {
-    for(auto& sensor:sensors_){
+    for(auto& sensor:sensors_) {
         sensor.first->reset();
     }
 }
@@ -213,10 +213,10 @@ Vec2d NeuronalScorpion::move()
 {
     Vec2d force(0,0);
     double p = getAppConfig().simulation_world_size / 25.0;
-    if(abs(targetDirection_.angle() - getRotation()) > getAppConfig().scorpion_rotation_angle_precision){
+    if(abs(targetDirection_.angle() - getRotation()) > getAppConfig().scorpion_rotation_angle_precision) {
         setRotation(targetDirection_.angle());
         force = computeForceDecelerate();
-    }else{
+    } else {
         setTargetPosition(convertToGlobalCoord(Vec2d(p,0)));
         force = computeAttractionForce();
     }

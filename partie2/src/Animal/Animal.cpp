@@ -16,11 +16,11 @@
 #include <SFML/Graphics.hpp>
 
 Animal::Animal(Vec2d position)
-:CircularCollider (position, ANIMAL_RADIUS)
-,direction_(1,0)
-,speed_(0)
-,targetPosition_(0,0)
-,currentTarget_(1,0)
+    :CircularCollider (position, ANIMAL_RADIUS)
+    ,direction_(1,0)
+    ,speed_(0)
+    ,targetPosition_(0,0)
+    ,currentTarget_(1,0)
 {
     setDeceleration(DECELERATION_MEDIUM);
 }
@@ -54,10 +54,10 @@ void Animal::update(sf::Time dt)
 {
     std::list<Vec2d> targetsInsight(getAppEnv().getTargetsInSightForAnimal(this));
     Vec2d force(0,0);
-    if(!targetsInsight.empty()){
+    if(!targetsInsight.empty()) {
         targetPosition_ = targetsInsight.front();
         force = computeForce();
-    }else{
+    } else {
         targetPosition_ = Vec2d(0,0);
         force = randomWalk();
     }
@@ -72,22 +72,23 @@ void Animal::draw(sf::RenderTarget& targetWindow) const
     auto image_to_draw(buildSprite(getPosition(), 2*getRadius(),texture, getRotation()/DEG_TO_RAD));
     targetWindow.draw(image_to_draw);
     drawVision(targetWindow);
-    if(targetPosition_ == Vec2d(0,0)){
+    if(targetPosition_ == Vec2d(0,0)) {
         drawRandomWalkTarget(targetWindow);
     }
 }
 
-void Animal::setDeceleration(Deceleration deceleration){
+void Animal::setDeceleration(Deceleration deceleration)
+{
     switch (deceleration) {
-        case DECELERATION_STRONG:
-            deceleration_ = 0.9;
-            break;
-        case DECELERATION_MEDIUM:
-            deceleration_ = 0.6;
-            break;
-        case DECELERATION_WEAK:
-            deceleration_ = 0.3;
-            break;
+    case DECELERATION_STRONG:
+        deceleration_ = 0.9;
+        break;
+    case DECELERATION_MEDIUM:
+        deceleration_ = 0.6;
+        break;
+    case DECELERATION_WEAK:
+        deceleration_ = 0.3;
+        break;
     }
 }
 
@@ -132,8 +133,8 @@ double Animal::getRandomWalkJitter() const
 
 void Animal::setRotation(double angle)
 {
-   direction_.x = cos(angle);
-   direction_.y = sin(angle);
+    direction_.x = cos(angle);
+    direction_.y = sin(angle);
 }
 
 Vec2d Animal::computeForce() const

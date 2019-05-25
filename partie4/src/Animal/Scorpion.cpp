@@ -53,10 +53,10 @@ bool Scorpion::matable(OrganicEntity const* other) const
 bool Scorpion::canMate(Scorpion const* scorpion) const
 {
     return scorpion->isFemale() != isFemale()
-            && !scorpion->isPregnant()
-            && !scorpion->isGivingBirth()
-            && scorpion->getEnergyLevel() >= scorpion->getMinimumMatingEnergy()
-            && scorpion->getAge() >= getMinAgeMating();;
+           && !scorpion->isPregnant()
+           && !scorpion->isGivingBirth()
+           && scorpion->getEnergyLevel() >= scorpion->getMinimumMatingEnergy()
+           && scorpion->getAge() >= getMinAgeMating();;
 }
 
 bool Scorpion::canMate(Gerbil const* Scorpion) const

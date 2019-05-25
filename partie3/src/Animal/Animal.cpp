@@ -73,7 +73,7 @@ bool Animal::isTargetInSight(Vec2d const& target)
     Vec2d d = target - getPosition();
 
     return isEqual(d.lengthSquared(), 0.0) ||
-            (d.lengthSquared() <= getViewDistance()*getViewDistance() && direction_.dot(d.normalised()) >= cos((getViewRange() + 0.001)/2));
+           (d.lengthSquared() <= getViewDistance()*getViewDistance() && direction_.dot(d.normalised()) >= cos((getViewRange() + 0.001)/2));
 }
 
 bool Animal::isFemale() const
@@ -99,7 +99,8 @@ double Animal::getMaxSpeed() const
     }
 }
 
-bool Animal::isPregnant() const{
+bool Animal::isPregnant() const
+{
     return gestation_ > sf::Time::Zero && childrenPending_ > 0;
 }
 
@@ -167,19 +168,19 @@ sf::Time Animal::getMatingTime() const
 
 void Animal::updateState(sf::Time dt)
 {
-    if(break_ < sf::Time::Zero){
+    if(break_ < sf::Time::Zero) {
         state_ = WANDERING;
         break_ = sf::Time::Zero;
     }
 
-    if(state_ == FEEDING || state_ == MATING || isGivingBirth()){
+    if(state_ == FEEDING || state_ == MATING || isGivingBirth()) {
         break_ -= dt;
-    }else if(!enemies_.empty()){
+    } else if(!enemies_.empty()) {
         state_ = RUNNING_AWAY;
-    }else if(nearestMate_ != nullptr){
+    } else if(nearestMate_ != nullptr) {
         state_ = MATE_IN_SIGHT;
         targetPosition_ = nearestMate_->getPosition();
-        if(isColliding(*nearestMate_)){
+        if(isColliding(*nearestMate_)) {
             state_ = MATING;
             break_ = getMatingTime();
             meet(nearestMate_);
@@ -187,24 +188,24 @@ void Animal::updateState(sf::Time dt)
             ((Animal*)nearestMate_)->break_ = getMatingTime();
             ((Animal*)nearestMate_)->meet(this);
         }
-    }else if(nearestFood_ != nullptr){
+    } else if(nearestFood_ != nullptr) {
         state_ = FOOD_IN_SIGHT;
         targetPosition_ = nearestFood_->getPosition();
-        if(isColliding(*nearestFood_)){
+        if(isColliding(*nearestFood_)) {
             state_= FEEDING;
             break_ = getFeedingBreak();
             OrganicEntity::increaseEnergyLevel(getFeedingEfficiency() * nearestFood_->getEnergyLevel());
             nearestFood_->eaten();
         }
-    }else{
+    } else {
         state_ = WANDERING;
         targetPosition_ = Vec2d(0,0);
     }
 
-    if(isPregnant()){
+    if(isPregnant()) {
         gestation_ -= dt;
 
-        if(gestation_ <= sf::Time::Zero){
+        if(gestation_ <= sf::Time::Zero) {
             state_ = GIVING_BIRTH;
             break_ = getGivingBirthBreak();
             makeChildren();
@@ -214,7 +215,8 @@ void Animal::updateState(sf::Time dt)
     }
 }
 
-void Animal::analyzeEnvironment(){
+void Animal::analyzeEnvironment()
+{
     std::list<OrganicEntity*> entitiesInSight(getAppEnv().getEntitiesInSightForAnimal(this));
     Vec2d maxVector(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     Vec2d targetFood(maxVector);
@@ -223,10 +225,10 @@ void Animal::analyzeEnvironment(){
     nearestMate_ = nullptr;
     enemies_.clear();
     for(auto& entity:entitiesInSight) {
-        if(eatable(entity) && entity->distanceTo(getPosition()) < distanceTo(targetFood)){
+        if(eatable(entity) && entity->distanceTo(getPosition()) < distanceTo(targetFood)) {
             targetFood = entity->getPosition();
             nearestFood_ = entity;
-        }else if(matable(entity) && entity->matable(this) && entity->distanceTo(getPosition()) < distanceTo(targetMate)){
+        } else if(matable(entity) && entity->matable(this) && entity->distanceTo(getPosition()) < distanceTo(targetMate)) {
             targetMate = entity->getPosition();
             nearestMate_ = entity;
         }
@@ -265,8 +267,8 @@ Vec2d Animal::computeForceRunningAway() const
     Vec2d force(0,0);
     double delta1(500.0);
     double delta2(1.2);
-    for(auto& enemy:enemies_){
-        if(enemy != nullptr){
+    for(auto& enemy:enemies_) {
+        if(enemy != nullptr) {
             Vec2d dir(enemy->getPosition()-getPosition());
             force += delta1*dir/pow(dir.length(),delta2);
         }
@@ -284,10 +286,10 @@ Vec2d Animal::randomWalk()
 
 void Animal::meet(OrganicEntity * entity)
 {
-    if(matable(entity) && entity->matable(this)){
+    if(matable(entity) && entity->matable(this)) {
         Animal* female = (Animal*)entity;
         Animal* male = this;
-        if(isFemale()){
+        if(isFemale()) {
             female = this;
             male = (Animal*)entity;
         }
@@ -300,7 +302,7 @@ void Animal::meet(OrganicEntity * entity)
 
 void Animal::makeChildren() const
 {
-    for(int i = 0; i < childrenPending_;++i){
+    for(int i = 0; i < childrenPending_; ++i) {
         getAppEnv().addEntity(giveBirth());
     }
 }

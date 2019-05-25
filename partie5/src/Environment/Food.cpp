@@ -10,7 +10,7 @@
 #include <SFML/Graphics.hpp>
 
 Food::Food(Vec2d position)
-:OrganicEntity (position, getAppConfig().food_size, getAppConfig().food_energy)
+    :OrganicEntity (position, getAppConfig().food_size, getAppConfig().food_energy)
 {
     getAppEnv().increaseCounter(this);
 }

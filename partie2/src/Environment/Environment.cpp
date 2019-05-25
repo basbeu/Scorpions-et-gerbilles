@@ -51,7 +51,7 @@ void Environment::clean()
 std::list<Vec2d> Environment::getTargetsInSightForAnimal(Animal* animal)
 {
     std::list<Vec2d> targetInSight;
-    for(auto& target:targets_){
+    for(auto& target:targets_) {
         if(animal->isTargetInSight(target))
             targetInSight.push_back(target);
     }

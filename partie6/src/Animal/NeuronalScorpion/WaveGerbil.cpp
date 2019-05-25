@@ -33,7 +33,7 @@ void WaveGerbil::update(sf::Time dt)
     Gerbil::update(dt);
     waveGenElapsedTime_ += dt;
 
-    if(waveGenElapsedTime_.asSeconds() >= 1.0/getAppConfig().wave_gerbil_frequency){
+    if(waveGenElapsedTime_.asSeconds() >= 1.0/getAppConfig().wave_gerbil_frequency) {
         getAppEnv().addWave(new Wave(getPosition(),
                                      getAppConfig().wave_default_energy,
                                      getAppConfig().wave_default_radius,
