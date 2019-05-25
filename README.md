@@ -53,6 +53,7 @@ The following commands are availables during the Predator Prey Simulation :
      Space : Pause
 
 The following commands are availables during the Neuronal Simulation :
+
      R     : Reset the simulation
      Esc   : End of program
      C     : Reload config file
