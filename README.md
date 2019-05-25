@@ -3,6 +3,7 @@ This project was developped during the introductory object oriented programming 
 It provide a simulation of scorpions and gerbils in a toric world.
 
 This project was tested :
+
      - On Linux Mint 18.2 Cinnamon 64-bit
      - On Ubuntu VM on CO thinclient at epfl.
 
