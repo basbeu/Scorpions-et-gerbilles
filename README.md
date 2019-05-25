@@ -67,4 +67,8 @@ The following commands are availables during the Neuronal Simulation :
      <-    : Move view to left
      Space : Pause
 
+## Config files
+The configuration files of the simulations are located in baseDir/partie6/res. The default JSON file to use is app.json. The others are related to previous state of the project. The user can edit the values in app.json in order to change the parameters of the simulation. If an other JSON file is used, it just has to passed to the cfg parameters, i.e.:
+
+    - scons application-run --cfg=YOUR_CUSTOM_FILE.json 
 
